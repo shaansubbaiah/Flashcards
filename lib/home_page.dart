@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("HOME"),
+            Text("HOME!"),
             RaisedButton(
               onPressed: () {
                 context.read<AuthService>().signOut();
