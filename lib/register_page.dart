@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -82,10 +83,10 @@ class RegisterPage extends StatelessWidget {
                     color: Colors.blue[400],
                     onPressed: () async {
                       if (form.currentState.validate()) {
-                        // context.read<AuthService>().signUp(
-                        //       email: emailController.text.trim(),
-                        //       password: passwordController.text.trim(),
-                        //     );
+                        context.read<AuthService>().signUp(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
                       }
                     },
                   ),
