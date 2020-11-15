@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
-import 'package:flutterfiretest/sign_in_page.dart';
+import 'package:flutterfiretest/profile_page.dart';
+import 'package:flutterfiretest/settings_page.dart';
+import 'package:flutterfiretest/add_card_page.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -26,13 +30,17 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: AuthenticationWrapper(),
-      ),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: AuthenticationWrapper(),
+          routes: <String, WidgetBuilder>{
+            "/profile": (BuildContext context) => new Profile(),
+            "/settings": (BuildContext context) => new Settings(),
+            "/addCard": (BuildContext context) => new AddCard(),
+          }),
     );
   }
 }
@@ -49,7 +57,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseuser != null) {
       return HomePage();
     } else {
-      return SignInPage();
+      return Authenticate();
     }
   }
 }

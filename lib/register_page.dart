@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'auth_service.dart';
+import 'package:flutterfiretest/auth_service.dart';
 
-class SignInPage extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  final Function toggle;
-  SignInPage({this.toggle});
-
+class RegisterPage extends StatelessWidget {
+  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
   final form = GlobalKey<FormState>();
 
   @override
@@ -24,7 +19,7 @@ class SignInPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Signin",
+                    "Register",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
@@ -80,64 +75,26 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
-                    textColor: Colors.grey[275],
-                    onPressed: null,
-                    child: Text("Forgot Password?"),
-                  ),
-                  FlatButton(
                     child: Text(
-                      "Signin",
+                      "Register",
                       style: TextStyle(color: Colors.white),
                     ),
                     color: Colors.blue[400],
                     onPressed: () async {
                       if (form.currentState.validate()) {
-                        context.read<AuthService>().signIn(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                        // context.read<AuthService>().signUp(
+                        //       email: emailController.text.trim(),
+                        //       password: passwordController.text.trim(),
+                        //     );
                       }
                     },
                   ),
-                  Container(
-                    padding: EdgeInsets.all(30.0),
-                    child: FlatButton(
-                        child: Text("Create an account"),
-                        onPressed: () {
-                          toggle();
-                        }),
-                  )
                 ],
               ),
             ),
           ),
         ),
       ),
-      // body: Column(
-      //   children: [
-      //     TextField(
-      //       controller: emailController,
-      //       decoration: InputDecoration(
-      //         labelText: "Email",
-      //       ),
-      //     ),
-      //     TextField(
-      //       controller: passwordController,
-      //       decoration: InputDecoration(
-      //         labelText: "Password",
-      //       ),
-      //     ),
-      //     RaisedButton(
-      //       onPressed: () {
-      //         context.read<AuthService>().signIn(
-      //               email: emailController.text.trim(),
-      //               password: passwordController.text.trim(),
-      //             );
-      //       },
-      //       child: Text("Sign in"),
-      //     )
-      //   ],
-      // ),
     );
   }
 }
