@@ -136,7 +136,6 @@ class _AddCardState extends State<AddCard> {
                       ),
                       FlatButton(
                         onPressed: addTag,
-                        height: 30.0,
                         child: Text(
                           "DBMS",
                           style: TextStyle(
@@ -152,7 +151,6 @@ class _AddCardState extends State<AddCard> {
                         width: 10.0,
                       ),
                       FlatButton(
-                        height: 30.0,
                         onPressed: addTag,
                         child: Text(
                           "Networks",
@@ -181,7 +179,6 @@ class _AddCardState extends State<AddCard> {
                   children: [
                     FlatButton(
                       onPressed: addTag,
-                      height: 30.0,
                       child: Text(
                         "Cancel",
                         style: TextStyle(
@@ -197,7 +194,6 @@ class _AddCardState extends State<AddCard> {
                       width: 10.0,
                     ),
                     FlatButton(
-                      height: 30.0,
                       onPressed: addTag,
                       child: Text(
                         "Done",
