@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/addDeck/add_card.dart';
 import 'package:flutterfiretest/database.dart';
 
 class AddCard extends StatefulWidget {
@@ -158,84 +159,6 @@ class _AddCardState extends State<AddCard> {
                         height: 20.0,
                       ),
                       Row(
-                        children: [
-                          SizedBox(
-                            width: 300.0,
-                            height: 150.0,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 5.0,
-                                  bottom: 5.0,
-                                  right: 10.0,
-                                  left: 10.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xffEDEDED),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
-                              ),
-                              child: TextField(
-                                controller: frontController,
-                                style: TextStyle(
-                                  color: Color(0xff9E9D9D),
-                                ),
-                                cursorColor: Color(0xff9E9D9D),
-                                maxLines: 6,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Front",
-                                  hintStyle: TextStyle(
-                                    color: Color(0xff9E9D9D),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 300.0,
-                            height: 150.0,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 5.0,
-                                  bottom: 5.0,
-                                  right: 10.0,
-                                  left: 10.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xffEDEDED),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
-                              ),
-                              child: TextField(
-                                controller: backController,
-                                style: TextStyle(
-                                  color: Color(0xff9E9D9D),
-                                ),
-                                cursorColor: Color(0xff9E9D9D),
-                                maxLines: 6,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Back",
-                                  hintStyle: TextStyle(
-                                    color: Color(0xff9E9D9D),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
@@ -253,9 +176,6 @@ class _AddCardState extends State<AddCard> {
                           ),
                         ],
                       ),
-                      // SizedBox(
-                      //   height: 10.0,
-                      // ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -315,6 +235,9 @@ class _AddCardState extends State<AddCard> {
                       ),
                     ],
                   ),
+                ),
+                Container(
+                  child: CardForm(),
                 ),
                 SizedBox(
                   height: 40.0,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfiretest/add_card_page.dart';
+import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:flutterfiretest/overview_page.dart';
 import 'package:flutterfiretest/profile_page.dart';
 import 'package:flutterfiretest/settings_page.dart';

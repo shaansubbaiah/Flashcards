@@ -7,7 +7,7 @@ import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
 import 'package:flutterfiretest/profile_page.dart';
 import 'package:flutterfiretest/settings_page.dart';
-import 'package:flutterfiretest/add_card_page.dart';
+import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
