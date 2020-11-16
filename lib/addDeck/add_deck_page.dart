@@ -17,17 +17,37 @@ class _AddCardState extends State<AddCard> {
 
   List<bool> pressed = [false, false];
 
+  List<Map<String, String>> cards = [];
+
   void addTag(String tagName) {
     tag = tagName;
   }
 
+  void addCard() {
+    Map<String, String> card = {
+      "front": frontController.text,
+      "back": backController.text
+    };
+
+    setState(() {
+      cards.add(card);
+      frontController.text = "";
+      backController.text = "";
+    });
+  }
+
+  void cardDelete(int i) {
+    setState(() {
+      cards.removeAt(i);
+    });
+  }
+
   void cancel() {
     deckNameController.text = "";
-    frontController.text = "";
-    backController.text = "";
     descController.text = "";
     setState(() {
       pressed = [false, false];
+      cards.clear();
     });
   }
 
@@ -35,8 +55,12 @@ class _AddCardState extends State<AddCard> {
     String deckid = await DatabaseService()
         .addDeck(deckNameController.text, descController.text, tag);
 
-    await DatabaseService()
-        .addCard(deckid, frontController.text, backController.text);
+    for (int i = 0; i < cards.length; i++) {
+      await DatabaseService()
+          .addCard(deckid, cards[i]["front"], cards[i]["back"]);
+    }
+    // await DatabaseService()
+    //     .addCard(deckid, frontController.text, backController.text);
   }
 
   @override
@@ -85,14 +109,14 @@ class _AddCardState extends State<AddCard> {
                           ),
                           SizedBox(
                             width: 250.0,
-                            height: 40.0,
+                            height: 50.0,
                             child: Container(
                               // padding: EdgeInsets.all(5.0),
                               padding: EdgeInsets.only(
-                                  top: 5.0,
+                                  // top: 5.0,
                                   bottom: 5.0,
                                   right: 10.0,
-                                  left: 10.0),
+                                  left: 15.0),
                               decoration: BoxDecoration(
                                 color: Color(0xffEDEDED),
                                 borderRadius: BorderRadius.all(
@@ -124,13 +148,13 @@ class _AddCardState extends State<AddCard> {
                         children: [
                           SizedBox(
                             width: 300.0,
-                            height: 40.0,
+                            height: 50.0,
                             child: Container(
                               padding: EdgeInsets.only(
-                                  top: 5.0,
+                                  // top: 5.0,
                                   bottom: 5.0,
                                   right: 10.0,
-                                  left: 10.0),
+                                  left: 15.0),
                               decoration: BoxDecoration(
                                 color: Color(0xffEDEDED),
                                 borderRadius: BorderRadius.all(
@@ -236,8 +260,113 @@ class _AddCardState extends State<AddCard> {
                     ],
                   ),
                 ),
-                Container(
-                  child: CardForm(),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 300.0,
+                      height: 60.0,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            // top: 5.0,
+                            bottom: 5.0,
+                            right: 10.0,
+                            left: 15.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xffEDEDED),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.0),
+                          ),
+                        ),
+                        child: TextField(
+                          maxLines: 2,
+                          controller: frontController,
+                          style: TextStyle(
+                            color: Color(0xff9E9D9D),
+                          ),
+                          cursorColor: Color(0xff9E9D9D),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Front",
+                            hintStyle: TextStyle(
+                              color: Color(0xff9E9D9D),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 300.0,
+                      height: 60.0,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            // top: 5.0,
+                            bottom: 5.0,
+                            right: 10.0,
+                            left: 15.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xffEDEDED),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.0),
+                          ),
+                        ),
+                        child: TextField(
+                          maxLines: 2,
+                          controller: backController,
+                          style: TextStyle(
+                            color: Color(0xff9E9D9D),
+                          ),
+                          cursorColor: Color(0xff9E9D9D),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Back",
+                            hintStyle: TextStyle(
+                              color: Color(0xff9E9D9D),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FlatButton(
+                      height: 30.0,
+                      onPressed: addCard,
+                      child: Text("Add card"),
+                    )
+                  ],
+                ),
+                ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: cards.length,
+                  itemBuilder: (_, index) {
+                    return Card(
+                      child: Row(children: [
+                        Text('${cards[index]}'),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              cards.removeAt(index);
+                            });
+                          },
+                        ),
+                      ]),
+                    );
+                  },
+                  shrinkWrap: true,
                 ),
                 SizedBox(
                   height: 40.0,

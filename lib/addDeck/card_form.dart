@@ -15,6 +15,9 @@ class CardForm1 extends StatefulWidget {
 }
 
 class _CardForm1State extends State<CardForm1> {
+  final TextEditingController frontController = TextEditingController();
+  final TextEditingController backController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +65,7 @@ class _CardForm1State extends State<CardForm1> {
                   ),
                 ),
                 child: TextField(
-                  // controller: frontController,
+                  controller: frontController,
                   style: TextStyle(
                     color: Color(0xff9E9D9D),
                   ),
@@ -98,7 +101,7 @@ class _CardForm1State extends State<CardForm1> {
                   ),
                 ),
                 child: TextField(
-                  // controller: backController,
+                  controller: backController,
                   style: TextStyle(
                     color: Color(0xff9E9D9D),
                   ),
