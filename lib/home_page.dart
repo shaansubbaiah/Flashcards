@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/add_card_page.dart';
+import 'package:flutterfiretest/overview_page.dart';
+import 'package:flutterfiretest/profile_page.dart';
+import 'package:flutterfiretest/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'auth_service.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [Overview(), AddCard(), Settings(), Profile()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,31 +34,26 @@ class HomePage extends StatelessWidget {
               ))
         ],
       ),
+      body: _children[_currentIndex],
+      extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blueAccent,
+        color: Colors.teal[400],
+        // buttonBackgroundColor: Colors.teal[700],
+        backgroundColor: Colors.transparent,
+        height: 50,
+        animationDuration: Duration(milliseconds: 300),
         items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.add, size: 30),
-          Icon(Icons.settings, size: 30),
-          Icon(Icons.perm_identity, size: 30),
+          Icon(Icons.home, color: Colors.white, size: 30),
+          Icon(Icons.add, color: Colors.white, size: 30),
+          Icon(Icons.settings, color: Colors.white, size: 30),
+          Icon(Icons.perm_identity, color: Colors.white, size: 30),
         ],
-        onTap: (index) {
-          print(index);
-          //Handle button tap
-
-          if (index == 0) {
-            // Navigator.popAndPushNamed(context, "/addCard");
-          } else if (index == 1) {
-            Navigator.popAndPushNamed(context, "/addCard");
-          } else if (index == 2) {
-            Navigator.popAndPushNamed(context, "/settings");
-          } else {
-            Navigator.popAndPushNamed(context, "/profile");
-          }
+        onTap: (int index) {
+          debugPrint(index.toString());
+          setState(() {
+            this._currentIndex = index;
+          });
         },
-      ),
-      body: Container(
-        child: Text(""),
       ),
     );
   }
