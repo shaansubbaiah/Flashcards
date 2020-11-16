@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/database.dart';
 
 class AddCard extends StatefulWidget {
   @override
@@ -7,26 +8,34 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
   final TextEditingController deckNameController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
   final TextEditingController frontController = TextEditingController();
   final TextEditingController backController = TextEditingController();
 
+  String tag;
+
   List<bool> pressed = [false, false];
 
-  void addTag() {}
+  void addTag(String tagName) {
+    tag = tagName;
+  }
 
   void cancel() {
     deckNameController.text = "";
     frontController.text = "";
     backController.text = "";
+    descController.text = "";
     setState(() {
       pressed = [false, false];
     });
   }
 
-  void post() {
-    print(deckNameController.text);
-    print(frontController.text);
-    print(backController.text);
+  void post() async {
+    String deckid = await DatabaseService()
+        .addDeck(deckNameController.text, descController.text, tag);
+
+    await DatabaseService()
+        .addCard(deckid, frontController.text, backController.text);
   }
 
   @override
@@ -98,6 +107,44 @@ class _AddCardState extends State<AddCard> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Enter deck name",
+                                  hintStyle: TextStyle(
+                                    color: Color(0xff9E9D9D),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 300.0,
+                            height: 40.0,
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  top: 5.0,
+                                  bottom: 5.0,
+                                  right: 10.0,
+                                  left: 10.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xffEDEDED),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(25.0),
+                                ),
+                              ),
+                              child: TextField(
+                                controller: descController,
+                                style: TextStyle(
+                                  color: Color(0xff9E9D9D),
+                                ),
+                                cursorColor: Color(0xff9E9D9D),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Enter description",
                                   hintStyle: TextStyle(
                                     color: Color(0xff9E9D9D),
                                   ),
@@ -221,7 +268,7 @@ class _AddCardState extends State<AddCard> {
                                 pressed[1] = false;
                                 pressed[0] = !pressed[0];
                               });
-                              print(pressed[0]);
+                              addTag("DBMS");
                             },
                             child: Text(
                               "DBMS",
@@ -247,7 +294,7 @@ class _AddCardState extends State<AddCard> {
                                 pressed[0] = false;
                                 pressed[1] = !pressed[1];
                               });
-                              print(pressed[1]);
+                              addTag("Networks");
                             },
                             child: Text(
                               "Networks",
@@ -312,7 +359,10 @@ class _AddCardState extends State<AddCard> {
                       ],
                     ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
               ],
             ),
           ),
