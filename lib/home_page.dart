@@ -20,20 +20,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: Icon(Icons.exit_to_app),
-                tooltip: "Signout",
-                onPressed: () {
-                  context.read<AuthService>().signOut();
-                },
-              ))
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: Text("Home"),
+      //   actions: <Widget>[
+      //     Padding(
+      //         padding: EdgeInsets.only(right: 20.0),
+      //         child: IconButton(
+      //           icon: Icon(Icons.exit_to_app),
+      //           tooltip: "Signout",
+      //           onPressed: () {
+      //             context.read<AuthService>().signOut();
+      //           },
+      //         ))
+      //   ],
+      // ),
       body: _children[_currentIndex],
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
