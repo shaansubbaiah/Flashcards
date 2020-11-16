@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfiretest/addDeck/add_card.dart';
 import 'package:flutterfiretest/database.dart';
 
 class AddCard extends StatefulWidget {
