@@ -16,7 +16,8 @@ dependencies:
   cloud_firestore: ^0.14.3
   provider: ^4.3.2+1
 
-  curved_navigation_bar: ^0.3.4
+  curved_navigation_bar:
+  flutter_slidable:
 
   cupertino_icons: ^0.1.3
 
