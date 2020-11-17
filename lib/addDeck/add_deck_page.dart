@@ -185,12 +185,16 @@ class _AddCardState extends State<AddCard> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 50.0),
+                      padding:
+                          EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                       child: _deckNameValidate
                           ? null
-                          : Text(
-                              "Required",
-                              style: TextStyle(color: Colors.red),
+                          : Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Required",
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                     ),
                     SizedBox(
@@ -236,12 +240,16 @@ class _AddCardState extends State<AddCard> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 0.0),
+                      padding:
+                          EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                       child: _descValidate
                           ? null
-                          : Text(
-                              "Required",
-                              style: TextStyle(color: Colors.red),
+                          : Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Required",
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                     ),
                     SizedBox(
@@ -317,12 +325,16 @@ class _AddCardState extends State<AddCard> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 50.0),
+                      padding:
+                          EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                       child: _tagValidate
                           ? null
-                          : Text(
-                              "Required",
-                              style: TextStyle(color: Colors.red),
+                          : Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Required",
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                     ),
                     SizedBox(
@@ -374,12 +386,16 @@ class _AddCardState extends State<AddCard> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 50.0),
+                      padding:
+                          EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                       child: _customTagValidate
                           ? null
-                          : Text(
-                              "Required",
-                              style: TextStyle(color: Colors.red),
+                          : Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Required",
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                     ),
                   ],
@@ -428,12 +444,15 @@ class _AddCardState extends State<AddCard> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 0.0),
+                  padding: EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                   child: _frontValidate
                       ? null
-                      : Text(
-                          "Required",
-                          style: TextStyle(color: Colors.red),
+                      : Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Required",
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
                 ),
                 SizedBox(
@@ -480,12 +499,15 @@ class _AddCardState extends State<AddCard> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 50.0),
+                  padding: EdgeInsets.only(left: 50.0, right: 10.0, top: 5.0),
                   child: _backValidate
                       ? null
-                      : Text(
-                          "Required",
-                          style: TextStyle(color: Colors.red),
+                      : Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Required",
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
                 ),
                 Row(

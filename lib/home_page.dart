@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.teal[400],
         // buttonBackgroundColor: Colors.teal[700],
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         height: 50,
         animationDuration: Duration(milliseconds: 300),
         items: <Widget>[
