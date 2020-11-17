@@ -14,13 +14,12 @@ class AuthService {
 
   Future<String> signIn({String email, String password}) async {
     try {
-      UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      await DatabaseService().getUid(userCredential.user.uid);
+      // await DatabaseService().getUid(userCredential.user.uid);
       return "Signed In";
     } catch (e) {
       return e.message;

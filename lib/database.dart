@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
   static String uid;
@@ -12,6 +13,12 @@ class DatabaseService {
 
   final CollectionReference cardCollection =
       FirebaseFirestore.instance.collection('cards');
+
+  DatabaseService() {
+    final User user = FirebaseAuth.instance.currentUser;
+    uid = user.uid;
+    print(uid);
+  }
 
   // DatabaseService(this.uid);
 
