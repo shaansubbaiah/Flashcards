@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
+import 'package:flutterfiretest/overview_page.dart';
 import 'package:flutterfiretest/profile_page.dart';
 import 'package:flutterfiretest/settings_page.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
             "/profile": (BuildContext context) => new Profile(),
             "/settings": (BuildContext context) => new Settings(),
             "/addCard": (BuildContext context) => new AddCard(),
+            "/home": (BuildContext context) => new HomePage(),
           }),
     );
   }

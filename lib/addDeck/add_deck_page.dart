@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AddCard extends StatefulWidget {
   @override
@@ -11,55 +12,96 @@ class _AddCardState extends State<AddCard> {
   final TextEditingController descController = TextEditingController();
   final TextEditingController frontController = TextEditingController();
   final TextEditingController backController = TextEditingController();
+  final TextEditingController tagController = TextEditingController();
 
-  String tag;
+  bool _deckNameValidate = true;
+  bool _descValidate = true;
+  bool _frontValidate = true;
+  bool _backValidate = true;
+  bool _cardValidate = true;
+  bool _tagValidate = true;
+  bool _customTagValidate = true;
 
-  List<bool> pressed = [false, false];
+  String tag, tagValue;
+
+  var _tags = ["DBMS", "ADA", "CN", "OS", "New Tag"];
+
+  bool customTag = false;
 
   List<Map<String, String>> cards = [];
 
-  void addTag(String tagName) {
-    tag = tagName;
-  }
-
   void addCard() {
-    Map<String, String> card = {
-      "front": frontController.text,
-      "back": backController.text
-    };
-
     setState(() {
-      cards.add(card);
-      frontController.text = "";
-      backController.text = "";
+      _frontValidate = frontController.text.isEmpty ? false : true;
+      _backValidate = backController.text.isEmpty ? false : true;
     });
-  }
 
-  void cardDelete(int i) {
-    setState(() {
-      cards.removeAt(i);
-    });
+    if (_backValidate && _frontValidate) {
+      Map<String, String> card = {
+        "front": frontController.text,
+        "back": backController.text
+      };
+
+      setState(() {
+        cards.add(card);
+        frontController.text = "";
+        backController.text = "";
+        _cardValidate = true;
+      });
+    }
   }
 
   void cancel() {
     deckNameController.text = "";
     descController.text = "";
+    tag = null;
+    customTag = false;
     setState(() {
-      pressed = [false, false];
       cards.clear();
     });
   }
 
   void post() async {
-    String deckid = await DatabaseService()
-        .addDeck(deckNameController.text, descController.text, tag);
+    setState(() {
+      _deckNameValidate = deckNameController.text.isEmpty ? false : true;
+      _descValidate = descController.text.isEmpty ? false : true;
+      _cardValidate = cards.isEmpty ? false : true;
+      if (customTag) {
+        _customTagValidate = tagController.text.isEmpty ? false : true;
+      } else {
+        if (tag == null) {
+          _tagValidate = false;
+        } else {
+          _tagValidate = true;
+        }
+      }
+    });
 
-    for (int i = 0; i < cards.length; i++) {
-      await DatabaseService()
-          .addCard(deckid, cards[i]["front"], cards[i]["back"]);
+    if (customTag) {
+      tagValue = tagController.text;
+    } else {
+      tagValue = tag;
     }
-    // await DatabaseService()
-    //     .addCard(deckid, frontController.text, backController.text);
+
+    if (_deckNameValidate &&
+        _descValidate &&
+        (_tagValidate || _customTagValidate) &&
+        _cardValidate) {
+      print(deckNameController.text);
+      print(descController.text);
+      print(tagValue);
+      print(cards);
+
+      String deckid = await DatabaseService()
+          .addDeck(deckNameController.text, descController.text, tagValue);
+
+      for (int i = 0; i < cards.length; i++) {
+        await DatabaseService()
+            .addCard(deckid, cards[i]["front"], cards[i]["back"]);
+      }
+
+      Navigator.popAndPushNamed(context, "/home");
+    }
   }
 
   @override
@@ -72,192 +114,275 @@ class _AddCardState extends State<AddCard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                      SizedBox(
-                        child: Text(
-                          "Add Flash Card",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    SizedBox(
+                      child: Text(
+                        "Add Flash Card",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
                         ),
                       ),
-                      SizedBox(
-                        height: 50.0,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 50.0,
-                            height: 40.0,
-                            child: Center(
-                              child: Text(
-                                "Deck",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: Center(
+                            child: Text(
+                              "Deck",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 250.0,
-                            height: 50.0,
-                            child: Container(
-                              // padding: EdgeInsets.all(5.0),
-                              padding: EdgeInsets.only(
-                                  // top: 5.0,
-                                  bottom: 5.0,
-                                  right: 10.0,
-                                  left: 15.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xffEDEDED),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
+                        ),
+                        SizedBox(
+                          width: 250.0,
+                          height: 50.0,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 5.0, right: 10.0, left: 15.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xffEDEDED),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(25.0),
                               ),
-                              child: TextField(
-                                controller: deckNameController,
-                                style: TextStyle(
+                            ),
+                            child: TextField(
+                              onChanged: (value) {
+                                if (value != "") {
+                                  setState(() {
+                                    _deckNameValidate = true;
+                                  });
+                                }
+                              },
+                              controller: deckNameController,
+                              style: TextStyle(
+                                color: Color(0xff9E9D9D),
+                              ),
+                              cursorColor: Color(0xff9E9D9D),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Enter deck name",
+                                hintStyle: TextStyle(
                                   color: Color(0xff9E9D9D),
                                 ),
-                                cursorColor: Color(0xff9E9D9D),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Enter deck name",
-                                  hintStyle: TextStyle(
-                                    color: Color(0xff9E9D9D),
-                                  ),
-                                ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 300.0,
-                            height: 50.0,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  // top: 5.0,
-                                  bottom: 5.0,
-                                  right: 10.0,
-                                  left: 15.0),
-                              decoration: BoxDecoration(
-                                color: Color(0xffEDEDED),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 50.0),
+                      child: _deckNameValidate
+                          ? null
+                          : Text(
+                              "Required",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 300.0,
+                          height: 50.0,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 5.0, right: 10.0, left: 15.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xffEDEDED),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(25.0),
                               ),
-                              child: TextField(
-                                controller: descController,
-                                style: TextStyle(
+                            ),
+                            child: TextField(
+                              onChanged: (value) {
+                                if (value != "") {
+                                  setState(() {
+                                    _descValidate = true;
+                                  });
+                                }
+                              },
+                              controller: descController,
+                              style: TextStyle(
+                                color: Color(0xff9E9D9D),
+                              ),
+                              cursorColor: Color(0xff9E9D9D),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Enter description",
+                                hintStyle: TextStyle(
                                   color: Color(0xff9E9D9D),
                                 ),
-                                cursorColor: Color(0xff9E9D9D),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Enter description",
-                                  hintStyle: TextStyle(
-                                    color: Color(0xff9E9D9D),
-                                  ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 0.0),
+                      child: _descValidate
+                          ? null
+                          : Text(
+                              "Required",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 50.0,
+                          height: 40.0,
+                          child: Center(
+                            child: Text(
+                              "Tag",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        SizedBox(
+                          width: 200.0,
+                          height: 40.0,
+                          child: DropdownButtonFormField(
+                            items: _tags.map((String category) {
+                              return new DropdownMenuItem(
+                                  value: category,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: Color(0xff9E9D9D),
+                                        ),
+                                      ),
+                                    ],
+                                  ));
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                tag = newValue;
+                                _tagValidate = true;
+                                if (tag == "New Tag") {
+                                  customTag = true;
+                                } else {
+                                  customTag = false;
+                                }
+                              });
+                            },
+                            value: tag,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                  color: Color(0xffEDEDED),
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 50.0,
-                            height: 20.0,
-                            child: Center(
-                              child: Text(
-                                "Tags",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 20, 10, 0),
+                              filled: true,
+                              fillColor: Color(0xffEDEDED),
+                              hintText: "Select Tag",
+                              hintStyle: TextStyle(
+                                color: Color(0xff9E9D9D),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 30.0,
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                pressed[1] = false;
-                                pressed[0] = !pressed[0];
-                              });
-                              addTag("DBMS");
-                            },
-                            child: Text(
-                              "DBMS",
-                              style: TextStyle(
-                                color: Color(0xff1B689C),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 50.0),
+                      child: _tagValidate
+                          ? null
+                          : Text(
+                              "Required",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 70.0,
+                        ),
+                        SizedBox(
+                          width: 200.0,
+                          height: customTag ? 40.0 : 0.0,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 5.0, right: 10.0, left: 15.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xffEDEDED),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(25.0),
                               ),
                             ),
-                            height: 30.0,
-                            color: Color(0xffA9DDED),
-                            shape: RoundedRectangleBorder(
-                              side: pressed[0]
-                                  ? BorderSide(color: Color(0xff1B689C))
-                                  : BorderSide(color: Color(0xffA9DDED)),
-                              borderRadius: BorderRadius.circular(25.0),
-                            ),
+                            child: customTag
+                                ? TextField(
+                                    onChanged: (value) {
+                                      if (value != "") {
+                                        setState(() {
+                                          _customTagValidate = true;
+                                        });
+                                      }
+                                    },
+                                    controller: tagController,
+                                    style: TextStyle(
+                                      color: Color(0xff9E9D9D),
+                                    ),
+                                    cursorColor: Color(0xff9E9D9D),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Enter Custom Tag",
+                                      hintStyle: TextStyle(
+                                        color: Color(0xff9E9D9D),
+                                      ),
+                                    ),
+                                  )
+                                : null,
                           ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                pressed[0] = false;
-                                pressed[1] = !pressed[1];
-                              });
-                              addTag("Networks");
-                            },
-                            child: Text(
-                              "Networks",
-                              style: TextStyle(
-                                color: Color(0xffA8317F),
-                              ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 50.0),
+                      child: _customTagValidate
+                          ? null
+                          : Text(
+                              "Required",
+                              style: TextStyle(color: Colors.red),
                             ),
-                            height: 30.0,
-                            color: Color(0xffEDA9D6),
-                            shape: RoundedRectangleBorder(
-                              side: pressed[1]
-                                  ? BorderSide(color: Color(0xffA8317F))
-                                  : BorderSide(color: Color(0xffEDA9D6)),
-                              borderRadius: BorderRadius.circular(25.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20.0,
@@ -269,10 +394,7 @@ class _AddCardState extends State<AddCard> {
                       height: 60.0,
                       child: Container(
                         padding: EdgeInsets.only(
-                            // top: 5.0,
-                            bottom: 5.0,
-                            right: 10.0,
-                            left: 15.0),
+                            bottom: 5.0, right: 10.0, left: 15.0),
                         decoration: BoxDecoration(
                           color: Color(0xffEDEDED),
                           borderRadius: BorderRadius.all(
@@ -280,6 +402,13 @@ class _AddCardState extends State<AddCard> {
                           ),
                         ),
                         child: TextField(
+                          onChanged: (value) {
+                            if (value != "") {
+                              setState(() {
+                                _frontValidate = true;
+                              });
+                            }
+                          },
                           maxLines: 2,
                           controller: frontController,
                           style: TextStyle(
@@ -298,6 +427,15 @@ class _AddCardState extends State<AddCard> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 0.0),
+                  child: _frontValidate
+                      ? null
+                      : Text(
+                          "Required",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -308,10 +446,7 @@ class _AddCardState extends State<AddCard> {
                       height: 60.0,
                       child: Container(
                         padding: EdgeInsets.only(
-                            // top: 5.0,
-                            bottom: 5.0,
-                            right: 10.0,
-                            left: 15.0),
+                            bottom: 5.0, right: 10.0, left: 15.0),
                         decoration: BoxDecoration(
                           color: Color(0xffEDEDED),
                           borderRadius: BorderRadius.all(
@@ -319,6 +454,13 @@ class _AddCardState extends State<AddCard> {
                           ),
                         ),
                         child: TextField(
+                          onChanged: (value) {
+                            if (value != "") {
+                              setState(() {
+                                _backValidate = true;
+                              });
+                            }
+                          },
                           maxLines: 2,
                           controller: backController,
                           style: TextStyle(
@@ -337,6 +479,15 @@ class _AddCardState extends State<AddCard> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 50.0),
+                  child: _backValidate
+                      ? null
+                      : Text(
+                          "Required",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -347,22 +498,48 @@ class _AddCardState extends State<AddCard> {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 20.0,
+                  child: _cardValidate
+                      ? null
+                      : Text(
+                          "Add one card",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                ),
                 ListView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: cards.length,
                   itemBuilder: (_, index) {
-                    return Card(
-                      child: Row(children: [
-                        Text('${cards[index]}'),
-                        IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () {
-                            setState(() {
-                              cards.removeAt(index);
-                            });
-                          },
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        actionExtentRatio: 0.25,
+                        child: Container(
+                          height: 70.0,
+                          color: Colors.white,
+                          child: ListTile(
+                            title: Text('${cards[index]["front"]}'),
+                            subtitle: Text('${cards[index]["back"]}'),
+                          ),
                         ),
-                      ]),
+                        secondaryActions: <Widget>[
+                          IconSlideAction(
+                            caption: 'Delete',
+                            color: Colors.red,
+                            icon: Icons.delete,
+                            onTap: () {
+                              setState(() {
+                                cards.removeAt(index);
+                                if (cards.isEmpty) {
+                                  _cardValidate = false;
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     );
                   },
                   shrinkWrap: true,
@@ -379,7 +556,7 @@ class _AddCardState extends State<AddCard> {
                         FlatButton(
                           onPressed: cancel,
                           child: Text(
-                            "Cancel",
+                            "Clear",
                             style: TextStyle(
                               color: Color(0xff950F0F),
                             ),
@@ -396,7 +573,7 @@ class _AddCardState extends State<AddCard> {
                         FlatButton(
                           onPressed: post,
                           child: Text(
-                            "Done",
+                            "Post",
                             style: TextStyle(
                               color: Color(0xff08913F),
                             ),
