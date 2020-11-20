@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutterfiretest/alert_dialog.dart';
 
 class AddCard extends StatefulWidget {
   @override
@@ -92,15 +93,20 @@ class _AddCardState extends State<AddCard> {
       print(tagValue);
       print(cards);
 
-      String deckid = await DatabaseService()
-          .addDeck(deckNameController.text, descController.text, tagValue);
+      final action = await Dialogs.yesAbort(
+          context, "Post Deck", "Are you sure?", "Post", "No");
 
-      for (int i = 0; i < cards.length; i++) {
-        await DatabaseService()
-            .addCard(deckid, cards[i]["front"], cards[i]["back"]);
+      if (action == DialogAction.yes) {
+        String deckid = await DatabaseService()
+            .addDeck(deckNameController.text, descController.text, tagValue);
+
+        for (int i = 0; i < cards.length; i++) {
+          await DatabaseService()
+              .addCard(deckid, cards[i]["front"], cards[i]["back"]);
+        }
+
+        Navigator.popAndPushNamed(context, "/home");
       }
-
-      Navigator.popAndPushNamed(context, "/home");
     }
   }
 

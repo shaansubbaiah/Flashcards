@@ -40,4 +40,21 @@ class AuthService {
       return e.message;
     }
   }
+
+  Future<bool> deleteUser(passwordValue) async {
+    bool status = true;
+    final User user = this._firebaseAuth.currentUser;
+    AuthCredential credential = EmailAuthProvider.credential(
+        email: user.email, password: passwordValue);
+    await user.reauthenticateWithCredential(credential).then((value) {
+      value.user.delete().then((res) {
+        print("user deleted");
+      });
+    }).catchError((onError) {
+      print(onError);
+      status = false;
+    });
+
+    return status ? true : false;
+  }
 }

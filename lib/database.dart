@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'auth_service.dart';
 
 class DatabaseService {
   static String uid;
@@ -43,5 +44,40 @@ class DatabaseService {
 
     deckid = docRef.id;
     return deckid;
+  }
+
+  Future deleteAccount() async {
+    String docRef, deckRef;
+    await userCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                docRef = doc.id;
+              })
+            });
+
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                deckRef = doc.id;
+
+                cardCollection
+                    .where("deckid", isEqualTo: deckRef)
+                    .get()
+                    .then((QuerySnapshot querySnapshot) => {
+                          querySnapshot.docs.forEach((doc) {
+                            cardCollection.doc(doc.id).delete();
+                          })
+                        });
+
+                deckCollection.doc(deckRef).delete();
+              })
+            });
+
+    print("deleted");
+    await userCollection.doc(docRef).delete();
   }
 }
