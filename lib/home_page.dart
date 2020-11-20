@@ -6,6 +6,8 @@ import 'package:flutterfiretest/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+import 'gamePage/game.dart';
+
 import 'auth_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +17,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [Overview(), AddCard(), Settings(), Profile()];
+  final List<Widget> _children = [
+    Overview(),
+    AddCard(),
+    Settings(),
+    Profile(),
+    GamePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +55,7 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.add, color: Colors.white, size: 30),
           Icon(Icons.settings, color: Colors.white, size: 30),
           Icon(Icons.perm_identity, color: Colors.white, size: 30),
+          Icon(Icons.play_arrow, color: Colors.white, size: 30),
         ],
         onTap: (int index) {
           debugPrint(index.toString());

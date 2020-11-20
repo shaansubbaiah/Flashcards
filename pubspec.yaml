@@ -17,7 +17,8 @@ dependencies:
   provider: ^4.3.2+1
 
   curved_navigation_bar:
-  flutter_slidable: 
+  flutter_slidable:
+  flutter_tindercard: ^0.2.0
 
   cupertino_icons: ^0.1.3
 
