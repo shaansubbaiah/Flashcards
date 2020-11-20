@@ -7,15 +7,40 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<String> cardContent = ["qn1", "qn2", "qn3"];
+  var cardContent = [
+    {
+      "question": "What is your name",
+      "answer": "Flutterther",
+    },
+    {
+      "question": "What is the color of an orange",
+      "answer": "Orange",
+    },
+    {
+      "question": "What is 2+2",
+      "answer": "4",
+    },
+    {
+      "question": "What is 2+2",
+      "answer": "4",
+    },
+    {
+      "question": "What is 2+2",
+      "answer": "4",
+    },
+  ];
+
+  // debugPrint(cardContent[index]["question"]);
 
   CardController controller;
 
   @override
   Widget build(BuildContext context) {
-    return new TinderSwapCard(
-      swipeUp: true,
-      swipeDown: true,
+    // return new Column(
+    // children: [
+    new TinderSwapCard(
+      swipeUp: false,
+      swipeDown: false,
       orientation: AmassOrientation.TOP,
       totalNum: cardContent.length,
       stackNum: 3,
@@ -25,20 +50,47 @@ class _GamePageState extends State<GamePage> {
       minWidth: MediaQuery.of(context).size.width * 0.8,
       minHeight: MediaQuery.of(context).size.width * 0.8,
       cardBuilder: (context, index) => Card(
-        child: Text('${cardContent[index]}'),
+        child: Column(
+          children: [
+            Text('${index + 1}.' + '${cardContent[index]["question"]}'),
+            Divider(),
+            Text('${cardContent[index]["answer"]}'),
+          ],
+        ),
       ),
       cardController: controller = CardController(),
       swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {
         /// Get swiping card's alignment
         if (align.x < 0) {
-          //Card is LEFT swiping
+          debugPrint("Card swiped LEFT");
         } else if (align.x > 0) {
-          //Card is RIGHT swiping
+          debugPrint("Card swiped RIGHT");
         }
       },
       swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
-        /// Get orientation & index of swiped card!
+        debugPrint(index.toString());
       },
     );
+    //     Column(children: [
+    //       Text("Rate difficulty:"),
+    //       Row(
+    //         children: [
+    //           OutlinedButton(
+    //             onPressed: () => {debugPrint("very hard")},
+    //             child: Text("Very Hard"),
+    //           ),
+    //           OutlinedButton(
+    //             onPressed: () => {debugPrint("okay")},
+    //             child: Text("Okay"),
+    //           ),
+    //           OutlinedButton(
+    //             onPressed: () => {debugPrint("easy")},
+    //             child: Text("Easy"),
+    //           ),
+    //         ],
+    //       )
+    //     ])
+    //   ],
+    // );
   }
 }
