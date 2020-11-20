@@ -15,7 +15,7 @@ class _SettingsState extends State<Settings> {
   final TextEditingController passwordController = TextEditingController();
 
   void deleteAccount() async {
-    DatabaseService().deleteAccount();
+    // DatabaseService().deleteAccount();
     bool status =
         await context.read<AuthService>().deleteUser(passwordController.text);
     setState(() {

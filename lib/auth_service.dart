@@ -47,6 +47,7 @@ class AuthService {
     AuthCredential credential = EmailAuthProvider.credential(
         email: user.email, password: passwordValue);
     await user.reauthenticateWithCredential(credential).then((value) {
+      DatabaseService().deleteAccount();
       value.user.delete().then((res) {
         print("user deleted");
       });
