@@ -6,3 +6,11 @@ class Deck{
   Deck({ this.deckname, this.desc, this.tag});
   
 }
+
+class FlashCard{
+  final String deckId;
+  final String front;
+  final String back;
+
+  FlashCard({ this.deckId, this.front, this.back});
+}

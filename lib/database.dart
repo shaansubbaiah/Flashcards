@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_service.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
+// import 'package:flutterfiretest/overview/models/card.dart';
 
 class DatabaseService {
   static String uid;
@@ -98,5 +99,22 @@ class DatabaseService {
         .where("uid", isEqualTo: uid)
         .snapshots()
         .map(_deckListFromSnapshot);
+  }
+
+  List<FlashCard> _cardListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return FlashCard(
+        deckId: doc.data()['deckId'] ?? '',
+        front: doc.data()['front'] ?? '',
+        back: doc.data()['back'] ?? '',
+      );
+    }).toList();
+  }
+
+  Stream<List<FlashCard>> get cards {
+    return cardCollection
+    .where("deckid", isEqualTo: deckid)
+    .snapshots()
+    .map(_cardListFromSnapshot);
   }
 }
