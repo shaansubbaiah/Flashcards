@@ -11,21 +11,18 @@ class deckList extends StatefulWidget {
 class _deckListState extends State<deckList> {
   @override
   Widget build(BuildContext context) {
+    final decks = Provider.of<List<Deck>>(context);
+    // decks.forEach((deck) {
+    //   print(deck.deckname);
+    //   print(deck.desc);
+    //   print(deck.tag);
+    // });
 
-    final decks= Provider.of<List<Deck>>(context);
-    decks.forEach((deck) { 
-      print(deck.deckname);
-      print(deck.desc);
-      print(deck.tag);
-
-    });
-    
     return ListView.builder(
-      itemCount: decks.length,
-      itemBuilder: (context, index){
+      itemCount: decks != null ? decks.length : 0,
+      itemBuilder: (context, index) {
         return DeckTile(deck: decks[index]);
       },
-      
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_service.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 
-
 class DatabaseService {
   static String uid;
   static String deckid;
@@ -82,27 +81,22 @@ class DatabaseService {
     print("deleted");
     await userCollection.doc(docRef).delete();
   }
+
   //deck list from snapshot
-  List<Deck> _deckListFromSnapshot(QuerySnapshot snapshot){
-    return snapshot.docs.map((doc){
+  List<Deck> _deckListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
       return Deck(
         deckname: doc.data()['deckname'] ?? '',
         desc: doc.data()['desc'] ?? '',
         tag: doc.data()['tag'] ?? '',
-        
-
       );
     }).toList();
   }
 
-
-
-
-  Stream<List<Deck>> get decks{
+  Stream<List<Deck>> get decks {
     return deckCollection
-    .where("uid", isEqualTo: uid)
-    .snapshots()
-      .map(_deckListFromSnapshot);
+        .where("uid", isEqualTo: uid)
+        .snapshots()
+        .map(_deckListFromSnapshot);
   }
-
 }

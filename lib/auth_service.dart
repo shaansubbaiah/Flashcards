@@ -58,4 +58,27 @@ class AuthService {
 
     return status ? true : false;
   }
+
+  Future<bool> checkPassword(String oldPassword) async {
+    try {
+      final User user = await this._firebaseAuth.currentUser;
+
+      AuthCredential credential = EmailAuthProvider.credential(
+          email: user.email, password: oldPassword);
+      var authResult = await user.reauthenticateWithCredential(credential);
+      return authResult != null;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  void editPassword(String newPassword) async {
+    try {
+      final User user = this._firebaseAuth.currentUser;
+      await user.updatePassword(newPassword);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

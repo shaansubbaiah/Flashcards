@@ -7,7 +7,8 @@ import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
 import 'package:flutterfiretest/profile_page.dart';
-import 'package:flutterfiretest/settings_page.dart';
+import 'package:flutterfiretest/settings/edit_user.dart';
+import 'package:flutterfiretest/settings/settings_page.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.teal,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: AuthenticationWrapper(),
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
             "/settings": (BuildContext context) => new Settings(),
             "/addCard": (BuildContext context) => new AddCard(),
             "/home": (BuildContext context) => new HomePage(),
+            "/settings/editUser": (BuildContext context) => new EditUser(),
           }),
     );
   }

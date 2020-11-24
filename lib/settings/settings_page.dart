@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterfiretest/alert_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
-import 'package:flutterfiretest/database.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -74,7 +73,8 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             onTap: () {
-                              print("edit");
+                              Navigator.popAndPushNamed(
+                                  context, "/settings/editUser");
                             },
                           ),
                         ),

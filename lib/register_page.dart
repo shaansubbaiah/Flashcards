@@ -80,7 +80,7 @@ class RegisterPage extends StatelessWidget {
                       "Register",
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blue[400],
+                    color: Colors.teal,
                     onPressed: () async {
                       if (form.currentState.validate()) {
                         context.read<AuthService>().signUp(
