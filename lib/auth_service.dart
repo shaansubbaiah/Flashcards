@@ -41,8 +41,7 @@ class AuthService {
     }
   }
 
-  Future<bool> deleteUser(passwordValue) async {
-    bool status = true;
+  void deleteUser(passwordValue) async {
     final User user = this._firebaseAuth.currentUser;
     AuthCredential credential = EmailAuthProvider.credential(
         email: user.email, password: passwordValue);
@@ -53,10 +52,7 @@ class AuthService {
       });
     }).catchError((onError) {
       print(onError);
-      status = false;
     });
-
-    return status ? true : false;
   }
 
   Future<bool> checkPassword(String oldPassword) async {

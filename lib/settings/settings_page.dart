@@ -9,23 +9,6 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool deleteStatus = true;
-
-  final TextEditingController passwordController = TextEditingController();
-
-  void deleteAccount() async {
-    // DatabaseService().deleteAccount();
-    bool status =
-        await context.read<AuthService>().deleteUser(passwordController.text);
-    setState(() {
-      deleteStatus = status;
-    });
-    if (status) {
-      Navigator.of(context).pop();
-      // context.read<AuthService>().signOut();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,43 +169,11 @@ class _SettingsState extends State<Settings> {
                         FlatButton(
                           onPressed: () {
                             showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Account'),
-                                    content: SizedBox(
-                                      height: 70.0,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          TextField(
-                                            controller: passwordController,
-                                            decoration: InputDecoration(
-                                                hintText: "Confirm Password"),
-                                          ),
-                                          SizedBox(
-                                            height: deleteStatus ? 0.0 : 20.0,
-                                            child: Text("invalid password"),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: [
-                                      FlatButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text("Cancel"),
-                                      ),
-                                      RaisedButton(
-                                        onPressed: () {
-                                          deleteAccount();
-                                        },
-                                        child: Text("Delete"),
-                                      ),
-                                    ],
-                                  );
-                                });
+                              context: context,
+                              builder: (context) {
+                                return DeleteAlert();
+                              },
+                            );
                           },
                           child: Text(
                             "Delete",
@@ -250,6 +201,72 @@ class _SettingsState extends State<Settings> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DeleteAlert extends StatefulWidget {
+  @override
+  _DeleteAlertState createState() => _DeleteAlertState();
+}
+
+class _DeleteAlertState extends State<DeleteAlert> {
+  bool wrongPassword = false;
+
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<bool> checkPassword() async {
+    return await context
+        .read<AuthService>()
+        .checkPassword(passwordController.text);
+  }
+
+  void deleteAccount() async {
+    if (await checkPassword()) {
+      context.read<AuthService>().deleteUser(passwordController.text);
+      Navigator.of(context).pop();
+    } else {
+      setState(() {
+        wrongPassword = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Delete Account'),
+      content: SizedBox(
+        height: 70.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                hintText: "Confirm Password",
+                errorText: wrongPassword ? "Wrong Password" : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            passwordController.text = "";
+            wrongPassword = false;
+          },
+          child: Text("Cancel"),
+        ),
+        RaisedButton(
+          onPressed: () {
+            deleteAccount();
+          },
+          child: Text("Delete"),
+        ),
+      ],
     );
   }
 }
