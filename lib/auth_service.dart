@@ -22,7 +22,11 @@ class AuthService {
       // await DatabaseService().getUid(userCredential.user.uid);
       return "Signed In";
     } catch (e) {
-      return e.message;
+      if (e.code == 'user-not-found') {
+        return "user-not-found";
+      } else if (e.code == 'wrong-password') {
+        return "wrong-password";
+      }
     }
   }
 
