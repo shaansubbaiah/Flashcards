@@ -89,6 +89,7 @@ class DatabaseService {
         deckname: doc.data()['deckname'] ?? '',
         desc: doc.data()['desc'] ?? '',
         tag: doc.data()['tag'] ?? '',
+        deckid: doc.id ?? '',
       );
     }).toList();
   }
