@@ -99,4 +99,23 @@ class DatabaseService {
         .snapshots()
         .map(_deckListFromSnapshot);
   }
+
+  Future<List> getCardDetails(String deckid) async {
+    List<Map<String, dynamic>> allCards = [];
+    await cardCollection
+        .where("deckid", isEqualTo: deckid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                Map<String, String> card = {
+                  "front": doc.data()['front'],
+                  "back": doc.data()['back']
+                };
+                allCards.add(card);
+              })
+            });
+
+    print(allCards);
+    return allCards;
+  }
 }
