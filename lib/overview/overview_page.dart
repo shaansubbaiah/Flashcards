@@ -13,23 +13,21 @@ class _OverviewState extends State<Overview> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Deck>>.value(
-          value: DatabaseService().decks,
-          
-          child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.teal[400] ,
+        value: DatabaseService().decks,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.teal[400],
             title: Text(
-            "DECKS",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+              "DECKS",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
+            centerTitle: true,
+            elevation: 4.0,
           ),
-          centerTitle: true,
-          elevation: 4.0,
-          ),
-            body: deckList(),
-            )
-        );
+          body: deckList(),
+        ));
   }
 }

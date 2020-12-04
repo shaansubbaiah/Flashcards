@@ -6,7 +6,7 @@ import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
-import 'package:flutterfiretest/profile_page.dart';
+import 'package:flutterfiretest/profile/profile_page.dart';
 import 'package:flutterfiretest/settings/edit_user.dart';
 import 'package:flutterfiretest/settings/settings_page.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
