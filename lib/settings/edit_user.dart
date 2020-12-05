@@ -4,11 +4,15 @@ import '../alert_dialog.dart';
 import '../auth_service.dart';
 
 class EditUser extends StatefulWidget {
+  Function setIndex;
+  EditUser(this.setIndex);
   @override
-  _EditUserState createState() => _EditUserState();
+  _EditUserState createState() => _EditUserState(this.setIndex);
 }
 
 class _EditUserState extends State<EditUser> {
+  Function setIndex;
+  _EditUserState(this.setIndex);
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final form = GlobalKey<FormState>();
@@ -27,7 +31,8 @@ class _EditUserState extends State<EditUser> {
       if (action == DialogAction.yes) {
         if (await checkPassword()) {
           context.read<AuthService>().editPassword(oldPasswordController.text);
-          Navigator.popAndPushNamed(context, "/settings");
+          // Navigator.popAndPushNamed(context, "/settings");
+          this.setIndex(2);
         } else {
           setState(() {
             wrongPassword = true;

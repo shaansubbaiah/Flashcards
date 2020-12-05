@@ -4,11 +4,15 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutterfiretest/alert_dialog.dart';
 
 class AddCard extends StatefulWidget {
+  Function setIndex;
+  AddCard(this.setIndex);
   @override
-  _AddCardState createState() => _AddCardState();
+  _AddCardState createState() => _AddCardState(this.setIndex);
 }
 
 class _AddCardState extends State<AddCard> {
+  Function setIndex;
+  _AddCardState(this.setIndex);
   final TextEditingController deckNameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
   final TextEditingController frontController = TextEditingController();
@@ -105,7 +109,8 @@ class _AddCardState extends State<AddCard> {
               .addCard(deckid, cards[i]["front"], cards[i]["back"]);
         }
 
-        Navigator.popAndPushNamed(context, "/home");
+        // Navigator.popAndPushNamed(context, "/home");
+        this.setIndex(0);
       }
     }
   }

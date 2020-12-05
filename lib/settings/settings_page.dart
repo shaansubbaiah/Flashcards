@@ -4,11 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 
 class Settings extends StatefulWidget {
+  Function setIndex;
+  Settings(this.setIndex);
   @override
-  _SettingsState createState() => _SettingsState();
+  _SettingsState createState() => _SettingsState(this.setIndex);
 }
 
 class _SettingsState extends State<Settings> {
+  Function setIndex;
+  _SettingsState(this.setIndex);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +60,7 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.popAndPushNamed(
-                                  context, "/settings/editUser");
+                              this.setIndex(5);
                             },
                           ),
                         ),

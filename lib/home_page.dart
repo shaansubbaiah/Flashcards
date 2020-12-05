@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
 import 'package:flutterfiretest/profile/profile_page.dart';
+import 'package:flutterfiretest/settings/edit_user.dart';
 import 'package:flutterfiretest/settings/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -17,13 +18,34 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    Overview(),
-    AddCard(),
-    Settings(),
-    Profile(),
-    GamePage()
-  ];
+  List<Widget> _children;
+
+  Settings settings;
+  EditUser editUser;
+  AddCard addCard;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    settings = new Settings(this.setIndex);
+    editUser = new EditUser(this.setIndex);
+    addCard = new AddCard(this.setIndex);
+    _children = [
+      Overview(),
+      addCard,
+      settings,
+      Profile(),
+      GamePage(),
+      editUser
+    ];
+  }
+
+  void setIndex(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

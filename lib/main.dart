@@ -39,11 +39,11 @@ class MyApp extends StatelessWidget {
           ),
           home: AuthenticationWrapper(),
           routes: <String, WidgetBuilder>{
-            "/profile": (BuildContext context) => new Profile(),
-            "/settings": (BuildContext context) => new Settings(),
-            "/addCard": (BuildContext context) => new AddCard(),
-            "/home": (BuildContext context) => new HomePage(),
-            "/settings/editUser": (BuildContext context) => new EditUser(),
+            // "/profile": (BuildContext context) => new Profile(),
+            // "/settings": (BuildContext context) => new Settings(),
+            // "/addCard": (BuildContext context) => new AddCard(),
+            // "/home": (BuildContext context) => new HomePage(),
+            // "/settings/editUser": (BuildContext context) => new EditUser(),
           }),
     );
   }
