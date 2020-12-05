@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 
 class RegisterPage extends StatelessWidget {
+  Function toggle;
+  RegisterPage(this.toggle);
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final form = GlobalKey<FormState>();
@@ -90,6 +92,14 @@ class RegisterPage extends StatelessWidget {
                       }
                     },
                   ),
+                  Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: FlatButton(
+                        child: Text("Already have an Account?"),
+                        onPressed: () {
+                          toggle();
+                        }),
+                  )
                 ],
               ),
             ),

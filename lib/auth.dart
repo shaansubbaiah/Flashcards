@@ -12,16 +12,16 @@ class _AuthenticateState extends State<Authenticate> {
 
   void toggle() {
     setState(() {
-      showSignIn = false;
+      showSignIn = showSignIn ? false : true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (showSignIn) {
-      return SignInPage(toggle: toggle);
+      return SignInPage(toggle);
     } else {
-      return RegisterPage();
+      return RegisterPage(toggle);
     }
   }
 }

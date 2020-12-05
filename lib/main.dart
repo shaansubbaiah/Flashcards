@@ -32,19 +32,13 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.teal,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: AuthenticationWrapper(),
-          routes: <String, WidgetBuilder>{
-            // "/profile": (BuildContext context) => new Profile(),
-            // "/settings": (BuildContext context) => new Settings(),
-            // "/addCard": (BuildContext context) => new AddCard(),
-            // "/home": (BuildContext context) => new HomePage(),
-            // "/settings/editUser": (BuildContext context) => new EditUser(),
-          }),
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: AuthenticationWrapper(),
+      ),
     );
   }
 }

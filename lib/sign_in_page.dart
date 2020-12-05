@@ -4,13 +4,15 @@ import 'auth_service.dart';
 
 class SignInPage extends StatefulWidget {
   final Function toggle;
-  SignInPage({this.toggle});
+  SignInPage(this.toggle);
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignInPageState createState() => _SignInPageState(this.toggle);
 }
 
 class _SignInPageState extends State<SignInPage> {
+  Function toggle;
+  _SignInPageState(this.toggle);
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -131,8 +133,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: FlatButton(
                         child: Text("Create an account"),
                         onPressed: () {
-                          SignInPage().toggle();
-                          // SignInPage().toggle();
+                          toggle();
                         }),
                   )
                 ],
