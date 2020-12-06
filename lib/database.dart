@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'auth_service.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 
 class DatabaseService {
@@ -116,7 +115,7 @@ class DatabaseService {
               })
             });
 
-    print(allCards);
+    // print(allCards);
     return allCards;
   }
 }
