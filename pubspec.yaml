@@ -16,6 +16,7 @@ dependencies:
   cloud_firestore: ^0.14.3
   provider: ^4.3.2+1
 
+  carousel_slider: ^2.3.1
   curved_navigation_bar:
   flutter_slidable:
   flutter_tindercard: ^0.2.0
