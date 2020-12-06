@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 import 'package:flutterfiretest/overview/deck_tile.dart';
 
-class deckList extends StatefulWidget {
+class DeckList extends StatefulWidget {
   @override
-  _deckListState createState() => _deckListState();
+  _DeckListState createState() => _DeckListState();
 }
 
-class _deckListState extends State<deckList> {
+class _DeckListState extends State<DeckList> {
   @override
   Widget build(BuildContext context) {
     final decks = Provider.of<List<Deck>>(context);

@@ -27,7 +27,7 @@ class _OverviewState extends State<Overview> {
             centerTitle: true,
             elevation: 4.0,
           ),
-          body: deckList(),
+          body: DeckList(),
         ));
   }
 }
