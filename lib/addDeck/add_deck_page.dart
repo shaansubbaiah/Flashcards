@@ -119,11 +119,15 @@ class _AddCardState extends State<AddCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Add FlashCard",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            "Add Flashcard",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
       ),

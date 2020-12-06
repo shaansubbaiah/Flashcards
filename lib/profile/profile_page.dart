@@ -34,11 +34,15 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Profile",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            "Profile",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
       ),

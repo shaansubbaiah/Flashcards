@@ -45,6 +45,19 @@ class _EditUserState extends State<EditUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            "Edit Password",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
       body: Container(
           padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
           child: Column(
@@ -52,16 +65,6 @@ class _EditUserState extends State<EditUser> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 40.0,
-                    child: Text(
-                      "Edit Password",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ),
                   Center(
                     child: Form(
                       key: form,

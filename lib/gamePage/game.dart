@@ -31,11 +31,15 @@ class _GamePageState extends State<GamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Game",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            "Game",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
       ),

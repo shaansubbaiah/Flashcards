@@ -17,11 +17,15 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Settings",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            "Settings",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
       ),

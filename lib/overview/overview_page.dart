@@ -16,11 +16,15 @@ class _OverviewState extends State<Overview> {
         value: DatabaseService().decks,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Decks",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+            backgroundColor: Colors.transparent,
+            title: Center(
+              child: Text(
+                "Decks",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
