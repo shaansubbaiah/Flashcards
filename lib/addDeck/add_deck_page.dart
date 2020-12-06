@@ -118,6 +118,15 @@ class _AddCardState extends State<AddCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Add FlashCard",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: Container(
         child: Padding(
           padding: EdgeInsets.all(30.0),
@@ -127,21 +136,6 @@ class _AddCardState extends State<AddCard> {
               children: [
                 Column(
                   children: [
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    SizedBox(
-                      child: Text(
-                        "Add Flash Card",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

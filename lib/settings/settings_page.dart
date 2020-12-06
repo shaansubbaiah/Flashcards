@@ -16,6 +16,15 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Padding(
@@ -25,16 +34,6 @@ class _SettingsState extends State<Settings> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 40.0,
-                      child: Text(
-                        "Settings",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
                     ListView(
                       shrinkWrap: true,
                       children: [

@@ -29,9 +29,17 @@ class _GamePageState extends State<GamePage> {
 
     CarouselController buttonCarouselController = CarouselController();
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-      child: Column(children: [
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Game",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ),
+      body: Column(children: [
         CarouselSlider(
           options: CarouselOptions(
             height: 400.0,

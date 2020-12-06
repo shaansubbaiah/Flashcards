@@ -32,95 +32,94 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
-                child: Center(
-                  child: Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ),
+      body: Container(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: CircleAvatar(
+                        radius: 40.0,
+                        backgroundColor: Colors.primaries[
+                            Random().nextInt(Colors.primaries.length)],
+                        child: Text(
+                          "A",
+                          style: TextStyle(
+                            fontSize: 40,
+                          ),
+                        ),
+                        foregroundColor: Colors.white,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: CircleAvatar(
-                      radius: 40.0,
-                      backgroundColor: Colors
-                          .primaries[Random().nextInt(Colors.primaries.length)],
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Text(
-                        "A",
+                        "name",
                         style: TextStyle(
-                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
-                      foregroundColor: Colors.white,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: Text(
-                      "name",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FlatButton(
-                        onPressed: btn1,
-                        child: Text(btn1Text),
-                        height: 30.0,
-                        color: Color(0xffEDEDED),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FlatButton(
+                          onPressed: btn1,
+                          child: Text(btn1Text),
+                          height: 30.0,
+                          color: Color(0xffEDEDED),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
-                      ),
-                      FlatButton(
-                        onPressed: btn2,
-                        child: Text(btn2Text),
-                        height: 30.0,
-                        color: Color(0xffEDEDED),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                        FlatButton(
+                          onPressed: btn2,
+                          child: Text(btn2Text),
+                          height: 30.0,
+                          color: Color(0xffEDEDED),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
-                      ),
-                      FlatButton(
-                        onPressed: btn3,
-                        child: Text(btn3Text),
-                        height: 30.0,
-                        color: Color(0xffEDEDED),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                        FlatButton(
+                          onPressed: btn3,
+                          child: Text(btn3Text),
+                          height: 30.0,
+                          color: Color(0xffEDEDED),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ],
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

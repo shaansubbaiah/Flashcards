@@ -36,6 +36,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          appBarTheme: AppBarTheme(
+            elevation: 0.0,
+          ),
         ),
         home: AuthenticationWrapper(),
       ),
