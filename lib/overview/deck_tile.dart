@@ -25,7 +25,7 @@ class DeckTile extends StatelessWidget {
                 foregroundColor: Colors.white,
               ),
               title: Text(deck.deckname),
-              subtitle: Text(deck.desc),
+              subtitle: Text(deck.desc + " " + deck.deckid),
             ),
           ),
           actions: <Widget>[

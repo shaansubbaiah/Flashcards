@@ -9,22 +9,27 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  final currentDeck = "v4VFWkP6JQGAfuCPhBf8";
-  var flashcards;
+  final currentDeck = "SchBjhHW0ixEmnIy2s6J";
+  var flashcards = [];
+  var index = 1;
 
   @override
   Widget build(BuildContext context) {
-    // final flashcards = Provider.of<List<FlashCard>>(context);
     DatabaseService()
         .getCardDetails(currentDeck)
         .then((value) => {
-              print(value),
+              // print(value[0]["front"]),
               flashcards = value,
               print("Total cards:" + flashcards.length.toString()),
+              flashcards.forEach((element) {
+                print(element);
+              })
             })
         .catchError((err) => {
               print(err),
-              flashcards = [],
+              flashcards = [
+                {"front": "Error", "back": "Error2"}
+              ],
             });
 
     CarouselController buttonCarouselController = CarouselController();
@@ -52,7 +57,8 @@ class _GamePageState extends State<GamePage> {
             scrollPhysics: NeverScrollableScrollPhysics(),
           ),
           carouselController: buttonCarouselController,
-          items: [1, 2, 3, 4, 5].map((i) {
+          // items: flashCardWidgetList(),
+          items: flashcards.map((i) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -62,10 +68,11 @@ class _GamePageState extends State<GamePage> {
                     child: Column(
                       children: [
                         Text(
-                          'Q$i',
-                          style: TextStyle(fontSize: 16.0),
+                          'Q$index.' + " " + i["front"],
                         ),
-                        Text("What, Why, When?"),
+                        Text(
+                          i["back"],
+                        )
                       ],
                     ));
               },
@@ -75,11 +82,12 @@ class _GamePageState extends State<GamePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OutlineButton(
-              onPressed: () => buttonCarouselController.jumpToPage(0),
+            OutlinedButton(
+              onPressed: () => buttonCarouselController.animateToPage(0,
+                  duration: Duration(milliseconds: 300), curve: Curves.linear),
               child: Text('Restart'),
             ),
-            OutlineButton(
+            OutlinedButton(
               onPressed: () => buttonCarouselController.nextPage(
                   duration: Duration(milliseconds: 300), curve: Curves.linear),
               child: Text('Next'),
@@ -110,7 +118,5 @@ class _GamePageState extends State<GamePage> {
         )
       ]),
     );
-    //   ],
-    // );
   }
 }
