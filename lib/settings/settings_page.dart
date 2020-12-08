@@ -3,6 +3,8 @@ import 'package:flutterfiretest/alert_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 
+import '../app_state.dart';
+
 class Settings extends StatefulWidget {
   Function setIndex;
   Settings(this.setIndex);
@@ -141,18 +143,20 @@ class _SettingsState extends State<Settings> {
                           ),
                           child: ListTile(
                             leading: Icon(
-                              Icons.nights_stay,
+                              Icons.wb_sunny,
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             title: Text(
-                              "Night Mode",
+                              Provider.of<AppState>(context, listen: false)
+                                  .mode,
                               style: TextStyle(
                                 color: Color(0xff9E9D9D),
                                 fontSize: 20,
                               ),
                             ),
                             onTap: () {
-                              print("edit");
+                              Provider.of<AppState>(context, listen: false)
+                                  .changeTheme();
                             },
                           ),
                         ),

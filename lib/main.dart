@@ -8,6 +8,8 @@ import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
 import 'package:provider/provider.dart';
 
+import 'app_state.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -25,22 +27,22 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider(
           create: (context) => context.read<AuthService>().authStateChanges,
-        )
+        ),
+        ChangeNotifierProvider<AppState>(
+          create: (_) => AppState(),
+        ),
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        // themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
-        // theme: ThemeData(
-        //   primarySwatch: Colors.teal,
-        //   visualDensity: VisualDensity.adaptivePlatformDensity,
-        //   appBarTheme: AppBarTheme(
-        //     elevation: 0.0,
-        //   ),
-        // ),
-        home: AuthenticationWrapper(),
-      ),
+      child: Builder(builder: (context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: Provider.of<AppState>(context).isNightModeOn
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          home: AuthenticationWrapper(),
+        );
+      }),
     );
   }
 }
