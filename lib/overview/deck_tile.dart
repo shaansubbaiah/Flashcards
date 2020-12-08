@@ -5,7 +5,8 @@ import 'dart:math';
 
 class DeckTile extends StatelessWidget {
   final Deck deck;
-  DeckTile({this.deck});
+  Function setIndex;
+  DeckTile(this.deck, this.setIndex);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,9 @@ class DeckTile extends StatelessWidget {
               caption: 'Edit',
               color: Colors.black45,
               icon: Icons.edit,
-              onTap: () => debugPrint('Edit'),
+              onTap: () {
+                setIndex(6);
+              },
             ),
             IconSlideAction(
               caption: 'Delete',

@@ -5,11 +5,15 @@ import 'package:flutterfiretest/overview/deck_list.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 
 class Overview extends StatefulWidget {
+  Function setIndex;
+  Overview(this.setIndex);
   @override
-  _OverviewState createState() => _OverviewState();
+  _OverviewState createState() => _OverviewState(this.setIndex);
 }
 
 class _OverviewState extends State<Overview> {
+  Function setIndex;
+  _OverviewState(this.setIndex);
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Deck>>.value(
@@ -28,7 +32,7 @@ class _OverviewState extends State<Overview> {
               ),
             ),
           ),
-          body: DeckList(),
+          body: DeckList(this.setIndex),
         ));
   }
 }

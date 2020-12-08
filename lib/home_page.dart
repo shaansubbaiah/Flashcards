@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
+import 'package:flutterfiretest/overview/edit_deck_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
 import 'package:flutterfiretest/profile/profile_page.dart';
 import 'package:flutterfiretest/settings/edit_user.dart';
@@ -23,6 +24,8 @@ class _HomePageState extends State<HomePage> {
   Settings settings;
   EditUser editUser;
   AddCard addCard;
+  Overview overview;
+  EditDeck editDeck;
 
   @override
   void initState() {
@@ -31,13 +34,16 @@ class _HomePageState extends State<HomePage> {
     settings = new Settings(this.setIndex);
     editUser = new EditUser(this.setIndex);
     addCard = new AddCard(this.setIndex);
+    overview = new Overview(this.setIndex);
+    editDeck = new EditDeck(this.setIndex);
     _children = [
-      Overview(),
+      overview,
       addCard,
       settings,
       Profile(),
       GamePage(),
-      editUser
+      editUser,
+      editDeck,
     ];
   }
 
