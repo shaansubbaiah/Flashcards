@@ -119,14 +119,14 @@ class _AddCardState extends State<AddCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
         title: Center(
           child: Text(
             "Add Flashcard",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ),
@@ -152,6 +152,7 @@ class _AddCardState extends State<AddCard> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
                             ),
                           ),
@@ -163,7 +164,7 @@ class _AddCardState extends State<AddCard> {
                             padding: EdgeInsets.only(
                                 bottom: 5.0, right: 10.0, left: 15.0),
                             decoration: BoxDecoration(
-                              color: Color(0xffEDEDED),
+                              color: Theme.of(context).colorScheme.secondary,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
@@ -178,14 +179,17 @@ class _AddCardState extends State<AddCard> {
                               },
                               controller: deckNameController,
                               style: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
-                              cursorColor: Color(0xff9E9D9D),
+                              cursorColor:
+                                  Theme.of(context).colorScheme.onSecondary,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Enter deck name",
                                 hintStyle: TextStyle(
-                                  color: Color(0xff9E9D9D),
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
                                 ),
                               ),
                             ),
@@ -202,7 +206,9 @@ class _AddCardState extends State<AddCard> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 "Required",
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onError),
                               ),
                             ),
                     ),
@@ -218,7 +224,7 @@ class _AddCardState extends State<AddCard> {
                             padding: EdgeInsets.only(
                                 bottom: 5.0, right: 10.0, left: 15.0),
                             decoration: BoxDecoration(
-                              color: Color(0xffEDEDED),
+                              color: Theme.of(context).colorScheme.secondary,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
@@ -233,14 +239,17 @@ class _AddCardState extends State<AddCard> {
                               },
                               controller: descController,
                               style: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
-                              cursorColor: Color(0xff9E9D9D),
+                              cursorColor:
+                                  Theme.of(context).colorScheme.onSecondary,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Enter description",
                                 hintStyle: TextStyle(
-                                  color: Color(0xff9E9D9D),
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
                                 ),
                               ),
                             ),
@@ -257,7 +266,9 @@ class _AddCardState extends State<AddCard> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 "Required",
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onError),
                               ),
                             ),
                     ),
@@ -276,6 +287,7 @@ class _AddCardState extends State<AddCard> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
                             ),
                           ),
@@ -295,7 +307,9 @@ class _AddCardState extends State<AddCard> {
                                       Text(
                                         category,
                                         style: TextStyle(
-                                          color: Color(0xff9E9D9D),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
                                         ),
                                       ),
                                     ],
@@ -317,16 +331,19 @@ class _AddCardState extends State<AddCard> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Color(0xffEDEDED),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                               contentPadding:
                                   EdgeInsets.fromLTRB(20, 20, 10, 0),
                               filled: true,
-                              fillColor: Color(0xffEDEDED),
+                              fillColor:
+                                  Theme.of(context).colorScheme.secondary,
                               hintText: "Select Tag",
                               hintStyle: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ),
@@ -342,7 +359,9 @@ class _AddCardState extends State<AddCard> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 "Required",
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onError),
                               ),
                             ),
                     ),
@@ -362,7 +381,7 @@ class _AddCardState extends State<AddCard> {
                             padding: EdgeInsets.only(
                                 bottom: 5.0, right: 10.0, left: 15.0),
                             decoration: BoxDecoration(
-                              color: Color(0xffEDEDED),
+                              color: Theme.of(context).colorScheme.secondary,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
@@ -378,14 +397,20 @@ class _AddCardState extends State<AddCard> {
                                     },
                                     controller: tagController,
                                     style: TextStyle(
-                                      color: Color(0xff9E9D9D),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary,
                                     ),
-                                    cursorColor: Color(0xff9E9D9D),
+                                    cursorColor: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "Enter Custom Tag",
                                       hintStyle: TextStyle(
-                                        color: Color(0xff9E9D9D),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
                                       ),
                                     ),
                                   )
@@ -403,7 +428,9 @@ class _AddCardState extends State<AddCard> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 "Required",
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onError),
                               ),
                             ),
                     ),
@@ -421,7 +448,7 @@ class _AddCardState extends State<AddCard> {
                         padding: EdgeInsets.only(
                             bottom: 5.0, right: 10.0, left: 15.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffEDEDED),
+                          color: Theme.of(context).colorScheme.secondary,
                           borderRadius: BorderRadius.all(
                             Radius.circular(25.0),
                           ),
@@ -437,14 +464,15 @@ class _AddCardState extends State<AddCard> {
                           maxLines: 2,
                           controller: frontController,
                           style: TextStyle(
-                            color: Color(0xff9E9D9D),
+                            color: Theme.of(context).colorScheme.onSecondary,
                           ),
-                          cursorColor: Color(0xff9E9D9D),
+                          cursorColor:
+                              Theme.of(context).colorScheme.onSecondary,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Front",
                             hintStyle: TextStyle(
-                              color: Color(0xff9E9D9D),
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),
                           ),
                         ),
@@ -460,7 +488,8 @@ class _AddCardState extends State<AddCard> {
                           alignment: Alignment.centerRight,
                           child: Text(
                             "Required",
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onError),
                           ),
                         ),
                 ),
@@ -476,7 +505,7 @@ class _AddCardState extends State<AddCard> {
                         padding: EdgeInsets.only(
                             bottom: 5.0, right: 10.0, left: 15.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffEDEDED),
+                          color: Theme.of(context).colorScheme.secondary,
                           borderRadius: BorderRadius.all(
                             Radius.circular(25.0),
                           ),
@@ -492,14 +521,15 @@ class _AddCardState extends State<AddCard> {
                           maxLines: 2,
                           controller: backController,
                           style: TextStyle(
-                            color: Color(0xff9E9D9D),
+                            color: Theme.of(context).colorScheme.onSecondary,
                           ),
-                          cursorColor: Color(0xff9E9D9D),
+                          cursorColor:
+                              Theme.of(context).colorScheme.onSecondary,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Back",
                             hintStyle: TextStyle(
-                              color: Color(0xff9E9D9D),
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),
                           ),
                         ),
@@ -515,7 +545,8 @@ class _AddCardState extends State<AddCard> {
                           alignment: Alignment.centerRight,
                           child: Text(
                             "Required",
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onError),
                           ),
                         ),
                 ),
@@ -525,7 +556,12 @@ class _AddCardState extends State<AddCard> {
                     FlatButton(
                       height: 30.0,
                       onPressed: addCard,
-                      child: Text("Add card"),
+                      child: Text(
+                        "Add card",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -535,48 +571,9 @@ class _AddCardState extends State<AddCard> {
                       ? null
                       : Text(
                           "Add one card",
-                          style: TextStyle(color: Colors.red),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onError),
                         ),
-                ),
-                ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: cards.length,
-                  itemBuilder: (_, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 5.0),
-                      child: Slidable(
-                        actionPane: SlidableDrawerActionPane(),
-                        actionExtentRatio: 0.25,
-                        child: Container(
-                          height: 70.0,
-                          color: Colors.white,
-                          child: ListTile(
-                            title: Text('${cards[index]["front"]}'),
-                            subtitle: Text('${cards[index]["back"]}'),
-                          ),
-                        ),
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                            caption: 'Delete',
-                            color: Colors.red,
-                            icon: Icons.delete,
-                            onTap: () {
-                              setState(() {
-                                cards.removeAt(index);
-                                if (cards.isEmpty) {
-                                  _cardValidate = false;
-                                }
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  shrinkWrap: true,
-                ),
-                SizedBox(
-                  height: 40.0,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -619,6 +616,111 @@ class _AddCardState extends State<AddCard> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: cards.length,
+                    itemBuilder: (_, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 5.0),
+                        child: Slidable(
+                          actionPane: SlidableDrawerActionPane(),
+                          actionExtentRatio: 0.25,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 5, bottom: 5, right: 15, left: 15),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(25.0),
+                                ),
+                              ),
+                              height: 70.0,
+                              child: ListTile(
+                                title: Text(
+                                  '${cards[index]["front"]}',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary),
+                                ),
+                                subtitle: Text(
+                                  '${cards[index]["back"]}',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary),
+                                ),
+                              ),
+                            ),
+                          ),
+                          secondaryActions: <Widget>[
+                            IconSlideAction(
+                              caption: 'Delete',
+                              color: Theme.of(context).colorScheme.onError,
+                              icon: Icons.delete,
+                              onTap: () {
+                                setState(() {
+                                  cards.removeAt(index);
+                                  if (cards.isEmpty) {
+                                    _cardValidate = false;
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    shrinkWrap: true,
+                  ),
+                ),
+                SizedBox(
+                  height: 40.0,
+                ),
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.end,
+                //       children: [
+                //         FlatButton(
+                //           onPressed: cancel,
+                //           child: Text(
+                //             "Clear",
+                //             style: TextStyle(
+                //               color: Color(0xff950F0F),
+                //             ),
+                //           ),
+                //           height: 30.0,
+                //           color: Color(0xffEDA9A9),
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(25.0),
+                //           ),
+                //         ),
+                //         SizedBox(
+                //           width: 10.0,
+                //         ),
+                //         FlatButton(
+                //           onPressed: post,
+                //           child: Text(
+                //             "Post",
+                //             style: TextStyle(
+                //               color: Color(0xff08913F),
+                //             ),
+                //           ),
+                //           height: 30.0,
+                //           color: Color(0xffA9EDC4),
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(25.0),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: 20.0,
                 ),

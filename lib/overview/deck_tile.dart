@@ -14,18 +14,35 @@ class DeckTile extends StatelessWidget {
         Slidable(
           actionPane: SlidableDrawerActionPane(),
           actionExtentRatio: 0.25,
-          child: Container(
-            color: Colors.white,
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 25.0,
-                backgroundColor:
-                    Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                child: Text(deck.tag),
-                foregroundColor: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.only(top: 5, bottom: 5, right: 15, left: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(25.0),
+                ),
               ),
-              title: Text(deck.deckname),
-              subtitle: Text(deck.desc + " " + deck.deckid),
+              // color: Colors.white,
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 25.0,
+                  backgroundColor: Colors
+                      .primaries[Random().nextInt(Colors.primaries.length)],
+                  child: Text(deck.tag),
+                  foregroundColor: Colors.white,
+                ),
+                title: Text(
+                  deck.deckname,
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                ),
+                subtitle: Text(
+                  deck.desc + " " + deck.deckid,
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary),
+                ),
+              ),
             ),
           ),
           actions: <Widget>[

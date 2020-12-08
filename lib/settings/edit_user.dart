@@ -46,14 +46,14 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
         title: Center(
           child: Text(
             "Edit Password",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ),
@@ -84,15 +84,36 @@ class _EditUserState extends State<EditUser> {
                               },
                               controller: oldPasswordController,
                               obscureText: true,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.primary,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                               decoration: InputDecoration(
                                 // icon: Icon(Icons.lock),
                                 labelText: "Old Password",
-                                errorText:
-                                    wrongPassword ? "Wrong Password" : null,
-                                border: OutlineInputBorder(
+                                labelStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                errorText:
+                                    wrongPassword ? "Wrong Password" : null,
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 0.0, horizontal: 10.0),
                                 // fillColor: Colors.grey[300],
@@ -112,13 +133,34 @@ class _EditUserState extends State<EditUser> {
                                 return null;
                               },
                               controller: newPasswordController,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.primary,
                               obscureText: true,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                               decoration: InputDecoration(
                                 // icon: Icon(Icons.lock),
                                 labelText: "New Password",
-                                border: OutlineInputBorder(
+                                labelStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
                                 ),
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 0.0, horizontal: 10.0),
@@ -130,9 +172,12 @@ class _EditUserState extends State<EditUser> {
                             onPressed: editPassword,
                             child: Text(
                               "Edit",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryVariant),
                             ),
-                            color: Colors.teal,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                           SizedBox(
                             height: 20.0,

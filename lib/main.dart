@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/app_theme.dart';
 
 import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
 import 'package:flutterfiretest/home_page.dart';
-import 'package:flutterfiretest/overview/overview_page.dart';
-import 'package:flutterfiretest/profile/profile_page.dart';
-import 'package:flutterfiretest/settings/edit_user.dart';
-import 'package:flutterfiretest/settings/settings_page.dart';
-import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -33,13 +29,16 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.teal,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          appBarTheme: AppBarTheme(
-            elevation: 0.0,
-          ),
-        ),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        // themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+        // theme: ThemeData(
+        //   primarySwatch: Colors.teal,
+        //   visualDensity: VisualDensity.adaptivePlatformDensity,
+        //   appBarTheme: AppBarTheme(
+        //     elevation: 0.0,
+        //   ),
+        // ),
         home: AuthenticationWrapper(),
       ),
     );

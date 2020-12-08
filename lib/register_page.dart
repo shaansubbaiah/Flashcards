@@ -26,6 +26,7 @@ class RegisterPage extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   Padding(
@@ -39,11 +40,26 @@ class RegisterPage extends StatelessWidget {
                         return null;
                       },
                       controller: emailController,
+                      cursorColor: Theme.of(context).colorScheme.primary,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       decoration: InputDecoration(
                         // icon: Icon(Icons.email),
                         labelText: "Email",
-                        border: OutlineInputBorder(
+                        labelStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40.0),
+                          ),
                         ),
                         contentPadding: EdgeInsets.symmetric(
                             vertical: 0.0, horizontal: 10.0),
@@ -64,12 +80,27 @@ class RegisterPage extends StatelessWidget {
                         return null;
                       },
                       controller: passwordController,
+                      cursorColor: Theme.of(context).colorScheme.primary,
                       obscureText: true,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       decoration: InputDecoration(
                         // icon: Icon(Icons.lock),
                         labelText: "Password",
-                        border: OutlineInputBorder(
+                        labelStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40.0),
+                          ),
                         ),
                         contentPadding: EdgeInsets.symmetric(
                             vertical: 0.0, horizontal: 10.0),
@@ -80,9 +111,10 @@ class RegisterPage extends StatelessWidget {
                   FlatButton(
                     child: Text(
                       "Register",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primaryVariant),
                     ),
-                    color: Colors.teal,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: () async {
                       if (form.currentState.validate()) {
                         context.read<AuthService>().signUp(
@@ -95,6 +127,7 @@ class RegisterPage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(20.0),
                     child: FlatButton(
+                        textColor: Theme.of(context).colorScheme.onPrimary,
                         child: Text("Already have an Account?"),
                         onPressed: () {
                           toggle();

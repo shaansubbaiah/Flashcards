@@ -17,14 +17,14 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
         title: Center(
           child: Text(
             "Settings",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ),
@@ -46,19 +46,25 @@ class _SettingsState extends State<Settings> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                               top: BorderSide(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.edit),
+                            leading: Icon(
+                              Icons.edit,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
                             title: Text(
                               "Edit Password",
                               style: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontSize: 20,
                               ),
                             ),
@@ -72,16 +78,21 @@ class _SettingsState extends State<Settings> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.get_app),
+                            leading: Icon(
+                              Icons.get_app,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
                             title: Text(
                               "Restore Backup",
                               style: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontSize: 20,
                               ),
                             ),
@@ -95,16 +106,21 @@ class _SettingsState extends State<Settings> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.cached),
+                            leading: Icon(
+                              Icons.cached,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
                             title: Text(
                               "Reset Stats",
                               style: TextStyle(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontSize: 20,
                               ),
                             ),
@@ -118,12 +134,16 @@ class _SettingsState extends State<Settings> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Color(0xff9E9D9D),
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.nights_stay),
+                            leading: Icon(
+                              Icons.nights_stay,
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
                             title: Text(
                               "Night Mode",
                               style: TextStyle(
@@ -241,7 +261,14 @@ class _DeleteAlertState extends State<DeleteAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Delete Account'),
+      title: Text(
+        'Delete Account',
+        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      backgroundColor: Theme.of(context).colorScheme.primaryVariant,
       content: SizedBox(
         height: 70.0,
         child: Column(
@@ -249,8 +276,21 @@ class _DeleteAlertState extends State<DeleteAlert> {
           children: [
             TextField(
               controller: passwordController,
+              cursorColor: Theme.of(context).colorScheme.primary,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
               decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Theme.of(context).colorScheme.primary),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                ),
                 hintText: "Confirm Password",
+                hintStyle:
+                    TextStyle(color: Theme.of(context).colorScheme.primary),
                 errorText: wrongPassword ? "Wrong Password" : null,
               ),
             ),

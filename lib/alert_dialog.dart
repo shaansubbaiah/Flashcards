@@ -14,8 +14,16 @@ class Dialogs {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            title: Text(title),
-            content: Text(content),
+            backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+            title: Text(
+              title,
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+            content: Text(
+              content,
+              style:
+                  TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+            ),
             actions: [
               FlatButton(
                 onPressed: () => Navigator.of(context).pop(DialogAction.abort),

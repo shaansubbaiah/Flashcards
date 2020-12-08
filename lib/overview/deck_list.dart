@@ -20,11 +20,14 @@ class _DeckListState extends State<DeckList> {
     //   print(deck.deckid);
     // });
 
-    return ListView.builder(
-      itemCount: decks != null ? decks.length : 0,
-      itemBuilder: (context, index) {
-        return DeckTile(deck: decks[index]);
-      },
+    return Padding(
+      padding: EdgeInsets.only(top: 5),
+      child: ListView.builder(
+        itemCount: decks != null ? decks.length : 0,
+        itemBuilder: (context, index) {
+          return DeckTile(deck: decks[index]);
+        },
+      ),
     );
   }
 }
