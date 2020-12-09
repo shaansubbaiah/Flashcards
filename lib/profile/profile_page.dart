@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -11,6 +13,7 @@ class _ProfileState extends State<Profile> {
   String btn1Text = "Total Cards";
   String btn2Text = "Correct Cards";
   String btn3Text = "Wrong Cards";
+  String name;
 
   void btn1() {
     setState(() {
@@ -28,6 +31,14 @@ class _ProfileState extends State<Profile> {
     setState(() {
       btn3Text = "3";
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final User user = FirebaseAuth.instance.currentUser;
+    name = user.email;
   }
 
   @override
@@ -64,7 +75,7 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.primaries[
                             Random().nextInt(Colors.primaries.length)],
                         child: Text(
-                          "A",
+                          name[0].toUpperCase(),
                           style: TextStyle(
                             fontSize: 40,
                           ),
@@ -75,7 +86,7 @@ class _ProfileState extends State<Profile> {
                     Padding(
                       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Text(
-                        "name",
+                        name.substring(0, name.indexOf('@')),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
