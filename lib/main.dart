@@ -5,6 +5,7 @@ import 'package:flutterfiretest/app_theme.dart';
 
 import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
+import 'package:flutterfiretest/authentication/forgot_password_page.dart';
 import 'package:flutterfiretest/home_page.dart';
 import 'package:provider/provider.dart';
 
@@ -34,14 +35,16 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return MaterialApp(
-          title: 'Flutter Demo',
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: Provider.of<AppState>(context).isNightModeOn
-              ? ThemeMode.dark
-              : ThemeMode.light,
-          home: AuthenticationWrapper(),
-        );
+            title: 'Flutter Demo',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: Provider.of<AppState>(context).isNightModeOn
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            home: AuthenticationWrapper(),
+            routes: <String, WidgetBuilder>{
+              "/forgotPassword": (BuildContext context) => new ForgotPassword(),
+            });
       }),
     );
   }

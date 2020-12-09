@@ -81,4 +81,13 @@ class AuthService {
       print(e);
     }
   }
+
+  Future<String> forgotPassword(String email) async {
+    try {
+      await this._firebaseAuth.sendPasswordResetEmail(email: email);
+      return "Successful";
+    } catch (e) {
+      return "error";
+    }
+  }
 }

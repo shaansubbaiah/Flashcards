@@ -20,6 +20,7 @@ dependencies:
   curved_navigation_bar:
   flutter_slidable:
   flutter_tindercard: ^0.2.0
+  email_validator: '^1.0.0'
 
   cupertino_icons: ^0.1.3
 

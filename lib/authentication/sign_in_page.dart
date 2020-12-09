@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutterfiretest/auth_service.dart';
+import '../auth_service.dart';
+import 'package:email_validator/email_validator.dart';
 
-class RegisterPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  final Function toggle;
+  SignInPage(this.toggle);
+
+  @override
+  _SignInPageState createState() => _SignInPageState(this.toggle);
+}
+
+class _SignInPageState extends State<SignInPage> {
   Function toggle;
-  RegisterPage(this.toggle);
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+  _SignInPageState(this.toggle);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool wrongEmail = false;
+  bool wrongPassword = false;
+
+  // final Function toggle;
+  // _SignInPageState({this.toggle});
+
   final form = GlobalKey<FormState>();
 
   @override
@@ -22,7 +38,7 @@ class RegisterPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Register",
+                    "Signin",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
@@ -36,6 +52,8 @@ class RegisterPage extends StatelessWidget {
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter email';
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Please enter valid email';
                         }
                         return null;
                       },
@@ -49,6 +67,7 @@ class RegisterPage extends StatelessWidget {
                         labelText: "Email",
                         labelStyle: TextStyle(
                             color: Theme.of(context).colorScheme.primary),
+                        errorText: wrongEmail ? "Email doesn't exist" : null,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide: BorderSide(
@@ -57,6 +76,13 @@ class RegisterPage extends StatelessWidget {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Theme.of(context).colorScheme.primary),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40.0),
+                          ),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onError),
                           borderRadius: BorderRadius.all(
                             Radius.circular(40.0),
                           ),
@@ -80,27 +106,35 @@ class RegisterPage extends StatelessWidget {
                         return null;
                       },
                       controller: passwordController,
-                      cursorColor: Theme.of(context).colorScheme.primary,
                       obscureText: true,
+                      cursorColor: Theme.of(context).colorScheme.primary,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       decoration: InputDecoration(
                         // icon: Icon(Icons.lock),
-                        labelText: "Password",
-                        labelStyle: TextStyle(
-                            color: Theme.of(context).colorScheme.primary),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                          borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary),
-                        ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Theme.of(context).colorScheme.primary),
                           borderRadius: BorderRadius.all(
                             Radius.circular(40.0),
                           ),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onError),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40.0),
+                          ),
+                        ),
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                        errorText: wrongPassword ? "Wrong Password" : null,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                         contentPadding: EdgeInsets.symmetric(
                             vertical: 0.0, horizontal: 10.0),
@@ -109,26 +143,51 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
+                    textColor: Theme.of(context).colorScheme.secondary,
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, "/forgotPassword");
+                    },
                     child: Text(
-                      "Register",
+                      "Forgot Password?",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Signin",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primaryVariant),
                     ),
                     color: Theme.of(context).colorScheme.primary,
                     onPressed: () async {
+                      setState(() {
+                        wrongEmail = wrongPassword = false;
+                      });
                       if (form.currentState.validate()) {
-                        context.read<AuthService>().signUp(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                        String result =
+                            await context.read<AuthService>().signIn(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
+
+                        if (result == "user-not-found") {
+                          setState(() {
+                            wrongEmail = true;
+                          });
+                        } else if (result == "wrong-password") {
+                          setState(() {
+                            wrongPassword = true;
+                          });
+                        }
                       }
                     },
                   ),
                   Container(
-                    padding: EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(30.0),
                     child: FlatButton(
                         textColor: Theme.of(context).colorScheme.onPrimary,
-                        child: Text("Already have an Account?"),
+                        child: Text("Create an account"),
                         onPressed: () {
                           toggle();
                         }),
