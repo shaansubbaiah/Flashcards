@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppState extends ChangeNotifier {
   bool isNightModeOn = false;
-  String mode = "Light Mode";
+  String mode = "Night Mode";
 
   void changeTheme() {
     isNightModeOn = isNightModeOn ? false : true;
