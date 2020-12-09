@@ -11,6 +11,9 @@ import 'package:provider/provider.dart';
 
 import 'app_state.dart';
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -41,7 +44,13 @@ class MyApp extends StatelessWidget {
             themeMode: Provider.of<AppState>(context).isNightModeOn
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            home: AuthenticationWrapper(),
+            home: AnimatedSplashScreen(
+                duration: 2000,
+                splash: Icons.home,
+                nextScreen: AuthenticationWrapper(),
+                splashTransition: SplashTransition.fadeTransition,
+                pageTransitionType: PageTransitionType.scale,
+                backgroundColor: Theme.of(context).colorScheme.primary),
             routes: <String, WidgetBuilder>{
               "/forgotPassword": (BuildContext context) => new ForgotPassword(),
             });

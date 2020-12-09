@@ -21,6 +21,8 @@ dependencies:
   flutter_slidable:
   flutter_tindercard: ^0.2.0
   email_validator: '^1.0.0'
+  charts_flutter: ^0.9.0
+  animated_splash_screen: ^1.0.1+2
 
   cupertino_icons: ^0.1.3
 
