@@ -108,7 +108,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       }
                     },
                   ),
-                  Text(message),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
                 ],
               ),
             ),
