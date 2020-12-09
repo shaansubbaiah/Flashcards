@@ -41,7 +41,10 @@ class AuthService {
       await DatabaseService().addUserData(userCredential.user.uid);
       return "Signed Up";
     } catch (e) {
-      return e.message;
+      if (e.code == 'email-already-in-use') {
+        return "email exists";
+      }
+      return "error";
     }
   }
 
