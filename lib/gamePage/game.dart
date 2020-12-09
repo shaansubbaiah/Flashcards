@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:flutterfiretest/database.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -10,113 +8,124 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final currentDeck = "SchBjhHW0ixEmnIy2s6J";
-  var flashcards = [];
-  var index = 1;
+  List<Widget> cardos = [];
+  int index = 0;
+  int stackIndex = 0;
 
-  @override
-  Widget build(BuildContext context) {
+  void switchPage() {
+    setState(() {
+      if (stackIndex < cardos.length - 1) stackIndex += 1;
+    });
+  }
+
+  void getFlashCardData() {
+    List<Widget> tmp = [];
     DatabaseService()
         .getCardDetails(currentDeck)
         .then((value) => {
-              // print(value[0]["front"]),
-              flashcards = value,
-              print("Total cards:" + flashcards.length.toString()),
-              flashcards.forEach((element) {
-                print(element);
-              })
-            })
-        .catchError((err) => {
-              print(err),
-              flashcards = [
-                {"front": "Error", "back": "Error2"}
-              ],
-            });
-
-    CarouselController buttonCarouselController = CarouselController();
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
-        title: Center(
-          child: Text(
-            "Game",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
-        ),
-      ),
-      body: Column(children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 400.0,
-            enableInfiniteScroll: false,
-            // to prevent the user from swiping the cards
-            scrollPhysics: NeverScrollableScrollPhysics(),
-          ),
-          carouselController: buttonCarouselController,
-          // items: flashCardWidgetList(),
-          items: flashcards.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
+              print("Total cards:" + tmp.length.toString()),
+              value.forEach((e) {
+                print(e);
+                index++;
+                tmp.add(
+                  Container(
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(color: Colors.amber),
                     child: Column(
                       children: [
-                        Text(
-                          'Q$index.' + " " + i["front"],
-                        ),
-                        Text(
-                          i["back"],
-                        )
+                        Text(index.toString() + ". " + e["front"]),
+                        Text("A. " + e["back"]),
                       ],
-                    ));
-              },
-            );
-          }).toList(),
+                    ),
+                  ),
+                );
+              })
+            })
+        .catchError((err) => {
+              print(err),
+            });
+    setState(() {
+      cardos = tmp;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFlashCardData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+          title: Center(
+            child: Text(
+              "Game",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OutlinedButton(
-              onPressed: () => buttonCarouselController.animateToPage(0,
-                  duration: Duration(milliseconds: 300), curve: Curves.linear),
-              child: Text('Restart'),
-            ),
-            OutlinedButton(
-              onPressed: () => buttonCarouselController.nextPage(
-                  duration: Duration(milliseconds: 300), curve: Curves.linear),
-              child: Text('Next'),
-            ),
-          ],
-        ),
-        Text("Rate difficulty:"),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OutlinedButton(
-              onPressed: () => {debugPrint("Very Spicy")},
-              child: Text("Very Hard"),
-            ),
-            OutlinedButton(
-              onPressed: () => {debugPrint("Hard")},
-              child: Text("Hard"),
-            ),
-            OutlinedButton(
-              onPressed: () => {debugPrint("Moderate")},
-              child: Text("Moderate"),
-            ),
-            OutlinedButton(
-              onPressed: () => {debugPrint("Easy")},
-              child: Text("Easy"),
-            ),
-          ],
-        )
-      ]),
-    );
+        body: Container(
+          child: Column(
+            children: [
+              Flexible(
+                child: IndexedStack(
+                  index: stackIndex,
+                  children: cardos,
+                ),
+              ),
+              Flexible(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => {switchPage()},
+                          child: Text("Next"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () => {
+                            setState(() => {stackIndex = 0})
+                          },
+                          child: Text("Restart"),
+                        ),
+                      ],
+                    ),
+                    Text("Rate difficulty:"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => {debugPrint("Very Spicy")},
+                          child: Text("Very Hard"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () => {debugPrint("Hard")},
+                          child: Text("Hard"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () => {debugPrint("Moderate")},
+                          child: Text("Moderate"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () => {debugPrint("Easy")},
+                          child: Text("Easy"),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
