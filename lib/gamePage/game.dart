@@ -30,13 +30,30 @@ class _GamePageState extends State<GamePage> {
                 tmp.add(
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(color: Colors.amber),
-                    child: Column(
-                      children: [
-                        Text(index.toString() + ". " + e["front"]),
-                        Text("A. " + e["back"]),
-                      ],
+                    height: 500,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: Theme.of(context).colorScheme.primaryVariant,
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              index.toString() + ". " + e["front"],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            Text(
+                              "A. " + e["back"],
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -76,16 +93,20 @@ class _GamePageState extends State<GamePage> {
           child: Column(
             children: [
               Flexible(
-                child: IndexedStack(
-                  index: stackIndex,
-                  children: cardos,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: IndexedStack(
+                    index: stackIndex,
+                    children: cardos,
+                  ),
                 ),
               ),
               Flexible(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 5,
                       children: [
                         OutlinedButton(
                           onPressed: () => {switchPage()},
@@ -100,8 +121,9 @@ class _GamePageState extends State<GamePage> {
                       ],
                     ),
                     Text("Rate difficulty:"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 5,
                       children: [
                         OutlinedButton(
                           onPressed: () => {debugPrint("Very Spicy")},
