@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:flutterfiretest/overview/edit_deck_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
@@ -27,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   Overview overview;
   EditDeck editDeck;
 
+  List<int> pages = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -50,52 +53,67 @@ class _HomePageState extends State<HomePage> {
   void setIndex(int index) {
     setState(() {
       _currentIndex = index;
+      pages.add(index);
     });
+  }
+
+  void backPressed() {
+    if (pages.isEmpty) {
+      SystemNavigator.pop();
+    } else {
+      int index = pages.removeLast();
+      index = pages.removeLast();
+      setIndex(index);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Home"),
-      //   actions: <Widget>[
-      //     Padding(
-      //         padding: EdgeInsets.only(right: 20.0),
-      //         child: IconButton(
-      //           icon: Icon(Icons.exit_to_app),
-      //           tooltip: "Signout",
-      //           onPressed: () {
-      //             context.read<AuthService>().signOut();
-      //           },
-      //         ))
-      //   ],
-      // ),
-      body: _children[_currentIndex],
-      extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
-        color: Theme.of(context).colorScheme.primary,
-        // buttonBackgroundColor: Colors.teal[700],
-        backgroundColor: Colors.transparent,
-        height: 50,
-        animationDuration: Duration(milliseconds: 300),
-        items: <Widget>[
-          Icon(Icons.home,
-              color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-          Icon(Icons.add,
-              color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-          Icon(Icons.settings,
-              color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-          Icon(Icons.perm_identity,
-              color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-          Icon(Icons.play_arrow,
-              color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-        ],
-        onTap: (int index) {
-          debugPrint(index.toString());
-          setState(() {
-            this._currentIndex = index;
-          });
-        },
+    return WillPopScope(
+      onWillPop: () {
+        backPressed();
+        return;
+      },
+      child: Scaffold(
+        // appBar: AppBar(
+        //   title: Text("Home"),
+        //   actions: <Widget>[
+        //     Padding(
+        //         padding: EdgeInsets.only(right: 20.0),
+        //         child: IconButton(
+        //           icon: Icon(Icons.exit_to_app),
+        //           tooltip: "Signout",
+        //           onPressed: () {
+        //             context.read<AuthService>().signOut();
+        //           },
+        //         ))
+        //   ],
+        // ),
+        body: _children[_currentIndex],
+        extendBody: true,
+        bottomNavigationBar: CurvedNavigationBar(
+          color: Theme.of(context).colorScheme.primary,
+          // buttonBackgroundColor: Colors.teal[700],
+          backgroundColor: Colors.transparent,
+          height: 50,
+          animationDuration: Duration(milliseconds: 300),
+          items: <Widget>[
+            Icon(Icons.home,
+                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+            Icon(Icons.add,
+                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+            Icon(Icons.settings,
+                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+            Icon(Icons.perm_identity,
+                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+            Icon(Icons.play_arrow,
+                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+          ],
+          onTap: (int index) {
+            debugPrint(index.toString());
+            setIndex(index);
+          },
+        ),
       ),
     );
   }
