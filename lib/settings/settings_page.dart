@@ -253,7 +253,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
 
   void deleteAccount() async {
     if (await checkPassword()) {
-      context.read<AuthService>().deleteUser(passwordController.text);
+      await context.read<AuthService>().deleteUser(passwordController.text);
       Navigator.of(context).pop();
     } else {
       setState(() {
@@ -274,7 +274,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
       ),
       backgroundColor: Theme.of(context).colorScheme.primaryVariant,
       content: SizedBox(
-        height: 70.0,
+        height: 80.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -285,12 +285,24 @@ class _DeleteAlertState extends State<DeleteAlert> {
                 color: Theme.of(context).colorScheme.primary,
               ),
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
                   borderSide:
                       BorderSide(color: Theme.of(context).colorScheme.primary),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Theme.of(context).colorScheme.primary),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40.0),
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Theme.of(context).colorScheme.onError),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40.0),
+                  ),
                 ),
                 hintText: "Confirm Password",
                 hintStyle:

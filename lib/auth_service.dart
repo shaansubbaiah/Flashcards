@@ -48,18 +48,24 @@ class AuthService {
     }
   }
 
-  void deleteUser(passwordValue) async {
+  Future deleteUser(passwordValue) async {
     final User user = this._firebaseAuth.currentUser;
     AuthCredential credential = EmailAuthProvider.credential(
         email: user.email, password: passwordValue);
     await user.reauthenticateWithCredential(credential).then((value) {
-      DatabaseService().deleteAccount();
-      value.user.delete().then((res) {
-        print("user deleted");
+      DatabaseService().deleteAccount().then((res) {
+        value.user.delete().then((value) {
+          print("user deleted");
+        }).catchError((onError) {
+          print("error");
+        });
+      }).catchError((onError) {
+        print("error");
       });
     }).catchError((onError) {
-      print(onError);
+      print("error");
     });
+    return;
   }
 
   Future<bool> checkPassword(String oldPassword) async {

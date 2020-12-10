@@ -79,6 +79,7 @@ class DatabaseService {
 
     print("deleted");
     await userCollection.doc(docRef).delete();
+    return;
   }
 
   //deck list from snapshot

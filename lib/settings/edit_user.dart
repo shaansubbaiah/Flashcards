@@ -112,6 +112,15 @@ class _EditUserState extends State<EditUser> {
                                     Radius.circular(40.0),
                                   ),
                                 ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onError),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
                                 errorText:
                                     wrongPassword ? "Wrong Password" : null,
                                 contentPadding: EdgeInsets.symmetric(
@@ -158,6 +167,15 @@ class _EditUserState extends State<EditUser> {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onError),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(40.0),
                                   ),
