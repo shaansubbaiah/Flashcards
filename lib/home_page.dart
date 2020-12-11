@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  int _selectedIndex = 0;
   List<Widget> _children;
 
   Settings settings;
@@ -53,6 +54,17 @@ class _HomePageState extends State<HomePage> {
   void setIndex(int index) {
     setState(() {
       _currentIndex = index;
+      if ((index == 0) || (index == 6)) {
+        _selectedIndex = 0;
+      } else if ((index == 2) || (index == 5)) {
+        _selectedIndex = 2;
+      } else if (index == 3) {
+        _selectedIndex = 3;
+      } else if (index == 4) {
+        _selectedIndex = 4;
+      } else if (index == 1) {
+        _selectedIndex = 1;
+      }
       pages.add(index);
     });
   }
@@ -113,6 +125,7 @@ class _HomePageState extends State<HomePage> {
             debugPrint(index.toString());
             setIndex(index);
           },
+          index: _selectedIndex,
         ),
       ),
     );
