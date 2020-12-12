@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/database.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:math';
+
+import '../alert_dialog.dart';
 
 class DeckTile extends StatelessWidget {
   final Deck deck;
@@ -67,7 +70,16 @@ class DeckTile extends StatelessWidget {
               caption: 'Delete',
               color: Colors.red,
               icon: Icons.delete,
-              onTap: () => debugPrint('Delete'),
+              onTap: () async {
+                final action = await Dialogs.yesAbort(
+                    context, "Delete Deck", "Are you sure?", "Delete", "No");
+
+                if (action == DialogAction.yes) {
+                  DatabaseService().deleteDeck(deck.deckid);
+                }
+                print(deck.deckid);
+                // DatabaseService().deleteDeck(deck.deckid);
+              },
             ),
           ],
         ),

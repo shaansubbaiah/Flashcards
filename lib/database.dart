@@ -82,6 +82,29 @@ class DatabaseService {
     return;
   }
 
+  Future deleteDeck(String deckid) async {
+    String deckRef;
+    await deckCollection.get().then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) {
+            if (doc.id == deckid) {
+              deckRef = doc.id;
+
+              cardCollection
+                  .where("deckid", isEqualTo: deckRef)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) => {
+                        querySnapshot.docs.forEach((doc) {
+                          cardCollection.doc(doc.id).delete();
+                        })
+                      });
+
+              deckCollection.doc(deckRef).delete();
+            }
+          })
+        });
+    return;
+  }
+
   //deck list from snapshot
   List<Deck> _deckListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
