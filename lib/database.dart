@@ -133,7 +133,8 @@ class DatabaseService {
               querySnapshot.docs.forEach((doc) {
                 Map<String, String> card = {
                   "front": doc.data()['front'],
-                  "back": doc.data()['back']
+                  "back": doc.data()['back'],
+                  "cardId": doc.id
                 };
                 allCards.add(card);
               })
@@ -141,5 +142,38 @@ class DatabaseService {
 
     // print(allCards);
     return allCards;
+  }
+
+  Future<Map<String, dynamic>> getDeckDetails(String deckid) async {
+    Map<String, dynamic> deckDetails;
+    await deckCollection.get().then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) async {
+            if (doc.id == deckid) {
+              deckDetails = {
+                "deckname": doc.data()['deckname'],
+                "desc": doc.data()['desc'],
+                "tag": doc.data()['tag'],
+                "deckid": doc.id
+              };
+            }
+          }),
+        });
+    return deckDetails;
+  }
+
+  Future<String> editDeck(
+      String deckname, String desc, String tag, String docid) async {
+    print(docid);
+    await deckCollection.doc(docid).update({
+      "uid": uid,
+      "deckname": deckname,
+      "desc": desc,
+      "tag": tag
+    }).then((value) {
+      return "Successful";
+    }).catchError((onError) {
+      print(onError);
+      return "error";
+    });
   }
 }

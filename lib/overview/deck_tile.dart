@@ -63,6 +63,7 @@ class DeckTile extends StatelessWidget {
               color: Colors.black45,
               icon: Icons.edit,
               onTap: () {
+                print(deck.deckid);
                 setIndex(6);
               },
             ),
@@ -77,7 +78,6 @@ class DeckTile extends StatelessWidget {
                 if (action == DialogAction.yes) {
                   DatabaseService().deleteDeck(deck.deckid);
                 }
-                print(deck.deckid);
                 // DatabaseService().deleteDeck(deck.deckid);
               },
             ),
