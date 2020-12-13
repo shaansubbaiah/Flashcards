@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
+import 'package:flutterfiretest/overview/deck_tile.dart';
 
 class GamePage extends StatefulWidget {
   final Function setIndex;
@@ -9,10 +10,10 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  final currentDeck = "SchBjhHW0ixEmnIy2s6J";
   List<Widget> cardos = [];
   int index = 0;
   int stackIndex = 0;
+  String deckid;
 
   Function setIndex;
   _GamePageState(this.setIndex);
@@ -23,10 +24,10 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  void getFlashCardData() {
+  void getFlashCardData(String deckid) {
     List<Widget> tmp = [];
     DatabaseService()
-        .getCardDetails(currentDeck)
+        .getCardDetails(deckid)
         .then((value) => {
               print("Total cards:" + tmp.length.toString()),
               value.forEach((e) {
@@ -75,7 +76,9 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    getFlashCardData();
+    deckid = DeckTileState.deckid;
+    print('Now playing deck: $deckid');
+    getFlashCardData(deckid);
   }
 
   @override

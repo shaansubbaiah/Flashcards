@@ -39,6 +39,14 @@ class DeckTileState extends State<DeckTile> {
               ),
               // color: Colors.white,
               child: ListTile(
+                onTap: () {
+                  print('Tapped ${deck.deckid}');
+                  setState(() {
+                    deckid = deck.deckid;
+                    // open the Game Page
+                    setIndex(4);
+                  });
+                },
                 leading: CircleAvatar(
                   radius: 25.0,
                   backgroundColor: Colors
@@ -73,11 +81,10 @@ class DeckTileState extends State<DeckTile> {
               color: Colors.black45,
               icon: Icons.edit,
               onTap: () {
-                print(deck.deckid);
+                print('Tapped to edit ${deck.deckid}');
                 setState(() {
                   deckid = deck.deckid;
                 });
-                print(deckid);
                 setIndex(6);
               },
             ),
@@ -86,6 +93,7 @@ class DeckTileState extends State<DeckTile> {
               color: Colors.red,
               icon: Icons.delete,
               onTap: () async {
+                print('Tapped to delete ${deck.deckid}');
                 final action = await Dialogs.yesAbort(
                     context, "Delete Deck", "Are you sure?", "Delete", "No");
 
