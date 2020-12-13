@@ -119,7 +119,7 @@ class _EditDeckState extends State<EditDeck> {
 
     if (_frontValidate && _backValidate) {
       await DatabaseService()
-          .editCard("a", "b", "cugvS9cqzkCQK3ZxNtfv", deckid)
+          .editCard(frontController.text, backController.text, cardId, deckid)
           .then((value) {
         print(value);
       }).catchError((onError) {
