@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     overview = new Overview(this.setIndex);
     editDeck = new EditDeck(this.setIndex);
     gamePage = new GamePage(this.setIndex);
+
     _children = [
       overview,
       addCard,
@@ -51,17 +52,18 @@ class _HomePageState extends State<HomePage> {
   void setIndex(int index) {
     setState(() {
       _currentIndex = index;
-      if ((index == 0) || (index == 6)) {
+
+      // _selectedIndex changes which navbar option is bubbled/selected
+      // highlight HOME ICON for overview, gamepage, editDeck
+      if (index == 0 || index == 6 || index == 4)
         _selectedIndex = 0;
-      } else if ((index == 2) || (index == 5)) {
+      // highlight GEAR ICON for settings, edituser
+      else if (index == 2 || index == 5)
         _selectedIndex = 2;
-      } else if (index == 3) {
-        _selectedIndex = 3;
-      } else if (index == 4) {
-        _selectedIndex = 4;
-      } else if (index == 1) {
-        _selectedIndex = 1;
-      }
+      // else highlight the icon corresponding to the index
+      else
+        _selectedIndex = index;
+
       pages.add(index);
     });
   }
@@ -84,20 +86,6 @@ class _HomePageState extends State<HomePage> {
         return;
       },
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text("Home"),
-        //   actions: <Widget>[
-        //     Padding(
-        //         padding: EdgeInsets.only(right: 20.0),
-        //         child: IconButton(
-        //           icon: Icon(Icons.exit_to_app),
-        //           tooltip: "Signout",
-        //           onPressed: () {
-        //             context.read<AuthService>().signOut();
-        //           },
-        //         ))
-        //   ],
-        // ),
         body: _children[_currentIndex],
         extendBody: true,
         bottomNavigationBar: CurvedNavigationBar(
@@ -114,8 +102,6 @@ class _HomePageState extends State<HomePage> {
             Icon(Icons.settings,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
             Icon(Icons.perm_identity,
-                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-            Icon(Icons.play_arrow,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
           ],
           onTap: (int index) {
