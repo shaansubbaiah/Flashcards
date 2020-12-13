@@ -12,21 +12,30 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<Widget> cardos = [];
   int index = 0;
-  int stackIndex = 0;
+  int stackIndex = -1;
   String deckid;
 
   Function setIndex;
   _GamePageState(this.setIndex);
 
-  void switchPage() {
+  void switchPage({int pageNo}) {
     setState(() {
-      if (stackIndex < cardos.length - 1) stackIndex += 1;
+      // switch to a specific page
+      if (pageNo != null) {
+        print('switching to page $pageNo');
+        stackIndex = pageNo;
+      }
+      // add a proper condition here...
+      // by default, switch to the next page
+      else if (stackIndex < cardos.length - 1) {
+        stackIndex += 1;
+      }
     });
   }
 
-  void getFlashCardData(String deckid) {
+  void getFlashCardData(String deckid) async {
     List<Widget> tmp = [];
-    DatabaseService()
+    await DatabaseService()
         .getCardDetails(deckid)
         .then((value) => {
               print("Total cards:" + tmp.length.toString()),
@@ -79,6 +88,8 @@ class _GamePageState extends State<GamePage> {
     deckid = DeckTileState.deckid;
     print('Now playing deck: $deckid');
     getFlashCardData(deckid);
+    // Start the game at the first card
+    switchPage(pageNo: 0);
   }
 
   @override
