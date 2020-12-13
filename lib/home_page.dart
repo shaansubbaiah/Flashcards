@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   Overview overview;
   EditDeck editDeck;
   GamePage gamePage;
+  Profile profile;
 
   List<int> pages = [];
 
@@ -37,12 +38,13 @@ class _HomePageState extends State<HomePage> {
     overview = new Overview(this.setIndex);
     editDeck = new EditDeck(this.setIndex);
     gamePage = new GamePage(this.setIndex);
+    profile = new Profile();
 
     _children = [
       overview,
       addCard,
       settings,
-      Profile(),
+      profile,
       gamePage,
       editUser,
       editDeck,
