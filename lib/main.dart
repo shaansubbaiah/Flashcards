@@ -1,3 +1,4 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -45,12 +46,14 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             home: AnimatedSplashScreen(
-                duration: 2000,
-                splash: Icons.home,
-                nextScreen: AuthenticationWrapper(),
-                splashTransition: SplashTransition.fadeTransition,
-                pageTransitionType: PageTransitionType.scale,
-                backgroundColor: Theme.of(context).colorScheme.primary),
+              duration: 1500,
+              splash: Image.asset('assets/brain-openmoji.png'),
+              splashIconSize: 200,
+              nextScreen: AuthenticationWrapper(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.scale,
+              backgroundColor: Colors.deepPurple[200],
+            ),
             routes: <String, WidgetBuilder>{
               "/forgotPassword": (BuildContext context) => new ForgotPassword(),
             });

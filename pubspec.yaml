@@ -20,7 +20,7 @@ dependencies:
   curved_navigation_bar:
   flutter_slidable:
   flutter_tindercard: ^0.2.0
-  email_validator: '^1.0.0'
+  email_validator: "^1.0.0"
   charts_flutter: ^0.9.0
   animated_splash_screen: ^1.0.1+2
 
@@ -32,3 +32,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/brain-openmoji.png
