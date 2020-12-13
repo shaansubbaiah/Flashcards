@@ -6,7 +6,7 @@ import 'package:flutterfiretest/auth_service.dart';
 import '../app_state.dart';
 
 class Settings extends StatefulWidget {
-  Function setIndex;
+  final Function setIndex;
   Settings(this.setIndex);
   @override
   _SettingsState createState() => _SettingsState(this.setIndex);

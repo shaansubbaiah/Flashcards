@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutterfiretest/alert_dialog.dart';
 
 class AddCard extends StatefulWidget {
-  Function setIndex;
+  final Function setIndex;
   AddCard(this.setIndex);
   @override
   _AddCardState createState() => _AddCardState(this.setIndex);

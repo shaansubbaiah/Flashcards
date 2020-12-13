@@ -8,7 +8,7 @@ import '../alert_dialog.dart';
 
 class DeckTile extends StatelessWidget {
   final Deck deck;
-  Function setIndex;
+  final Function setIndex;
   DeckTile(this.deck, this.setIndex);
 
   @override

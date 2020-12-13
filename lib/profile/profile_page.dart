@@ -47,7 +47,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final User user = FirebaseAuth.instance.currentUser;
     name = user.email;

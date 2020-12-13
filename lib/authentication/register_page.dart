@@ -4,7 +4,7 @@ import 'package:flutterfiretest/auth_service.dart';
 import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatefulWidget {
-  Function toggle;
+  final Function toggle;
   RegisterPage(this.toggle);
   @override
   _RegisterPageState createState() => _RegisterPageState(this.toggle);

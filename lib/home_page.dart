@@ -6,12 +6,8 @@ import 'package:flutterfiretest/overview/overview_page.dart';
 import 'package:flutterfiretest/profile/profile_page.dart';
 import 'package:flutterfiretest/settings/edit_user.dart';
 import 'package:flutterfiretest/settings/settings_page.dart';
-import 'package:provider/provider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-
-import 'gamePage/game.dart';
-
-import 'auth_service.dart';
+import 'package:flutterfiretest/gamePage/game.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,24 +24,25 @@ class _HomePageState extends State<HomePage> {
   AddCard addCard;
   Overview overview;
   EditDeck editDeck;
+  GamePage gamePage;
 
   List<int> pages = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     settings = new Settings(this.setIndex);
     editUser = new EditUser(this.setIndex);
     addCard = new AddCard(this.setIndex);
     overview = new Overview(this.setIndex);
     editDeck = new EditDeck(this.setIndex);
+    gamePage = new GamePage(this.setIndex);
     _children = [
       overview,
       addCard,
       settings,
       Profile(),
-      GamePage(),
+      gamePage,
       editUser,
       editDeck,
     ];

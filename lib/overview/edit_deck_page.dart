@@ -5,7 +5,7 @@ import '../alert_dialog.dart';
 import '../database.dart';
 
 class EditDeck extends StatefulWidget {
-  Function setIndex;
+  final Function setIndex;
   EditDeck(this.setIndex);
   @override
   _EditDeckState createState() => _EditDeckState(this.setIndex);
@@ -114,7 +114,6 @@ class _EditDeckState extends State<EditDeck> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData("bR9oY14hL0Vaq4qJKnc5");
   }

@@ -5,7 +5,7 @@ import 'package:flutterfiretest/overview/deck_list.dart';
 import 'package:flutterfiretest/overview/models/deck.dart';
 
 class Overview extends StatefulWidget {
-  Function setIndex;
+  final Function setIndex;
   Overview(this.setIndex);
   @override
   _OverviewState createState() => _OverviewState(this.setIndex);

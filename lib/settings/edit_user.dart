@@ -5,7 +5,7 @@ import '../alert_dialog.dart';
 import '../auth_service.dart';
 
 class EditUser extends StatefulWidget {
-  Function setIndex;
+  final Function setIndex;
   EditUser(this.setIndex);
   @override
   _EditUserState createState() => _EditUserState(this.setIndex);

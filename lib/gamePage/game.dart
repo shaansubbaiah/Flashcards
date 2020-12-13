@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 
 class GamePage extends StatefulWidget {
+  final Function setIndex;
+  GamePage(this.setIndex);
   @override
-  _GamePageState createState() => _GamePageState();
+  _GamePageState createState() => _GamePageState(this.setIndex);
 }
 
 class _GamePageState extends State<GamePage> {
@@ -11,6 +13,9 @@ class _GamePageState extends State<GamePage> {
   List<Widget> cardos = [];
   int index = 0;
   int stackIndex = 0;
+
+  Function setIndex;
+  _GamePageState(this.setIndex);
 
   void switchPage() {
     setState(() {
