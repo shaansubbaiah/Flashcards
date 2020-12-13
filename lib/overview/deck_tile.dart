@@ -67,14 +67,15 @@ class DeckTileState extends State<DeckTile> {
               ),
             ),
           ),
-          actions: <Widget>[
-            IconSlideAction(
-              caption: 'Share',
-              color: Colors.indigo,
-              icon: Icons.share,
-              onTap: () => debugPrint('Share'),
-            ),
-          ],
+          // NOTE: Comment out the code below to get back the SHARE left swipe action
+          // actions: <Widget>[
+          //   IconSlideAction(
+          //     caption: 'Share',
+          //     color: Colors.indigo,
+          //     icon: Icons.share,
+          //     onTap: () => debugPrint('Share'),
+          //   ),
+          // ],
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: 'Edit',
