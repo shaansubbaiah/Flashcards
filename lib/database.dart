@@ -34,8 +34,12 @@ class DatabaseService {
   }
 
   Future addCard(String deckId, String front, String back) async {
-    return await cardCollection
-        .add({"deckid": deckId, "front": front, "back": back});
+    return await cardCollection.add({
+      "deckid": deckId,
+      "front": front,
+      "back": back,
+      // "score": 0.5,
+    });
   }
 
   Future addDeck(String deckname, String desc, String tag) async {
@@ -134,7 +138,8 @@ class DatabaseService {
                 Map<String, String> card = {
                   "front": doc.data()['front'],
                   "back": doc.data()['back'],
-                  "cardId": doc.id
+                  // "score": doc.data()['score'],
+                  "cardId": doc.id,
                 };
                 allCards.add(card);
               })
@@ -163,28 +168,27 @@ class DatabaseService {
 
   Future<String> editDeck(
       String deckname, String desc, String tag, String docid) async {
-    await deckCollection.doc(docid).update({
-      "uid": uid,
-      "deckname": deckname,
-      "desc": desc,
-      "tag": tag
-    }).then((value) {
-      return "Successful";
-    }).catchError((onError) {
-      print(onError);
-      return "error";
-    });
+    await deckCollection
+        .doc(docid)
+        .update({"uid": uid, "deckname": deckname, "desc": desc, "tag": tag})
+        .then((value) {})
+        .catchError((onError) {
+          print(onError);
+          return "error";
+        });
+    return "Successful";
   }
 
   Future<String> editCard(
       String front, String back, String docid, String deckid) async {
     await cardCollection
         .doc(docid)
-        .update({"front": front, "back": back, "deckid": deckid}).then((value) {
-      return "Successful";
-    }).catchError((onError) {
-      print(onError);
-      return "error";
-    });
+        .update({"front": front, "back": back, "deckid": deckid})
+        .then((value) {})
+        .catchError((onError) {
+          print(onError);
+          return "error";
+        });
+    return "Successful";
   }
 }
