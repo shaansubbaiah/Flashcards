@@ -6,10 +6,20 @@ import 'dart:math';
 
 import '../alert_dialog.dart';
 
-class DeckTile extends StatelessWidget {
+class DeckTile extends StatefulWidget {
   final Deck deck;
   final Function setIndex;
   DeckTile(this.deck, this.setIndex);
+  @override
+  DeckTileState createState() => DeckTileState(this.deck, this.setIndex);
+}
+
+class DeckTileState extends State<DeckTile> {
+  final Deck deck;
+  final Function setIndex;
+  DeckTileState(this.deck, this.setIndex);
+
+  static String deckid;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +74,10 @@ class DeckTile extends StatelessWidget {
               icon: Icons.edit,
               onTap: () {
                 print(deck.deckid);
+                setState(() {
+                  deckid = deck.deckid;
+                });
+                print(deckid);
                 setIndex(6);
               },
             ),
