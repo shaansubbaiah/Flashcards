@@ -12,22 +12,26 @@ class AuthService {
     await _firebaseAuth.signOut();
   }
 
+// To avoid the platform exception when trying to log in with an email
+// that is not registered, follow the info at:
+// github.com/FirebaseExtended/flutterfire/issues/3303#issuecomment-687560133
   Future<String> signIn({String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-
-      // await DatabaseService().getUid(userCredential.user.uid);
-      return "Signed In";
     } catch (e) {
       if (e.code == 'user-not-found') {
         return "user-not-found";
       } else if (e.code == 'wrong-password') {
         return "wrong-password";
+      } else {
+        print(e);
+        return "user-not-found";
       }
     }
+    return "Signed In";
   }
 
   Future<String> signUp({String email, String password}) async {
