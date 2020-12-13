@@ -163,13 +163,24 @@ class DatabaseService {
 
   Future<String> editDeck(
       String deckname, String desc, String tag, String docid) async {
-    print(docid);
     await deckCollection.doc(docid).update({
       "uid": uid,
       "deckname": deckname,
       "desc": desc,
       "tag": tag
     }).then((value) {
+      return "Successful";
+    }).catchError((onError) {
+      print(onError);
+      return "error";
+    });
+  }
+
+  Future<String> editCard(
+      String front, String back, String docid, String deckid) async {
+    await cardCollection
+        .doc(docid)
+        .update({"front": front, "back": back, "deckid": deckid}).then((value) {
       return "Successful";
     }).catchError((onError) {
       print(onError);

@@ -27,7 +27,7 @@ class _EditDeckState extends State<EditDeck> {
   bool _tagValidate = true;
   bool _customTagValidate = true;
 
-  String tag, tagValue;
+  String tag, tagValue, deckid, cardId;
 
   var _tags = ["DBMS", "ADA", "CN", "OS", "New Tag"];
 
@@ -47,7 +47,7 @@ class _EditDeckState extends State<EditDeck> {
 
     await DatabaseService()
         .getCardDetails(deckid)
-        .then((value) => {cards = value})
+        .then((value) => {cards = value, print(cards)})
         .catchError((e) => (print(e)));
 
     setState(() {
@@ -90,33 +90,49 @@ class _EditDeckState extends State<EditDeck> {
 
     if (_deckNameValidate &&
         _descValidate &&
-        (_tagValidate || _customTagValidate) &&
-        _cardValidate) {
-      print(deckNameController.text);
-      print(descController.text);
-      print(tagValue);
+        (_tagValidate || _customTagValidate)) {
+      // print(deckNameController.text);
+      // print(descController.text);
+      // print(tagValue);
 
       final action = await Dialogs.yesAbort(
-          context, "Post Deck", "Are you sure?", "Post", "No");
+          context, "Edit Deck", "Are you sure?", "Edit", "No");
 
       if (action == DialogAction.yes) {
         await DatabaseService()
-            .editDeck(deckNameController.text, descController.text, tagValue,
-                "bR9oY14hL0Vaq4qJKnc5")
+            .editDeck(
+                deckNameController.text, descController.text, tagValue, deckid)
             .then((value) {
           print(value);
         }).catchError((onError) {
           print(onError);
         });
+        editCard();
         this.setIndex(0);
       }
+    }
+  }
+
+  void editCard() async {
+    _frontValidate = frontController.text.isEmpty ? false : true;
+    _backValidate = backController.text.isEmpty ? false : true;
+
+    if (_frontValidate && _backValidate) {
+      await DatabaseService()
+          .editCard("a", "b", "cugvS9cqzkCQK3ZxNtfv", deckid)
+          .then((value) {
+        print(value);
+      }).catchError((onError) {
+        print(onError);
+      });
     }
   }
 
   @override
   void initState() {
     super.initState();
-    getData(DeckTileState.deckid);
+    deckid = DeckTileState.deckid;
+    getData(deckid);
   }
 
   @override
