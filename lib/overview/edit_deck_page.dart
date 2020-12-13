@@ -58,6 +58,11 @@ class _EditDeckState extends State<EditDeck> {
           break;
         }
       }
+      if (tag == null) {
+        customTag = true;
+        tag = _tags[_tags.length - 1];
+        tagController.text = deckDetails['tag'];
+      }
     });
   }
 
