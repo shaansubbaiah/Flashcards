@@ -32,6 +32,9 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: _iconColor,
     ),
+    appBarTheme: AppBarTheme(
+      elevation: 0.0,
+    ),
   );
 
   static final ThemeData darkTheme = ThemeData(
@@ -46,6 +49,9 @@ class AppTheme {
     ),
     iconTheme: IconThemeData(
       color: _iconColor,
+    ),
+    appBarTheme: AppBarTheme(
+      elevation: 0.0,
     ),
   );
 }
