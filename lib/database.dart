@@ -191,4 +191,16 @@ class DatabaseService {
         });
     return "Successful";
   }
+
+  Future<String> deleteOneCard(String cardId) async {
+    await cardCollection
+        .doc(cardId)
+        .delete()
+        .then((value) {})
+        .catchError((onError) {
+      print(onError);
+      return "error";
+    });
+    return "Successful";
+  }
 }
