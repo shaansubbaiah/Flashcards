@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../alert_dialog.dart';
 import '../database.dart';
-import './deck_tile.dart';
+import 'deck_list.dart';
 
 class EditDeck extends StatefulWidget {
   final Function setIndex;
@@ -170,7 +170,7 @@ class _EditDeckState extends State<EditDeck> {
   @override
   void initState() {
     super.initState();
-    deckid = DeckTileState.deckid;
+    deckid = DeckListState.deckid;
     getData(deckid);
   }
 

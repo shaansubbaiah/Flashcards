@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutterfiretest/overview/models/deck.dart';
 
 class DatabaseService {
   static String uid;
@@ -110,23 +109,23 @@ class DatabaseService {
   }
 
   //deck list from snapshot
-  List<Deck> _deckListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      return Deck(
-        deckname: doc.data()['deckname'] ?? '',
-        desc: doc.data()['desc'] ?? '',
-        tag: doc.data()['tag'] ?? '',
-        deckid: doc.id ?? '',
-      );
-    }).toList();
-  }
+  // List<Deck> _deckListFromSnapshot(QuerySnapshot snapshot) {
+  //   return snapshot.docs.map((doc) {
+  //     return Deck(
+  //       deckname: doc.data()['deckname'] ?? '',
+  //       desc: doc.data()['desc'] ?? '',
+  //       tag: doc.data()['tag'] ?? '',
+  //       deckid: doc.id ?? '',
+  //     );
+  //   }).toList();
+  // }
 
-  Stream<List<Deck>> get decks {
-    return deckCollection
-        .where("uid", isEqualTo: uid)
-        .snapshots()
-        .map(_deckListFromSnapshot);
-  }
+  // Stream<List<Deck>> get decks {
+  //   return deckCollection
+  //       .where("uid", isEqualTo: uid)
+  //       .snapshots()
+  //       .map(_deckListFromSnapshot);
+  // }
 
   Future<List> getCardDetails(String deckid) async {
     List<Map<String, dynamic>> allCards = [];
@@ -147,6 +146,25 @@ class DatabaseService {
 
     // print(allCards);
     return allCards;
+  }
+
+  Future<List> getDecks() async {
+    List<Map<String, dynamic>> allDecks = [];
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                Map<String, String> deck = {
+                  "deckname": doc.data()['deckname'],
+                  "desc": doc.data()['desc'],
+                  "tag": doc.data()['tag'],
+                  "deckid": doc.id
+                };
+                allDecks.add(deck);
+              })
+            });
+    return allDecks;
   }
 
   Future<Map<String, dynamic>> getDeckDetails(String deckid) async {

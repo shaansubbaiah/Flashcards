@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
-import 'package:flutterfiretest/overview/deck_tile.dart';
+import 'package:flutterfiretest/overview/deck_list.dart';
 
 class GamePage extends StatefulWidget {
   final Function setIndex;
@@ -29,7 +29,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    deckid = DeckTileState.deckid;
+    deckid = DeckListState.deckid;
   }
 
   @override
