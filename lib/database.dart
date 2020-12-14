@@ -134,7 +134,7 @@ class DatabaseService {
         .get()
         .then((QuerySnapshot querySnapshot) => {
               querySnapshot.docs.forEach((doc) {
-                Map<String, String> card = {
+                Map<String, dynamic> card = {
                   "front": doc.data()['front'],
                   "back": doc.data()['back'],
                   "score": doc.data()['score'],
