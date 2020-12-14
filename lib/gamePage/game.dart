@@ -12,73 +12,17 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<Widget> cardos = [];
   int index = 0;
-  int stackIndex = -1;
   String deckid;
+
+  List<dynamic> flashcards = [];
+  int totCards = 0;
 
   Function setIndex;
   _GamePageState(this.setIndex);
 
   void switchPage({int pageNo}) {
     setState(() {
-      // switch to a specific page
-      if (pageNo != null) {
-        print('switching to page $pageNo');
-        stackIndex = pageNo;
-      }
-      // add a proper condition here...
-      // by default, switch to the next page
-      else if (stackIndex < cardos.length - 1) {
-        stackIndex += 1;
-      }
-    });
-  }
-
-  void getFlashCardData(String deckid) async {
-    List<Widget> tmp = [];
-    await DatabaseService()
-        .getCardDetails(deckid)
-        .then((value) => {
-              print("Total cards:" + tmp.length.toString()),
-              value.forEach((e) {
-                print(e);
-                index++;
-                tmp.add(
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 500,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: Theme.of(context).colorScheme.primaryVariant,
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              index.toString() + ". " + e["front"],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                            Text(
-                              "A. " + e["back"],
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              })
-            })
-        .catchError((err) => {
-              print(err),
-            });
-    setState(() {
-      cardos = tmp;
+      if (index < totCards - 1) index += 1;
     });
   }
 
@@ -86,10 +30,6 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
     deckid = DeckTileState.deckid;
-    print('Now playing deck: $deckid');
-    getFlashCardData(deckid);
-    // Start the game at the first card
-    switchPage(pageNo: 0);
   }
 
   @override
@@ -114,9 +54,51 @@ class _GamePageState extends State<GamePage> {
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: IndexedStack(
-                    index: stackIndex,
-                    children: cardos,
+                  child: Container(
+                    child: FutureBuilder(
+                      future: DatabaseService().getCardDetails(deckid),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          totCards = snapshot.data.length;
+                          print('Total Cards: $totCards');
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 500,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              color:
+                                  Theme.of(context).colorScheme.primaryVariant,
+                              elevation: 10,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Q. " + snapshot.data[index]["front"],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                    Divider(),
+                                    Text(
+                                      "A. " + snapshot.data[index]["back"],
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -133,7 +115,7 @@ class _GamePageState extends State<GamePage> {
                         ),
                         OutlinedButton(
                           onPressed: () => {
-                            setState(() => {stackIndex = 0})
+                            setState(() => {index = 0})
                           },
                           child: Text("Restart"),
                         ),
