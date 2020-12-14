@@ -37,7 +37,7 @@ class DatabaseService {
       "deckid": deckId,
       "front": front,
       "back": back,
-      // "score": 0.5,
+      "score": 0.5,
     });
   }
 
@@ -137,7 +137,7 @@ class DatabaseService {
                 Map<String, String> card = {
                   "front": doc.data()['front'],
                   "back": doc.data()['back'],
-                  // "score": doc.data()['score'],
+                  "score": doc.data()['score'],
                   "cardId": doc.id,
                 };
                 allCards.add(card);

@@ -28,6 +28,7 @@ class _GamePageState extends State<GamePage> {
 
   void updateScore(int i, int diff) {
     // easy: 1, moderate: 2, hard: 3, v hard: 4
+    print(flashcards[i]["score"]);
     if (diff == 1) {
     } else if (diff == 2) {
     } else if (diff == 3) {
@@ -67,7 +68,8 @@ class _GamePageState extends State<GamePage> {
                       future: DatabaseService().getCardDetails(deckid),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          totCards = snapshot.data.length;
+                          flashcards = snapshot.data;
+                          totCards = flashcards.length;
                           print('Total Cards: $totCards');
                           return Container(
                             width: MediaQuery.of(context).size.width,
@@ -85,14 +87,14 @@ class _GamePageState extends State<GamePage> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      "Q. " + snapshot.data[index]["front"],
+                                      "Q. " + flashcards[index]["front"],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18),
                                     ),
                                     Divider(),
                                     Text(
-                                      "A. " + snapshot.data[index]["back"],
+                                      "A. " + flashcards[index]["back"],
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ],
