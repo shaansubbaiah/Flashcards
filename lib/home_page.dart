@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
@@ -97,13 +98,13 @@ class _HomePageState extends State<HomePage> {
           height: 50,
           animationDuration: Duration(milliseconds: 300),
           items: <Widget>[
-            Icon(Icons.home,
+            Icon(EvaIcons.homeOutline,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-            Icon(Icons.add,
+            Icon(EvaIcons.plusCircleOutline,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-            Icon(Icons.settings,
+            Icon(EvaIcons.settings2Outline,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
-            Icon(Icons.perm_identity,
+            Icon(EvaIcons.barChartOutline,
                 color: Theme.of(context).colorScheme.primaryVariant, size: 30),
           ],
           onTap: (int index) {

@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -85,8 +86,12 @@ class DeckListState extends State<DeckList> {
                       cursorColor: Theme.of(context).colorScheme.onSecondary,
                       decoration: InputDecoration(
                         border: InputBorder.none,
+                        prefixIcon: Icon(
+                          EvaIcons.searchOutline,
+                        ),
                         hintText: "Search...",
                         hintStyle: TextStyle(
+                          height: 1,
                           color: Theme.of(context).colorScheme.onSecondary,
                         ),
                       ),
@@ -162,8 +167,9 @@ class DeckListState extends State<DeckList> {
                         secondaryActions: <Widget>[
                           IconSlideAction(
                             caption: 'Edit',
-                            color: Colors.black45,
-                            icon: Icons.edit,
+                            color: Colors.transparent,
+                            foregroundColor: Colors.blue[600],
+                            icon: EvaIcons.editOutline,
                             onTap: () {
                               print('Tapped to edit ${decks[index]["deckid"]}');
                               setState(() {
@@ -175,8 +181,9 @@ class DeckListState extends State<DeckList> {
                           ),
                           IconSlideAction(
                             caption: 'Delete',
-                            color: Colors.red,
-                            icon: Icons.delete,
+                            color: Colors.transparent,
+                            foregroundColor: Colors.red[600],
+                            icon: EvaIcons.trashOutline,
                             onTap: () async {
                               print(
                                   'Tapped to delete ${decks[index]["deckid"]}');

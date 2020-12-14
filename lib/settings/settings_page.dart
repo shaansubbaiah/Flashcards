@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/alert_dialog.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           child: ListTile(
                             leading: Icon(
-                              Icons.edit,
+                              EvaIcons.editOutline,
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             title: Text(
@@ -87,7 +88,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           child: ListTile(
                             leading: Icon(
-                              Icons.get_app,
+                              EvaIcons.downloadOutline,
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             title: Text(
@@ -115,7 +116,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           child: ListTile(
                             leading: Icon(
-                              Icons.cached,
+                              EvaIcons.refreshOutline,
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             title: Text(
@@ -143,7 +144,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           child: ListTile(
                             leading: Icon(
-                              Icons.wb_sunny,
+                              EvaIcons.sunOutline,
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             title: Text(

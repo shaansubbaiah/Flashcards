@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 import 'package:flutterfiretest/overview/deck_list.dart';
@@ -107,7 +108,7 @@ class _GamePageState extends State<GamePage> {
                           return Center(
                             child: Column(children: [
                               Icon(
-                                Icons.error_outline,
+                                EvaIcons.alertTriangleOutline,
                                 color: Colors.red,
                                 size: 60,
                               ),
