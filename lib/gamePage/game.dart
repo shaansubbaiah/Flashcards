@@ -28,7 +28,7 @@ class _GamePageState extends State<GamePage> {
 
   void updateScore(int i, int diff) {
     // easy: 1, moderate: 2, hard: 3, v hard: 4
-    print(flashcards[i]["score"]);
+    // print(flashcards[i]["score"].toString());
     if (diff == 1) {
     } else if (diff == 2) {
     } else if (diff == 3) {
@@ -39,6 +39,7 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
     deckid = DeckListState.deckid;
+    print('deckid: $deckid');
   }
 
   @override
@@ -101,6 +102,20 @@ class _GamePageState extends State<GamePage> {
                                 ),
                               ),
                             ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Column(children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: Colors.red,
+                                size: 60,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: Text('Error: ${snapshot.error}'),
+                              )
+                            ]),
                           );
                         } else {
                           return Center(
