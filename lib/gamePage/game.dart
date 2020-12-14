@@ -20,10 +20,18 @@ class _GamePageState extends State<GamePage> {
   Function setIndex;
   _GamePageState(this.setIndex);
 
-  void switchPage({int pageNo}) {
+  void switchCard({int pageNo}) {
     setState(() {
       if (index < totCards - 1) index += 1;
     });
+  }
+
+  void updateScore(int i, int diff) {
+    // easy: 1, moderate: 2, hard: 3, v hard: 4
+    if (diff == 1) {
+    } else if (diff == 2) {
+    } else if (diff == 3) {
+    } else {}
   }
 
   @override
@@ -85,7 +93,7 @@ class _GamePageState extends State<GamePage> {
                                     Divider(),
                                     Text(
                                       "A. " + snapshot.data[index]["back"],
-                                      style: TextStyle(fontSize: 18),
+                                      style: TextStyle(fontSize: 16),
                                     ),
                                   ],
                                 ),
@@ -110,7 +118,7 @@ class _GamePageState extends State<GamePage> {
                       spacing: 5,
                       children: [
                         OutlinedButton(
-                          onPressed: () => {switchPage()},
+                          onPressed: () => {switchCard()},
                           child: Text("Next"),
                         ),
                         OutlinedButton(
@@ -127,19 +135,35 @@ class _GamePageState extends State<GamePage> {
                       spacing: 5,
                       children: [
                         OutlinedButton(
-                          onPressed: () => {debugPrint("Very Spicy")},
+                          onPressed: () => {
+                            debugPrint("Very Spicy"),
+                            updateScore(index, 4),
+                            switchCard(),
+                          },
                           child: Text("Very Hard"),
                         ),
                         OutlinedButton(
-                          onPressed: () => {debugPrint("Hard")},
+                          onPressed: () => {
+                            debugPrint("Hard"),
+                            updateScore(index, 3),
+                            switchCard(),
+                          },
                           child: Text("Hard"),
                         ),
                         OutlinedButton(
-                          onPressed: () => {debugPrint("Moderate")},
+                          onPressed: () => {
+                            debugPrint("Moderate"),
+                            updateScore(index, 2),
+                            switchCard(),
+                          },
                           child: Text("Moderate"),
                         ),
                         OutlinedButton(
-                          onPressed: () => {debugPrint("Easy")},
+                          onPressed: () => {
+                            debugPrint("Easy"),
+                            updateScore(index, 1),
+                            switchCard(),
+                          },
                           child: Text("Easy"),
                         ),
                       ],
