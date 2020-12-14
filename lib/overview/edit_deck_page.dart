@@ -30,6 +30,7 @@ class _EditDeckState extends State<EditDeck> {
   bool _customTagValidate = true;
   bool _newFrontValidate = true;
   bool _newBackValidate = true;
+  bool _cardValidate = true;
 
   String tag, tagValue, deckid, cardId;
 
@@ -95,11 +96,8 @@ class _EditDeckState extends State<EditDeck> {
 
     if (_deckNameValidate &&
         _descValidate &&
-        (_tagValidate || _customTagValidate)) {
-      // print(deckNameController.text);
-      // print(descController.text);
-      // print(tagValue);
-
+        (_tagValidate || _customTagValidate) &&
+        _cardValidate) {
       final action = await Dialogs.yesAbort(
           context, "Edit Deck", "Are you sure?", "Edit", "No");
 
@@ -112,7 +110,6 @@ class _EditDeckState extends State<EditDeck> {
         }).catchError((onError) {
           print(onError);
         });
-        // editCard();
         this.setIndex(0);
       }
     }
@@ -137,6 +134,7 @@ class _EditDeckState extends State<EditDeck> {
     List temp = await DatabaseService().getCardDetails(deckid);
     setState(() {
       cards = temp;
+      _cardValidate = cards.isEmpty ? false : true;
     });
   }
 
@@ -147,11 +145,6 @@ class _EditDeckState extends State<EditDeck> {
     });
 
     if (_newBackValidate && _newFrontValidate) {
-      // Map<String, String> card = {
-      //   "front": newFrontController.text,
-      //   "back": newBackController.text
-      // };
-
       await DatabaseService()
           .addCard(deckid, newFrontController.text, newBackController.text);
 
@@ -630,6 +623,16 @@ class _EditDeckState extends State<EditDeck> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                  child: _cardValidate
+                      ? null
+                      : Text(
+                          "Add one card",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onError),
+                        ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 5),
