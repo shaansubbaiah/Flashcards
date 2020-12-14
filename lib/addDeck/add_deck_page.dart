@@ -648,6 +648,7 @@ class _AddCardState extends State<AddCard> {
                       );
                     },
                     shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
                   ),
                 ),
                 SizedBox(
