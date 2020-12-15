@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -632,8 +633,9 @@ class _AddCardState extends State<AddCard> {
                           secondaryActions: <Widget>[
                             IconSlideAction(
                               caption: 'Delete',
-                              color: Theme.of(context).colorScheme.onError,
-                              icon: Icons.delete,
+                              color: Colors.transparent,
+                              foregroundColor: Colors.red[600],
+                              icon: EvaIcons.trashOutline,
                               onTap: () {
                                 setState(() {
                                   cards.removeAt(index);
