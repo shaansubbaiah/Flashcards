@@ -11,6 +11,8 @@ class AppTheme {
   static const Color _lightOnPrimaryColor = Colors.black;
   static const Color _lightOnSecondaryColor = Color(0xff9E9D9D);
   static const Color _lightOnError = Colors.red;
+  static const Color _lightSurface = Color(0xffffff);
+  static const Color _lightBackground = Color(0xf5f6f7);
 
   static const Color _darkPrimaryColor = Color(0xffBB86FC);
   static const Color _darkPrimaryVariantColor = Colors.black;
@@ -18,10 +20,14 @@ class AppTheme {
   static const Color _darkOnPrimaryColor = Colors.white;
   static const Color _darkOnSecondaryColor = Color(0xff909090);
   static const Color _darkOnError = Colors.red;
+  static const Color _darkSurface = Color(0x212435);
+  static const Color _darkBackground = Color(0x1c1e2c);
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: _lightPrimaryVariantColor,
     colorScheme: ColorScheme.light(
+      surface: _lightSurface,
+      background: _lightBackground,
       primary: _lightPrimaryColor,
       primaryVariant: _lightPrimaryVariantColor,
       secondary: _lightSecondaryColor,
@@ -40,6 +46,8 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: _darkPrimaryVariantColor,
     colorScheme: ColorScheme.light(
+      surface: _darkSurface,
+      background: _darkBackground,
       primary: _darkPrimaryColor,
       primaryVariant: _darkPrimaryVariantColor,
       secondary: _darkSecondaryColor,
