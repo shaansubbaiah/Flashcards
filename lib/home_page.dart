@@ -100,9 +100,9 @@ class _HomePageState extends State<HomePage> {
           items: <Widget>[
             Icon(EvaIcons.homeOutline,
                 color: Theme.of(context).colorScheme.onPrimary, size: 30),
-            Icon(EvaIcons.plusCircleOutline,
+            Icon(EvaIcons.plusOutline,
                 color: Theme.of(context).colorScheme.onPrimary, size: 30),
-            Icon(EvaIcons.settings2Outline,
+            Icon(EvaIcons.options2Outline,
                 color: Theme.of(context).colorScheme.onPrimary, size: 30),
             Icon(EvaIcons.barChartOutline,
                 color: Theme.of(context).colorScheme.onPrimary, size: 30),
