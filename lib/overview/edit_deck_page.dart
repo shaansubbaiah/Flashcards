@@ -655,7 +655,7 @@ class _EditDeckState extends State<EditDeck> {
                                   Radius.circular(25.0),
                                 ),
                               ),
-                              height: 70.0,
+                              // height: 70.0,
                               child: ListTile(
                                 onTap: () {
                                   print(cards[index]["cardId"]);

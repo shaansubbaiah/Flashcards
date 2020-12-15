@@ -15,7 +15,7 @@ class _AddCardState extends State<AddCard> {
   Function setIndex;
   _AddCardState(this.setIndex);
 
-  // final form = GlobalKey<FormState>();
+  final form = GlobalKey<FormState>();
 
   final TextEditingController deckNameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
@@ -142,61 +142,124 @@ class _AddCardState extends State<AddCard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // Column(
-                //   children: [
-                //     Form(
-                //       key: form,
-                //       child: Padding(
-                //         padding: EdgeInsets.only(
-                //             left: 40, top: 10, right: 40, bottom: 2.5),
-                //         child: TextFormField(
-                //           validator: (value) {
-                //             if (value.isEmpty) {
-                //               return 'Please enter deckname';
-                //             }
-                //             return null;
-                //           },
-                //           controller: deckNameController,
-                //           cursorColor: Theme.of(context).colorScheme.primary,
-                //           style: TextStyle(
-                //             color: Theme.of(context).colorScheme.primary,
-                //           ),
-                //           decoration: InputDecoration(
-                //             // icon: Icon(Icons.email),
-                //             labelText: "Enter deckname",
-                //             labelStyle: TextStyle(
-                //                 color: Theme.of(context).colorScheme.primary),
-                //             // errorText:
-                //             //     wrongEmail ? "Email doesn't exist" : null,
-                //             enabledBorder: OutlineInputBorder(
-                //               borderRadius:
-                //                   BorderRadius.all(Radius.circular(40.0)),
-                //               borderSide: BorderSide(
-                //                   color: Theme.of(context).colorScheme.primary),
-                //             ),
-                //             focusedBorder: OutlineInputBorder(
-                //               borderSide: BorderSide(
-                //                   color: Theme.of(context).colorScheme.primary),
-                //               borderRadius: BorderRadius.all(
-                //                 Radius.circular(40.0),
-                //               ),
-                //             ),
-                //             errorBorder: OutlineInputBorder(
-                //               borderSide: BorderSide(
-                //                   color: Theme.of(context).colorScheme.onError),
-                //               borderRadius: BorderRadius.all(
-                //                 Radius.circular(40.0),
-                //               ),
-                //             ),
-                //             contentPadding: EdgeInsets.symmetric(
-                //                 vertical: 0.0, horizontal: 10.0),
-                //             // fillColor: Colors.grey[300],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                Column(
+                  children: [
+                    Form(
+                      key: form,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 40, top: 10, right: 40, bottom: 2.5),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter deckname';
+                                }
+                                return null;
+                              },
+                              controller: deckNameController,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.primary,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              decoration: InputDecoration(
+                                labelText: "Enter deckname",
+                                labelStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onError),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0.0, horizontal: 10.0),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 40, top: 10, right: 40, bottom: 2.5),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter description';
+                                }
+                                return null;
+                              },
+                              controller: deckNameController,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.primary,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              decoration: InputDecoration(
+                                labelText: "Enter description",
+                                labelStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onError),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(40.0),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0.0, horizontal: 10.0),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 Column(
                   children: [
                     Row(
@@ -675,7 +738,7 @@ class _AddCardState extends State<AddCard> {
                                   Radius.circular(25.0),
                                 ),
                               ),
-                              height: 70.0,
+                              // height: 70.0,
                               child: ListTile(
                                 title: Text(
                                   '${cards[index]["front"]}',
