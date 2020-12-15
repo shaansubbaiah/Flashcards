@@ -242,6 +242,7 @@ class DeleteAlert extends StatefulWidget {
 
 class _DeleteAlertState extends State<DeleteAlert> {
   bool wrongPassword = false;
+  bool _passwordValidate = true;
 
   final TextEditingController passwordController = TextEditingController();
 
@@ -252,13 +253,23 @@ class _DeleteAlertState extends State<DeleteAlert> {
   }
 
   void deleteAccount() async {
-    if (await checkPassword()) {
-      await context.read<AuthService>().deleteUser(passwordController.text);
-      Navigator.of(context).pop();
-    } else {
-      setState(() {
-        wrongPassword = true;
-      });
+    setState(() {
+      _passwordValidate = (passwordController.text.isEmpty ||
+              passwordController.text.length < 6)
+          ? false
+          : true;
+      wrongPassword = false;
+    });
+    if (_passwordValidate) {
+      if (await checkPassword()) {
+        await context.read<AuthService>().deleteUser(passwordController.text);
+        Navigator.of(context).pop();
+      } else {
+        setState(() {
+          wrongPassword = true;
+          _passwordValidate = false;
+        });
+      }
     }
   }
 
@@ -274,41 +285,72 @@ class _DeleteAlertState extends State<DeleteAlert> {
       ),
       backgroundColor: Theme.of(context).colorScheme.primaryVariant,
       content: SizedBox(
-        height: 80.0,
+        height: 75.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            TextField(
-              controller: passwordController,
-              cursorColor: Theme.of(context).colorScheme.primary,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                  borderSide:
-                      BorderSide(color: Theme.of(context).colorScheme.primary),
+            SizedBox(
+              height: 50,
+              // width: 0,
+              child: TextFormField(
+                onChanged: (value) {
+                  if (value != "") {
+                    setState(() {
+                      _passwordValidate = true;
+                    });
+                  }
+                },
+                controller: passwordController,
+                style: TextStyle(
+                  color: _passwordValidate
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onError,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Theme.of(context).colorScheme.primary),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40.0),
+                cursorColor: Theme.of(context).colorScheme.primary,
+                obscureText: true,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: _passwordValidate
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onError,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(40.0),
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                    borderSide: BorderSide(
+                      color: _passwordValidate
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onError,
+                    ),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                  labelText: "Confirm password",
+                  labelStyle: TextStyle(
+                    color: _passwordValidate
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onError,
                   ),
                 ),
-                errorBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Theme.of(context).colorScheme.onError),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40.0),
-                  ),
-                ),
-                hintText: "Confirm Password",
-                hintStyle:
-                    TextStyle(color: Theme.of(context).colorScheme.primary),
-                errorText: wrongPassword ? "Wrong Password" : null,
               ),
+            ),
+            SizedBox(
+              height: wrongPassword ? 24 : 0,
+              child: wrongPassword
+                  ? Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        "Wrong Password",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onError,
+                            fontSize: 14),
+                      ),
+                    )
+                  : null,
             ),
           ],
         ),
