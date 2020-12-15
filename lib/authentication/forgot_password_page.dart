@@ -12,9 +12,9 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController emailController = TextEditingController();
-  final form = GlobalKey<FormState>();
   String message = "";
   bool wrongEmail = false;
+  bool _emailValidate = true;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -25,7 +25,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       child: Scaffold(
         body: Center(
           child: Form(
-            key: form,
             child: SingleChildScrollView(
               child: Container(
                 // padding: new EdgeInsets.all(10.0),
@@ -40,54 +39,74 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 40, top: 10, right: 40, bottom: 2.5),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 300,
                       child: TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter email';
-                          } else if (!EmailValidator.validate(value)) {
-                            return 'Please enter valid email';
+                        onChanged: (value) {
+                          if (value != "") {
+                            setState(() {
+                              _emailValidate = true;
+                            });
                           }
-                          return null;
                         },
                         controller: emailController,
-                        cursorColor: Theme.of(context).colorScheme.primary,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: _emailValidate
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onError,
                         ),
+                        cursorColor: Theme.of(context).colorScheme.primary,
                         decoration: InputDecoration(
-                          // icon: Icon(Icons.email),
-                          labelText: "Email",
-                          labelStyle: TextStyle(
-                              color: Theme.of(context).colorScheme.primary),
-                          errorText: wrongEmail ? "Email doesn't exist" : null,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: _emailValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(40.0),
+                            ),
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.0)),
                             borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.onError),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
+                              color: _emailValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 10.0),
-                          // fillColor: Colors.grey[300],
+                          labelText: "Enter email",
+                          labelStyle: TextStyle(
+                            color: _emailValidate
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onError,
+                          ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: wrongEmail ? 24 : 0,
+                      child: wrongEmail
+                          ? Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                "Email doesnot exist",
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.onError,
+                                ),
+                              ),
+                            )
+                          : null,
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     FlatButton(
                       child: Text(
@@ -98,8 +117,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       onPressed: () async {
-                        if (form.currentState.validate()) {
+                        setState(() {
+                          _emailValidate = (emailController.text.isEmpty ||
+                                  !EmailValidator.validate(
+                                      emailController.text))
+                              ? false
+                              : true;
                           wrongEmail = false;
+                        });
+                        if (_emailValidate) {
                           print(emailController.text);
                           String result =
                               await AuthService(FirebaseAuth.instance)
@@ -112,6 +138,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           } else {
                             setState(() {
                               wrongEmail = true;
+                              _emailValidate = false;
                             });
                           }
                         }
