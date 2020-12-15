@@ -46,13 +46,13 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             home: AnimatedSplashScreen(
-              duration: 1500,
+              duration: 1000,
               splash: Image.asset('assets/brain-openmoji.png'),
-              splashIconSize: 200,
+              splashIconSize: 100,
               nextScreen: AuthenticationWrapper(),
               splashTransition: SplashTransition.fadeTransition,
               pageTransitionType: PageTransitionType.scale,
-              backgroundColor: Colors.deepPurple[200],
+              backgroundColor: Colors.white,
             ),
             routes: <String, WidgetBuilder>{
               "/forgotPassword": (BuildContext context) => new ForgotPassword(),
