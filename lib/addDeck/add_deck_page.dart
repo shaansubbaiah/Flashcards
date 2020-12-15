@@ -15,8 +15,6 @@ class _AddCardState extends State<AddCard> {
   Function setIndex;
   _AddCardState(this.setIndex);
 
-  final form = GlobalKey<FormState>();
-
   final TextEditingController deckNameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
   final TextEditingController frontController = TextEditingController();
@@ -438,6 +436,9 @@ class _AddCardState extends State<AddCard> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 Row(
                   children: [
