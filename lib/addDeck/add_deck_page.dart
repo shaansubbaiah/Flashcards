@@ -327,7 +327,7 @@ class _AddCardState extends State<AddCard> {
                   ],
                 ),
                 SizedBox(
-                  height: customTag ? 10.0 : 0,
+                  height: customTag ? 20.0 : 0,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,7 +391,7 @@ class _AddCardState extends State<AddCard> {
                   children: [
                     SizedBox(
                       width: 300.0,
-                      height: 80.0,
+                      height: 50.0,
                       child: TextFormField(
                         onChanged: (value) {
                           if (value != "") {
@@ -443,7 +443,7 @@ class _AddCardState extends State<AddCard> {
                   children: [
                     SizedBox(
                       width: 300.0,
-                      height: 60.0,
+                      height: 50.0,
                       child: TextFormField(
                         onChanged: (value) {
                           if (value != "") {
