@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
+import 'package:flutterfiretest/stats/line_chart.dart';
+import 'package:flutterfiretest/stats/pie_chart.dart';
 
 class StatsPage extends StatefulWidget {
   @override
@@ -91,6 +93,37 @@ class _StatsPageState extends State<StatsPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  color: Theme.of(context).colorScheme.surface,
+                  elevation: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: LineChart(),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  color: Theme.of(context).colorScheme.surface,
+                  elevation: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PieChart(),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                )
               ],
             ),
           ),
