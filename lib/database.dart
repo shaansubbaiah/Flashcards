@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class DatabaseService {
   static String uid;
@@ -220,5 +221,31 @@ class DatabaseService {
       return "error";
     });
     return "Successful";
+  }
+
+  Future<List> getTotalCount() async {
+    String deckRef;
+    List count = [0, 0];
+
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) async {
+                deckRef = doc.id;
+                count[0] += 1;
+
+                await cardCollection
+                    .where("deckid", isEqualTo: deckRef)
+                    .get()
+                    .then((QuerySnapshot querySnapshot) => {
+                          querySnapshot.docs.forEach((doc) {
+                            count[1] += 1;
+                          })
+                        });
+              })
+            });
+
+    return count;
   }
 }
