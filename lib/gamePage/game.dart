@@ -165,58 +165,84 @@ class _GamePageState extends State<GamePage> {
               Flexible(
                 child: Column(
                   children: [
-                    Wrap(
-                      direction: Axis.horizontal,
-                      spacing: 5,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () => {switchCard()},
-                          child: Text("Next"),
-                        ),
-                        OutlinedButton(
-                          onPressed: () => {
-                            setState(() => {index = 0})
-                          },
-                          child: Text("Restart"),
-                        ),
-                      ],
+                    // Wrap(
+                    //   direction: Axis.horizontal,
+                    //   spacing: 5,
+                    //   children: [
+                    //     OutlinedButton(
+                    //       onPressed: () => {switchCard()},
+                    //       child: Text("Next"),
+                    //     ),
+                    //     OutlinedButton(
+                    //       onPressed: () => {
+                    //         setState(() => {index = 0})
+                    //       },
+                    //       child: Text("Restart"),
+                    //     ),
+                    //   ],
+                    // ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Rate difficulty:",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
-                    Text("Rate difficulty:"),
+                    SizedBox(height: 10),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 5,
                       children: [
-                        OutlinedButton(
+                        FlatButton(
+                          color: Colors.red.withOpacity(0.2),
+                          textColor: Colors.red,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Insane"),
                           onPressed: () => {
-                            debugPrint("Very Spicy"),
+                            debugPrint("Insane"),
                             updateScore(index, 4),
                             switchCard(),
                           },
-                          child: Text("Very Hard"),
                         ),
-                        OutlinedButton(
+                        FlatButton(
+                          color: Colors.orange.withOpacity(0.2),
+                          textColor: Colors.orange,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Hard"),
                           onPressed: () => {
                             debugPrint("Hard"),
                             updateScore(index, 3),
                             switchCard(),
                           },
-                          child: Text("Hard"),
                         ),
-                        OutlinedButton(
+                        FlatButton(
+                          color: Colors.yellow.withOpacity(0.2),
+                          textColor: Colors.yellow[700],
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Moderate"),
                           onPressed: () => {
                             debugPrint("Moderate"),
                             updateScore(index, 2),
                             switchCard(),
                           },
-                          child: Text("Moderate"),
                         ),
-                        OutlinedButton(
+                        FlatButton(
+                          color: Colors.green.withOpacity(0.2),
+                          textColor: Colors.green,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Easy"),
                           onPressed: () => {
                             debugPrint("Easy"),
                             updateScore(index, 1),
                             switchCard(),
                           },
-                          child: Text("Easy"),
                         ),
                       ],
                     )
