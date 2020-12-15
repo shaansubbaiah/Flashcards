@@ -14,6 +14,7 @@ class _GamePageState extends State<GamePage> {
   List<Widget> cardos = [];
   int index = 0;
   String deckid;
+  bool ansVisible = false;
 
   List<dynamic> flashcards = [];
   int totCards = 0;
@@ -21,9 +22,12 @@ class _GamePageState extends State<GamePage> {
   Function setIndex;
   _GamePageState(this.setIndex);
 
-  void switchCard({int pageNo}) {
+  void switchCard() {
     setState(() {
-      if (index < totCards - 1) index += 1;
+      if (index < totCards - 1) {
+        toggleAnswer(hideAnswer: 0);
+        index += 1;
+      }
     });
   }
 
@@ -34,6 +38,19 @@ class _GamePageState extends State<GamePage> {
     } else if (diff == 2) {
     } else if (diff == 3) {
     } else {}
+  }
+
+  void toggleAnswer({int hideAnswer}) {
+    // if hideAnswer is provided, follow that, else toggle
+    setState(() {
+      if (hideAnswer != null) {
+        if (hideAnswer == 1)
+          ansVisible = true;
+        else
+          ansVisible = false;
+      } else
+        ansVisible = !ansVisible;
+    });
   }
 
   @override
@@ -76,30 +93,38 @@ class _GamePageState extends State<GamePage> {
                           return Container(
                             width: MediaQuery.of(context).size.width,
                             height: 500,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              color:
-                                  Theme.of(context).colorScheme.primaryVariant,
-                              elevation: 10,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      "Q. " + flashcards[index]["front"],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                    Divider(),
-                                    Text(
-                                      "A. " + flashcards[index]["back"],
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
+                            child: InkWell(
+                              onTap: () {
+                                toggleAnswer();
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryVariant,
+                                elevation: 10,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "Q. " + flashcards[index]["front"],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      Divider(),
+                                      Text(
+                                        ansVisible
+                                            ? "A. " + flashcards[index]["back"]
+                                            : "Tap to view the answer",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
