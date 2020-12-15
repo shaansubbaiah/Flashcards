@@ -14,6 +14,9 @@ class AddCard extends StatefulWidget {
 class _AddCardState extends State<AddCard> {
   Function setIndex;
   _AddCardState(this.setIndex);
+
+  // final form = GlobalKey<FormState>();
+
   final TextEditingController deckNameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
   final TextEditingController frontController = TextEditingController();
@@ -139,58 +142,119 @@ class _AddCardState extends State<AddCard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                // Column(
+                //   children: [
+                //     Form(
+                //       key: form,
+                //       child: Padding(
+                //         padding: EdgeInsets.only(
+                //             left: 40, top: 10, right: 40, bottom: 2.5),
+                //         child: TextFormField(
+                //           validator: (value) {
+                //             if (value.isEmpty) {
+                //               return 'Please enter deckname';
+                //             }
+                //             return null;
+                //           },
+                //           controller: deckNameController,
+                //           cursorColor: Theme.of(context).colorScheme.primary,
+                //           style: TextStyle(
+                //             color: Theme.of(context).colorScheme.primary,
+                //           ),
+                //           decoration: InputDecoration(
+                //             // icon: Icon(Icons.email),
+                //             labelText: "Enter deckname",
+                //             labelStyle: TextStyle(
+                //                 color: Theme.of(context).colorScheme.primary),
+                //             // errorText:
+                //             //     wrongEmail ? "Email doesn't exist" : null,
+                //             enabledBorder: OutlineInputBorder(
+                //               borderRadius:
+                //                   BorderRadius.all(Radius.circular(40.0)),
+                //               borderSide: BorderSide(
+                //                   color: Theme.of(context).colorScheme.primary),
+                //             ),
+                //             focusedBorder: OutlineInputBorder(
+                //               borderSide: BorderSide(
+                //                   color: Theme.of(context).colorScheme.primary),
+                //               borderRadius: BorderRadius.all(
+                //                 Radius.circular(40.0),
+                //               ),
+                //             ),
+                //             errorBorder: OutlineInputBorder(
+                //               borderSide: BorderSide(
+                //                   color: Theme.of(context).colorScheme.onError),
+                //               borderRadius: BorderRadius.all(
+                //                 Radius.circular(40.0),
+                //               ),
+                //             ),
+                //             contentPadding: EdgeInsets.symmetric(
+                //                 vertical: 0.0, horizontal: 10.0),
+                //             // fillColor: Colors.grey[300],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                Column(
                   children: [
-                    SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: Center(
-                        child: Text(
-                          "Deck",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 250.0,
-                      height: 50.0,
-                      child: Container(
-                        padding: EdgeInsets.only(
-                            bottom: 5.0, right: 10.0, left: 15.0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                        ),
-                        child: TextField(
-                          onChanged: (value) {
-                            if (value != "") {
-                              setState(() {
-                                _deckNameValidate = true;
-                              });
-                            }
-                          },
-                          controller: deckNameController,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onSecondary,
-                          ),
-                          cursorColor:
-                              Theme.of(context).colorScheme.onSecondary,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Enter deck name",
-                            hintStyle: TextStyle(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: Center(
+                            child: Text(
+                              "Deck",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 250.0,
+                          height: 50.0,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 5.0, right: 10.0, left: 15.0),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(25.0),
+                              ),
+                            ),
+                            child: TextField(
+                              onChanged: (value) {
+                                if (value != "") {
+                                  setState(() {
+                                    _deckNameValidate = true;
+                                  });
+                                }
+                              },
+                              controller: deckNameController,
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
+                              ),
+                              cursorColor:
+                                  Theme.of(context).colorScheme.onSecondary,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Enter deck name",
+                                hintStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

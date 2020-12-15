@@ -43,6 +43,7 @@ class _SettingsState extends State<Settings> {
                   children: [
                     ListView(
                       shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
                       children: [
                         Container(
                           height: 55.0,
@@ -167,7 +168,7 @@ class _SettingsState extends State<Settings> {
                   ],
                 ),
                 SizedBox(
-                  height: 200.0,
+                  height: 190.0,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -222,9 +223,6 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
                     ),
                   ],
                 )

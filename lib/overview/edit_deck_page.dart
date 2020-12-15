@@ -97,8 +97,7 @@ class _EditDeckState extends State<EditDeck> {
 
     if (_deckNameValidate &&
         _descValidate &&
-        (_tagValidate || _customTagValidate) &&
-        _cardValidate) {
+        (_tagValidate || _customTagValidate)) {
       final action = await Dialogs.yesAbort(
           context, "Edit Deck", "Are you sure?", "Edit", "No");
 
@@ -135,7 +134,7 @@ class _EditDeckState extends State<EditDeck> {
     List temp = await DatabaseService().getCardDetails(deckid);
     setState(() {
       cards = temp;
-      _cardValidate = cards.isEmpty ? false : true;
+      // _cardValidate = cards.isEmpty ? false : true;
     });
   }
 
@@ -630,7 +629,7 @@ class _EditDeckState extends State<EditDeck> {
                   child: _cardValidate
                       ? null
                       : Text(
-                          "Add one card",
+                          "One card is required",
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onError),
                         ),
@@ -929,7 +928,13 @@ class _EditDeckState extends State<EditDeck> {
                               icon: EvaIcons.trashOutline,
                               onTap: () {
                                 cardId = cards[index]['cardId'];
-                                deleteCard();
+                                if (cards.length > 1) {
+                                  deleteCard();
+                                } else {
+                                  setState(() {
+                                    _cardValidate = false;
+                                  });
+                                }
                               },
                             ),
                           ],
