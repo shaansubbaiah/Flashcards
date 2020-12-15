@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterfiretest/addDeck/add_deck_page.dart';
 import 'package:flutterfiretest/overview/edit_deck_page.dart';
 import 'package:flutterfiretest/overview/overview_page.dart';
-import 'package:flutterfiretest/profile/profile_page.dart';
+import 'package:flutterfiretest/stats/stats_page.dart';
 import 'package:flutterfiretest/settings/edit_user.dart';
 import 'package:flutterfiretest/settings/settings_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';

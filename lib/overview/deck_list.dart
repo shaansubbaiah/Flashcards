@@ -208,7 +208,11 @@ class DeckListState extends State<DeckList> {
                   );
                 },
                 shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
               ),
+            ),
+            SizedBox(
+              height: 15,
             ),
           ],
         ),
