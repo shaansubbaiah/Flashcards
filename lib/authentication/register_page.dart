@@ -15,9 +15,10 @@ class _RegisterPageState extends State<RegisterPage> {
   _RegisterPageState(this.toggle);
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-  final form = GlobalKey<FormState>();
 
   bool wrongEmail = false;
+  bool _emailValidate = true;
+  bool _passwordValidate = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,6 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         body: Center(
           child: Form(
-            key: form,
             child: SingleChildScrollView(
               child: Container(
                 // padding: new EdgeInsets.all(10.0),
@@ -44,103 +44,127 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 40, top: 10, right: 40, bottom: 2.5),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 300,
                       child: TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter email';
-                          } else if (!EmailValidator.validate(value)) {
-                            return 'Please enter valid email';
+                        onChanged: (value) {
+                          if (value != "") {
+                            setState(() {
+                              _emailValidate = true;
+                            });
                           }
-                          return null;
                         },
                         controller: emailController,
-                        cursorColor: Theme.of(context).colorScheme.primary,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: _emailValidate
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onError,
                         ),
+                        cursorColor: Theme.of(context).colorScheme.primary,
                         decoration: InputDecoration(
-                          // icon: Icon(Icons.email),
-                          labelText: "Email",
-                          errorText: wrongEmail ? "Email already exists" : null,
-                          labelStyle: TextStyle(
-                              color: Theme.of(context).colorScheme.primary),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: _emailValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(40.0),
+                            ),
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.0)),
                             borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.onError),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
+                              color: _emailValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 10.0),
-                          // fillColor: Colors.grey[300],
+                          labelText: "Enter email",
+                          labelStyle: TextStyle(
+                            color: _emailValidate
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onError,
+                          ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 40, top: 2.5, right: 40, bottom: 2.5),
+                    SizedBox(
+                      height: wrongEmail ? 24 : 0,
+                      child: wrongEmail
+                          ? Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                "Email already exists",
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.onError,
+                                ),
+                              ),
+                            )
+                          : null,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 300,
                       child: TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter password';
-                          } else if (value.length < 6) {
-                            return 'Min length is 6';
+                        onChanged: (value) {
+                          if (value != "") {
+                            setState(() {
+                              _passwordValidate = true;
+                            });
                           }
-                          return null;
                         },
                         controller: passwordController,
+                        style: TextStyle(
+                          color: _passwordValidate
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onError,
+                        ),
                         cursorColor: Theme.of(context).colorScheme.primary,
                         obscureText: true,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
                         decoration: InputDecoration(
-                          // icon: Icon(Icons.lock),
-                          labelText: "Password",
-                          labelStyle: TextStyle(
-                              color: Theme.of(context).colorScheme.primary),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: _passwordValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(40.0),
+                            ),
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.0)),
                             borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.onError),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
+                              color: _passwordValidate
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.onError,
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 10.0),
-                          // fillColor: Colors.grey[300],
+                          labelText: "Enter password",
+                          labelStyle: TextStyle(
+                            color: _passwordValidate
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onError,
+                          ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     FlatButton(
                       child: Text(
@@ -151,7 +175,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       onPressed: () async {
-                        if (form.currentState.validate()) {
+                        setState(() {
+                          _emailValidate = (emailController.text.isEmpty ||
+                                  !EmailValidator.validate(
+                                      emailController.text))
+                              ? false
+                              : true;
+                          _passwordValidate =
+                              (passwordController.text.isEmpty ||
+                                      passwordController.text.length < 6)
+                                  ? false
+                                  : true;
+                          wrongEmail = false;
+                        });
+                        if (_emailValidate && _passwordValidate) {
                           String result =
                               await context.read<AuthService>().signUp(
                                     email: emailController.text.trim(),
@@ -160,6 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (result == "email exists") {
                             setState(() {
                               wrongEmail = true;
+                              _emailValidate = false;
                             });
                           }
                         }

@@ -23,11 +23,6 @@ class _SignInPageState extends State<SignInPage> {
   bool _emailValidate = true;
   bool _passwordValidate = true;
 
-  // final Function toggle;
-  // _SignInPageState({this.toggle});
-
-  final form = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -38,7 +33,6 @@ class _SignInPageState extends State<SignInPage> {
       child: Scaffold(
         body: Center(
           child: Form(
-            key: form,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
