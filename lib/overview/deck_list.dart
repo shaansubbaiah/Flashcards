@@ -1,10 +1,8 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfiretest/database.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'dart:math';
-
-import '../alert_dialog.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutterfiretest/database.dart';
+import 'package:flutterfiretest/alert_dialog.dart';
 
 class DeckList extends StatefulWidget {
   final Function setIndex;
@@ -23,6 +21,17 @@ class DeckListState extends State<DeckList> {
   List temp = [];
 
   static String deckid;
+
+  static List<Color> colorArray = [
+    Colors.deepPurpleAccent[400],
+    Colors.cyanAccent[400],
+    Colors.orangeAccent[400],
+    Colors.greenAccent[400],
+    Colors.pinkAccent[400],
+    Colors.yellow[500],
+    Colors.purpleAccent[700],
+    Colors.redAccent[400],
+  ];
 
   void getDeckDetails() async {
     temp = await DatabaseService().getDecks();
@@ -130,8 +139,11 @@ class DeckListState extends State<DeckList> {
                               },
                               leading: CircleAvatar(
                                 radius: 25.0,
-                                backgroundColor: Colors.primaries[
-                                    Random().nextInt(Colors.primaries.length)],
+                                //
+                                // set color from colorArray
+                                //
+                                backgroundColor:
+                                    colorArray[index % colorArray.length],
                                 child: Text(decks[index]["tag"]),
                                 foregroundColor: Colors.white,
                               ),
