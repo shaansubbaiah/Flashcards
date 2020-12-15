@@ -158,6 +158,7 @@ class _SettingsState extends State<Settings> {
                             onTap: () {
                               Provider.of<AppState>(context, listen: false)
                                   .changeTheme();
+                              setIndex(0);
                             },
                           ),
                         ),
