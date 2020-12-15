@@ -11,8 +11,8 @@ class AppTheme {
   static const Color _lightOnPrimaryColor = Colors.black;
   static const Color _lightOnSecondaryColor = Color(0xff9E9D9D);
   static const Color _lightOnError = Colors.red;
-  static const Color _lightSurface = Color(0xffffff);
-  static const Color _lightBackground = Color(0xf5f6f7);
+  static const Color _lightSurface = Color(0xffffffff);
+  static const Color _lightBackground = Color(0xfff5f6f7);
 
   static const Color _darkPrimaryColor = Color(0xffBB86FC);
   static const Color _darkPrimaryVariantColor = Colors.black;
@@ -20,11 +20,11 @@ class AppTheme {
   static const Color _darkOnPrimaryColor = Colors.white;
   static const Color _darkOnSecondaryColor = Color(0xff909090);
   static const Color _darkOnError = Colors.red;
-  static const Color _darkSurface = Color(0x212435);
-  static const Color _darkBackground = Color(0x1c1e2c);
+  static const Color _darkSurface = Color(0xff17388e);
+  static const Color _darkBackground = Color(0xff0d2162);
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: _lightPrimaryVariantColor,
+    scaffoldBackgroundColor: _lightBackground,
     colorScheme: ColorScheme.light(
       surface: _lightSurface,
       background: _lightBackground,
@@ -44,7 +44,7 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: _darkPrimaryVariantColor,
+    scaffoldBackgroundColor: _darkBackground,
     colorScheme: ColorScheme.light(
       surface: _darkSurface,
       background: _darkBackground,
@@ -64,6 +64,8 @@ class AppTheme {
   );
 }
 
+// background - kinda obvious
+// surface - cards, botton navbar, etc that appear directly over the background
 // primary - navigation bottom, textfield(cursor,text,border),
 //         Button background(signin,register,edit), button text(for flat button)
 // primaryVariant - alert background, page background, navigation icon,

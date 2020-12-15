@@ -47,7 +47,7 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
             "Edit Password",

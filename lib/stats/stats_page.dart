@@ -14,23 +14,18 @@ class _ProfileState extends State<Profile> {
   String name;
   Color avatarColor;
 
-  
-
   List<charts.Series<Level, int>> seriesLineData;
 
   void generateData() {
-    
-
-    var lineData=[
-      new Level(0,2),
+    var lineData = [
+      new Level(0, 2),
       new Level(1, 4),
       new Level(2, 1),
-      new Level(3,3),
+      new Level(3, 3),
     ];
 
-    
-
-    seriesLineData.add(charts.Series(
+    seriesLineData.add(
+      charts.Series(
         id: "Stats",
         data: lineData,
         domainFn: (Level level, _) => level.level,
@@ -60,10 +55,10 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            "Profile",
+            "Statistics",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -122,17 +117,17 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          "Stats",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(top: 10),
+                      //   child: Text(
+                      //     "Stats",
+                      //     style: TextStyle(
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 24,
+                      //       color: Theme.of(context).colorScheme.onPrimary,
+                      //     ),
+                      //   ),
+                      // ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,28 +145,26 @@ class _ProfileState extends State<Profile> {
                             height: 400,
                             child: Padding(
                               padding: EdgeInsets.all(10),
-                                
                               child: charts.LineChart(
                                 seriesLineData,
                                 defaultRenderer: new charts.LineRendererConfig(
-                                  includeArea:true,
-                                  stacked: false
-                                ),
+                                    includeArea: true, stacked: false),
                                 animate: true,
                                 animationDuration: Duration(seconds: 2),
-                                
                                 behaviors: [
-                                  new charts.ChartTitle('Level', 
-                                  behaviorPosition: charts.BehaviorPosition.bottom,
-                                  titleOutsideJustification: charts.OutsideJustification.middleDrawArea ),
-                                  new charts.ChartTitle('No of questions', 
-                                  behaviorPosition: charts.BehaviorPosition.start,
-                                  titleOutsideJustification: charts.OutsideJustification.middleDrawArea ),
-                                  
+                                  new charts.ChartTitle('Level',
+                                      behaviorPosition:
+                                          charts.BehaviorPosition.bottom,
+                                      titleOutsideJustification: charts
+                                          .OutsideJustification.middleDrawArea),
+                                  new charts.ChartTitle('No of questions',
+                                      behaviorPosition:
+                                          charts.BehaviorPosition.start,
+                                      titleOutsideJustification: charts
+                                          .OutsideJustification.middleDrawArea),
                                 ],
-                                
+                              ),
                             ),
-                          ),
                           ),
                         ],
                       ),
@@ -193,5 +186,5 @@ class Level {
   int levelValue;
   // Color colorval;
 
-  Level( this.level, this.levelValue);
+  Level(this.level, this.levelValue);
 }

@@ -120,7 +120,7 @@ class _AddCardState extends State<AddCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
             "Add Flashcard",

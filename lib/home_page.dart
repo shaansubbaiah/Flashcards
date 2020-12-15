@@ -92,20 +92,20 @@ class _HomePageState extends State<HomePage> {
         body: _children[_currentIndex],
         extendBody: true,
         bottomNavigationBar: CurvedNavigationBar(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.surface,
           // buttonBackgroundColor: Colors.teal[700],
           backgroundColor: Colors.transparent,
           height: 50,
           animationDuration: Duration(milliseconds: 300),
           items: <Widget>[
             Icon(EvaIcons.homeOutline,
-                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+                color: Theme.of(context).colorScheme.onPrimary, size: 30),
             Icon(EvaIcons.plusCircleOutline,
-                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+                color: Theme.of(context).colorScheme.onPrimary, size: 30),
             Icon(EvaIcons.settings2Outline,
-                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+                color: Theme.of(context).colorScheme.onPrimary, size: 30),
             Icon(EvaIcons.barChartOutline,
-                color: Theme.of(context).colorScheme.primaryVariant, size: 30),
+                color: Theme.of(context).colorScheme.onPrimary, size: 30),
           ],
           onTap: (int index) {
             debugPrint(index.toString());

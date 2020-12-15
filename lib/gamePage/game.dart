@@ -64,7 +64,7 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+          backgroundColor: Colors.transparent,
           title: Center(
             child: Text(
               "Game",
@@ -101,9 +101,7 @@ class _GamePageState extends State<GamePage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryVariant,
+                                color: Theme.of(context).colorScheme.surface,
                                 elevation: 10,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -113,15 +111,26 @@ class _GamePageState extends State<GamePage> {
                                       Text(
                                         "Q. " + flashcards[index]["front"],
                                         style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),
-                                      Divider(),
+                                      Divider(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                      ),
                                       Text(
                                         ansVisible
                                             ? "A. " + flashcards[index]["back"]
                                             : "Tap to view the answer",
-                                        style: TextStyle(fontSize: 16),
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                            fontSize: 16),
                                       ),
                                     ],
                                   ),

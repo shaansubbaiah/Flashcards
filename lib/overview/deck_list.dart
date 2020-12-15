@@ -33,7 +33,6 @@ class DeckListState extends State<DeckList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDeckDetails();
   }
@@ -54,7 +53,7 @@ class DeckListState extends State<DeckList> {
                     padding:
                         EdgeInsets.only(bottom: 5.0, right: 10.0, left: 15.0),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.all(
                         Radius.circular(25.0),
                       ),
@@ -115,7 +114,7 @@ class DeckListState extends State<DeckList> {
                               top: 5, bottom: 5, right: 15, left: 15),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfiretest/database.dart';
-import 'package:provider/provider.dart';
 import 'package:flutterfiretest/overview/deck_list.dart';
 
 class Overview extends StatefulWidget {
@@ -17,7 +15,7 @@ class _OverviewState extends State<Overview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
             "Decks",

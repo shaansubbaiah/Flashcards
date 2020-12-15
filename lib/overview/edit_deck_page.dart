@@ -179,7 +179,7 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
             "Edit Deck",
