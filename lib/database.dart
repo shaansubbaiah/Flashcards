@@ -283,4 +283,34 @@ class DatabaseService {
     }
     return count;
   }
+
+  Future<String> resetStats() async {
+    List deckList = [];
+
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) async {
+        deckList.add(doc.id);
+      });
+    }).catchError((error) => {print(error)});
+
+    print(deckList);
+
+    for (int i = 0; i < deckList.length; i++) {
+      await cardCollection
+          .where("deckid", isEqualTo: deckList[i])
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) async {
+          print(doc.id);
+          await cardCollection
+              .doc(doc.id)
+              .update({"score": 0.5}).then((value) => {});
+        });
+      });
+    }
+    return "Successful";
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/alert_dialog.dart';
+import 'package:flutterfiretest/database.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 
@@ -128,8 +129,20 @@ class _SettingsState extends State<Settings> {
                                 fontSize: 20,
                               ),
                             ),
-                            onTap: () {
-                              print("edit");
+                            onTap: () async {
+                              final action = await Dialogs.yesAbort(
+                                  context,
+                                  "Reset Stats",
+                                  "Are you sure?",
+                                  "Reset",
+                                  "No");
+
+                              if (action == DialogAction.yes) {
+                                await DatabaseService()
+                                    .resetStats()
+                                    .then((value) => {print(value)})
+                                    .catchError((onError) => {print(onError)});
+                              }
                             },
                           ),
                         ),
