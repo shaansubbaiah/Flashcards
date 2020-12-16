@@ -249,40 +249,28 @@ class DatabaseService {
     return count;
   }
 
-  Future<List> getScoreCount() async {
-    List scoreCount = [0, 0, 0, 0];
+  Future<List> getLevelCount() async {
     String deckRef;
+    List count = [1, 2, 3, 4];
 
-    await deckCollection
-        .where("uid", isEqualTo: uid)
-        .get()
-        .then((QuerySnapshot querySnapshot) => {
-              querySnapshot.docs.forEach((doc) async {
-                deckRef = doc.id;
-                await cardCollection
-                    .where("deckid", isEqualTo: deckRef)
-                    .get()
-                    .then((QuerySnapshot querySnapshot) => {
-                          querySnapshot.docs.forEach((doc) {
-                            print(doc.data()['score']);
-                            // if (doc.data()['score'] < 0.25) {
-                            //   scoreCount[0] += 1; // easy
-                            //   print("easy");
-                            // } else if (doc.data()['score'] < 0.50) {
-                            //   scoreCount[1] += 1; // moderate
-                            //   print("moderate");
-                            // } else if (doc.data()['score'] < 0.75) {
-                            //   scoreCount[2] += 1; // hard
-                            //   print("hard");
-                            // } else {
-                            //   scoreCount[3] += 1; // insane
-                            //   print("insane");
-                            // }
-                          })
-                        });
-              })
-            });
+    // await deckCollection
+    //     .where("uid", isEqualTo: uid)
+    //     .get()
+    //     .then((QuerySnapshot querySnapshot) => {
+    //           querySnapshot.docs.forEach((doc) async {
+    //             deckRef = doc.id;
 
-    return scoreCount;
+    //             await cardCollection
+    //                 .where("deckid", isEqualTo: deckRef)
+    //                 .get()
+    //                 .then((QuerySnapshot querySnapshot) => {
+    //                       querySnapshot.docs.forEach((doc) {
+    //                         count[1] += 1;
+    //                       })
+    //                     });
+    //           })
+    //         });
+
+    return count;
   }
 }
