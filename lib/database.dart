@@ -250,27 +250,37 @@ class DatabaseService {
   }
 
   Future<List> getLevelCount() async {
-    String deckRef;
-    List count = [1, 2, 3, 4];
+    List count = [0, 0, 0, 0];
 
-    // await deckCollection
-    //     .where("uid", isEqualTo: uid)
-    //     .get()
-    //     .then((QuerySnapshot querySnapshot) => {
-    //           querySnapshot.docs.forEach((doc) async {
-    //             deckRef = doc.id;
+    List deckList = [];
 
-    //             await cardCollection
-    //                 .where("deckid", isEqualTo: deckRef)
-    //                 .get()
-    //                 .then((QuerySnapshot querySnapshot) => {
-    //                       querySnapshot.docs.forEach((doc) {
-    //                         count[1] += 1;
-    //                       })
-    //                     });
-    //           })
-    //         });
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) async {
+        deckList.add(doc.id);
+      });
+    }).catchError((error) => {print(error)});
 
+    for (int i = 0; i < deckList.length; i++) {
+      await cardCollection
+          .where("deckid", isEqualTo: deckList[i])
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) async {
+                  if (doc.data()['score'] < 0.25) {
+                    count[0] += 1; // easy
+                  } else if (doc.data()['score'] < 0.50) {
+                    count[1] += 1; // moderate
+                  } else if (doc.data()['score'] < 0.75) {
+                    count[2] += 1; // hard
+                  } else {
+                    count[3] += 1; // insane
+                  }
+                })
+              });
+    }
     return count;
   }
 }

@@ -18,6 +18,7 @@ class _PieChartState extends State<PieChart> {
 
   Future<List> getCount() async {
     temp = await DatabaseService().getLevelCount();
+    return temp;
   }
 
   void generateData() async {
