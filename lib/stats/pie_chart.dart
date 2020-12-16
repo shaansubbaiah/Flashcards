@@ -14,13 +14,13 @@ class _PieChartState extends State<PieChart> {
   List<charts.Series<Level, String>> seriesPieData;
 
   void generateData() async {
-    // List scoreCount = await DatabaseService().getScoreCount();
+    // await DatabaseService().getScoreCount();
     // print(scoreCount);
     var pieData = [
-      new Level("Easy", 10, Colors.green),
-      new Level("Moderate", 8, Colors.yellow),
-      new Level("Hard", 4, Colors.orange),
-      new Level("Insane", 6, Colors.red),
+      new Level("Easy", 1, Colors.green),
+      new Level("Moderate", 0, Colors.yellow),
+      new Level("Hard", 0, Colors.orange),
+      new Level("Insane", 0, Colors.red),
     ];
 
     seriesPieData.add(charts.Series(

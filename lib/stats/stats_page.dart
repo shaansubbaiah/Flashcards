@@ -9,6 +9,9 @@ class StatsPage extends StatefulWidget {
 }
 
 class _StatsPageState extends State<StatsPage> {
+  LineChart _lineChart;
+  PieChart _pieChart;
+
   List count;
   String btnDeckText = "Total Decks";
   String btnCardText = "Total Cards";
@@ -17,6 +20,7 @@ class _StatsPageState extends State<StatsPage> {
   }
 
   void totalDeck() {
+    if (!mounted) return;
     setState(() {
       btnDeckText =
           (btnDeckText == "Total Decks") ? count[0].toString() : "Total Decks";
@@ -24,6 +28,7 @@ class _StatsPageState extends State<StatsPage> {
   }
 
   void totalCard() {
+    if (!mounted) return;
     setState(() {
       btnCardText =
           (btnCardText == "Total Cards") ? count[1].toString() : "Total Cards";
@@ -34,6 +39,8 @@ class _StatsPageState extends State<StatsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _pieChart = new PieChart();
+    _lineChart = new LineChart();
     getTotal();
   }
 
@@ -104,7 +111,7 @@ class _StatsPageState extends State<StatsPage> {
                   elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LineChart(),
+                    child: _lineChart,
                   ),
                 ),
                 SizedBox(
@@ -118,7 +125,7 @@ class _StatsPageState extends State<StatsPage> {
                   elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: PieChart(),
+                    child: _pieChart,
                   ),
                 ),
                 SizedBox(

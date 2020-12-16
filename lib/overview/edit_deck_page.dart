@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutterfiretest/overview/edit_card.dart';
 
 import '../alert_dialog.dart';
 import '../database.dart';
@@ -16,8 +17,8 @@ class EditDeck extends StatefulWidget {
 class _EditDeckState extends State<EditDeck> {
   final TextEditingController deckNameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
-  final TextEditingController frontController = TextEditingController();
-  final TextEditingController backController = TextEditingController();
+  // final TextEditingController frontController = TextEditingController();
+  // final TextEditingController backController = TextEditingController();
   final TextEditingController tagController = TextEditingController();
 
   final TextEditingController newFrontController = TextEditingController();
@@ -25,8 +26,8 @@ class _EditDeckState extends State<EditDeck> {
 
   bool _deckNameValidate = true;
   bool _descValidate = true;
-  bool _frontValidate = true;
-  bool _backValidate = true;
+  // bool _frontValidate = true;
+  // bool _backValidate = true;
   bool _tagValidate = true;
   bool _customTagValidate = true;
   bool _newFrontValidate = true;
@@ -115,20 +116,20 @@ class _EditDeckState extends State<EditDeck> {
     }
   }
 
-  void editCard() async {
-    _frontValidate = frontController.text.isEmpty ? false : true;
-    _backValidate = backController.text.isEmpty ? false : true;
+  // void editCard() async {
+  //   _frontValidate = frontController.text.isEmpty ? false : true;
+  //   _backValidate = backController.text.isEmpty ? false : true;
 
-    if (_frontValidate && _backValidate) {
-      await DatabaseService()
-          .editCard(frontController.text, backController.text, cardId, deckid)
-          .then((value) {
-        print(value);
-      }).catchError((onError) {
-        print(onError);
-      });
-    }
-  }
+  //   if (_frontValidate && _backValidate) {
+  //     await DatabaseService()
+  //         .editCard(frontController.text, backController.text, cardId, deckid)
+  //         .then((value) {
+  //       print(value);
+  //     }).catchError((onError) {
+  //       print(onError);
+  //     });
+  //   }
+  // }
 
   void updateCardList() async {
     List temp = await DatabaseService().getCardDetails(deckid);
@@ -436,138 +437,183 @@ class _EditDeckState extends State<EditDeck> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 300.0,
-                      height: 50.0,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          if (value != "") {
-                            setState(() {
-                              _newFrontValidate = true;
-                            });
-                          }
-                        },
-                        maxLines: 2,
-                        controller: newFrontController,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        cursorColor: Theme.of(context).colorScheme.primary,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: _newFrontValidate
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.onError,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                              color: _newFrontValidate
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.onError,
-                            ),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          labelText: "Front",
-                          labelStyle: TextStyle(
-                            color: _newFrontValidate
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onError,
-                          ),
-                        ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.deepPurple,
+                        width: 2,
                       ),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 270.0,
+                              height: 50.0,
+                              child: TextFormField(
+                                onChanged: (value) {
+                                  if (value != "") {
+                                    setState(() {
+                                      _newFrontValidate = true;
+                                    });
+                                  }
+                                },
+                                maxLines: 2,
+                                controller: newFrontController,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                cursorColor:
+                                    Theme.of(context).colorScheme.primary,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: _newFrontValidate
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onError,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40.0),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(40.0)),
+                                    borderSide: BorderSide(
+                                      color: _newFrontValidate
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onError,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 20.0),
+                                  labelText: "Front",
+                                  labelStyle: TextStyle(
+                                    color: _newFrontValidate
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context).colorScheme.onError,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 270.0,
+                              height: 50.0,
+                              child: TextFormField(
+                                onChanged: (value) {
+                                  if (value != "") {
+                                    setState(() {
+                                      _newBackValidate = true;
+                                    });
+                                  }
+                                },
+                                maxLines: 2,
+                                controller: newBackController,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                cursorColor:
+                                    Theme.of(context).colorScheme.primary,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: _newBackValidate
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onError,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40.0),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(40.0)),
+                                    borderSide: BorderSide(
+                                      color: _newBackValidate
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onError,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 20.0),
+                                  labelText: "Back",
+                                  labelStyle: TextStyle(
+                                    color: _newBackValidate
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context).colorScheme.onError,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FlatButton.icon(
+                              icon: Icon(
+                                EvaIcons.plusCircleOutline,
+                                color: Colors.deepPurple,
+                              ),
+                              onPressed: addNewCard,
+                              label: Text(
+                                "Add New Card",
+                                style: TextStyle(
+                                  color: Colors.deepPurple,
+                                ),
+                              ),
+                              height: 30.0,
+                              color: Colors.deepPurple[100],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
                 Row(
-                  children: [
-                    SizedBox(
-                      width: 300.0,
-                      height: 50.0,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          if (value != "") {
-                            setState(() {
-                              _newBackValidate = true;
-                            });
-                          }
-                        },
-                        maxLines: 2,
-                        controller: newBackController,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        cursorColor: Theme.of(context).colorScheme.primary,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: _newBackValidate
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.onError,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40.0),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                              color: _newBackValidate
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.onError,
-                            ),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          labelText: "Back",
-                          labelStyle: TextStyle(
-                            color: _newBackValidate
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onError,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FlatButton(
-                      height: 30.0,
-                      onPressed: addNewCard,
-                      child: Text(
-                        "Add new card",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
+                    FlatButton.icon(
+                      icon: Icon(
+                        EvaIcons.editOutline,
+                        color: Color(0xff08913F),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FlatButton(
                       onPressed: editDeck,
-                      child: Text(
-                        "Edit",
+                      label: Text(
+                        "Edit Deck",
                         style: TextStyle(
                           color: Color(0xff08913F),
                         ),
@@ -588,7 +634,7 @@ class _EditDeckState extends State<EditDeck> {
                       child: _cardValidate
                           ? null
                           : Text(
-                              "One card is required",
+                              "A deck must contain atleast 1 card!",
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.onError),
                             ),
@@ -619,250 +665,17 @@ class _EditDeckState extends State<EditDeck> {
                               // height: 70.0,
                               child: ListTile(
                                 onTap: () {
-                                  print(cards[index]["cardId"]);
-                                  setState(() {
-                                    frontController.text =
-                                        cards[index]["front"];
-                                    backController.text = cards[index]["back"];
-                                    cardId = cards[index]["cardId"];
-                                  });
                                   showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            'Edit Card',
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          backgroundColor: Theme.of(context)
-                                              .colorScheme
-                                              .primaryVariant,
-                                          content: SizedBox(
-                                            height: 170.0,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 230.0,
-                                                      height: 60.0,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 5.0,
-                                                                right: 10.0,
-                                                                left: 15.0),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(
-                                                                25.0),
-                                                          ),
-                                                        ),
-                                                        child: TextField(
-                                                          onChanged: (value) {
-                                                            if (value != "") {
-                                                              setState(() {
-                                                                _frontValidate =
-                                                                    true;
-                                                              });
-                                                            }
-                                                          },
-                                                          maxLines: 2,
-                                                          controller:
-                                                              frontController,
-                                                          style: TextStyle(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .onSecondary,
-                                                          ),
-                                                          cursorColor:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .onSecondary,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            border: InputBorder
-                                                                .none,
-                                                            hintText: "Front",
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .onSecondary,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: _frontValidate
-                                                      ? null
-                                                      : 15,
-                                                  // padding: EdgeInsets.only(
-                                                  //     left: 50.0,
-                                                  //     right: 10.0,
-                                                  //     top: 5.0),
-                                                  child: _frontValidate
-                                                      ? null
-                                                      : Align(
-                                                          alignment: Alignment
-                                                              .centerRight,
-                                                          child: Text(
-                                                            "Required",
-                                                            style: TextStyle(
-                                                                fontSize: 13,
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .onError),
-                                                          ),
-                                                        ),
-                                                ),
-                                                // SizedBox(
-                                                //   height: 20.0,
-                                                // ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 230.0,
-                                                      height: 60.0,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 5.0,
-                                                                right: 10.0,
-                                                                left: 15.0),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(
-                                                                25.0),
-                                                          ),
-                                                        ),
-                                                        child: TextField(
-                                                          onChanged: (value) {
-                                                            if (value != "") {
-                                                              setState(() {
-                                                                _backValidate =
-                                                                    true;
-                                                              });
-                                                            }
-                                                          },
-                                                          maxLines: 2,
-                                                          controller:
-                                                              backController,
-                                                          style: TextStyle(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .onSecondary,
-                                                          ),
-                                                          cursorColor:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .onSecondary,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            border: InputBorder
-                                                                .none,
-                                                            hintText: "Back",
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .onSecondary,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height:
-                                                      _backValidate ? null : 15,
-                                                  // padding: EdgeInsets.only(
-                                                  //     left: 50.0,
-                                                  //     right: 10.0,
-                                                  //     top: 5.0),
-                                                  child: _backValidate
-                                                      ? null
-                                                      : Align(
-                                                          alignment: Alignment
-                                                              .centerRight,
-                                                          child: Text(
-                                                            "Required",
-                                                            style: TextStyle(
-                                                                fontSize: 13,
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .onError),
-                                                          ),
-                                                        ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          actions: [
-                                            FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("Cancel"),
-                                            ),
-                                            RaisedButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  _frontValidate =
-                                                      frontController
-                                                              .text.isEmpty
-                                                          ? false
-                                                          : true;
-                                                  _backValidate = backController
-                                                          .text.isEmpty
-                                                      ? false
-                                                      : true;
-
-                                                  if (_frontValidate &&
-                                                      _backValidate) {
-                                                    editCard();
-                                                    Navigator.of(context).pop();
-                                                    // updateCardList();
-                                                  }
-                                                });
-                                                updateCardList();
-                                              },
-                                              child: Text("Update"),
-                                            ),
-                                          ],
-                                        );
-                                      });
+                                    context: context,
+                                    builder: (context) {
+                                      return EditCard(
+                                          cards[index]["front"],
+                                          cards[index]["back"],
+                                          cards[index]["cardId"],
+                                          deckid,
+                                          updateCardList);
+                                    },
+                                  );
                                 },
                                 title: Text(
                                   '${cards[index]["front"]}',

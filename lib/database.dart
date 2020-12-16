@@ -264,15 +264,20 @@ class DatabaseService {
                     .get()
                     .then((QuerySnapshot querySnapshot) => {
                           querySnapshot.docs.forEach((doc) {
-                            if (doc.data()['score'] < 0.25) {
-                              scoreCount[0] += 1; // easy
-                            } else if (doc.data()['score'] < 0.50) {
-                              scoreCount[1] += 1; // moderate
-                            } else if (doc.data()['score'] < 0.75) {
-                              scoreCount[2] += 1; // hard
-                            } else {
-                              scoreCount[3] += 1; // insane
-                            }
+                            print(doc.data()['score']);
+                            // if (doc.data()['score'] < 0.25) {
+                            //   scoreCount[0] += 1; // easy
+                            //   print("easy");
+                            // } else if (doc.data()['score'] < 0.50) {
+                            //   scoreCount[1] += 1; // moderate
+                            //   print("moderate");
+                            // } else if (doc.data()['score'] < 0.75) {
+                            //   scoreCount[2] += 1; // hard
+                            //   print("hard");
+                            // } else {
+                            //   scoreCount[3] += 1; // insane
+                            //   print("insane");
+                            // }
                           })
                         });
               })
