@@ -233,19 +233,51 @@ class DatabaseService {
         .then((QuerySnapshot querySnapshot) => {
               querySnapshot.docs.forEach((doc) async {
                 deckRef = doc.id;
-                count[0] += 1;
+                count[0] += 1; // total deck
 
                 await cardCollection
                     .where("deckid", isEqualTo: deckRef)
                     .get()
                     .then((QuerySnapshot querySnapshot) => {
                           querySnapshot.docs.forEach((doc) {
-                            count[1] += 1;
+                            count[1] += 1; // total cards
                           })
                         });
               })
             });
 
     return count;
+  }
+
+  Future<List> getScoreCount() async {
+    List scoreCount = [0, 0, 0, 0];
+    String deckRef;
+
+    await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) async {
+                deckRef = doc.id;
+                await cardCollection
+                    .where("deckid", isEqualTo: deckRef)
+                    .get()
+                    .then((QuerySnapshot querySnapshot) => {
+                          querySnapshot.docs.forEach((doc) {
+                            if (doc.data()['score'] < 0.25) {
+                              scoreCount[0] += 1; // easy
+                            } else if (doc.data()['score'] < 0.50) {
+                              scoreCount[1] += 1; // moderate
+                            } else if (doc.data()['score'] < 0.75) {
+                              scoreCount[2] += 1; // hard
+                            } else {
+                              scoreCount[3] += 1; // insane
+                            }
+                          })
+                        });
+              })
+            });
+
+    return scoreCount;
   }
 }

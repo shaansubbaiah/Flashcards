@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:flutterfiretest/database.dart';
 
 class PieChart extends StatefulWidget {
   @override
@@ -12,7 +13,9 @@ class PieChart extends StatefulWidget {
 class _PieChartState extends State<PieChart> {
   List<charts.Series<Level, String>> seriesPieData;
 
-  void generateData() {
+  void generateData() async {
+    // List scoreCount = await DatabaseService().getScoreCount();
+    // print(scoreCount);
     var pieData = [
       new Level("Easy", 10, Colors.green),
       new Level("Moderate", 8, Colors.yellow),

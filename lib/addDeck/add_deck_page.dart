@@ -399,7 +399,7 @@ class _AddCardState extends State<AddCard> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 300.0,
+                              width: 270.0,
                               height: 50.0,
                               child: TextFormField(
                                 onChanged: (value) {
@@ -463,7 +463,7 @@ class _AddCardState extends State<AddCard> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 300.0,
+                              width: 270.0,
                               height: 50.0,
                               child: TextFormField(
                                 onChanged: (value) {
