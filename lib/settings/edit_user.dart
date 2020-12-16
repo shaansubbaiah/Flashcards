@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../alert_dialog.dart';
@@ -16,8 +15,10 @@ class _EditUserState extends State<EditUser> {
   _EditUserState(this.setIndex);
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
-  final form = GlobalKey<FormState>();
+
   bool wrongPassword = false;
+  bool _newPasswordValidate = true;
+  bool _oldPasswordValidate = true;
 
   Future<bool> checkPassword() async {
     return await context
@@ -26,17 +27,29 @@ class _EditUserState extends State<EditUser> {
   }
 
   void editPassword() async {
-    if (form.currentState.validate()) {
+    setState(() {
+      _oldPasswordValidate = (oldPasswordController.text.isEmpty ||
+              oldPasswordController.text.length < 6)
+          ? false
+          : true;
+      _newPasswordValidate = (newPasswordController.text.isEmpty ||
+              newPasswordController.text.length < 6)
+          ? false
+          : true;
+      wrongPassword = false;
+    });
+    if (_newPasswordValidate && _oldPasswordValidate) {
       final action = await Dialogs.yesAbort(
           context, "Edit Password", "Are you sure?", "Edit", "No");
       if (action == DialogAction.yes) {
         if (await checkPassword()) {
-          context.read<AuthService>().editPassword(oldPasswordController.text);
+          context.read<AuthService>().editPassword(newPasswordController.text);
           // Navigator.popAndPushNamed(context, "/settings");
           this.setIndex(2);
         } else {
           setState(() {
             wrongPassword = true;
+            _oldPasswordValidate = false;
           });
         }
       }
@@ -61,120 +74,153 @@ class _EditUserState extends State<EditUser> {
       ),
       body: Center(
           child: Form(
-        key: form,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 40, top: 2.5, right: 40, bottom: 2.5),
-              child: TextFormField(
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter password';
-                  } else if (value.length < 6) {
-                    return 'Min length is 6';
-                  }
-                  return null;
-                },
-                controller: oldPasswordController,
-                obscureText: true,
-                cursorColor: Theme.of(context).colorScheme.primary,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                decoration: InputDecoration(
-                  // icon: Icon(Icons.lock),
-                  labelText: "Old Password",
-                  labelStyle:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40.0),
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.onError),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40.0),
-                    ),
-                  ),
-                  errorText: wrongPassword ? "Wrong Password" : null,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                  // fillColor: Colors.grey[300],
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 40, top: 2.5, right: 40, bottom: 5),
-              child: TextFormField(
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter password';
-                  } else if (value.length < 6) {
-                    return 'Min length is 6';
-                  }
-                  return null;
-                },
-                controller: newPasswordController,
-                cursorColor: Theme.of(context).colorScheme.primary,
-                obscureText: true,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                decoration: InputDecoration(
-                  // icon: Icon(Icons.lock),
-                  labelText: "New Password",
-                  labelStyle:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40.0),
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.onError),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40.0),
-                    ),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                  // fillColor: Colors.grey[300],
-                ),
-              ),
-            ),
-            RaisedButton(
-              onPressed: editPassword,
-              child: Text(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
                 "Edit",
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.primaryVariant),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 50,
+                width: 300,
+                child: TextFormField(
+                  onChanged: (value) {
+                    if (value != "") {
+                      setState(() {
+                        _oldPasswordValidate = true;
+                      });
+                    }
+                  },
+                  controller: oldPasswordController,
+                  obscureText: true,
+                  style: TextStyle(
+                    color: _oldPasswordValidate
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onError,
+                  ),
+                  cursorColor: Theme.of(context).colorScheme.primary,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: _oldPasswordValidate
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onError,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40.0),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                      borderSide: BorderSide(
+                        color: _oldPasswordValidate
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onError,
+                      ),
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    labelText: "Enter old password",
+                    labelStyle: TextStyle(
+                      color: _oldPasswordValidate
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onError,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: wrongPassword ? 24 : 0,
+                child: wrongPassword
+                    ? Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          "Wrong Password",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onError,
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 50,
+                width: 300,
+                child: TextFormField(
+                  onChanged: (value) {
+                    if (value != "") {
+                      setState(() {
+                        _newPasswordValidate = true;
+                      });
+                    }
+                  },
+                  controller: newPasswordController,
+                  style: TextStyle(
+                    color: _newPasswordValidate
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onError,
+                  ),
+                  cursorColor: Theme.of(context).colorScheme.primary,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: _newPasswordValidate
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onError,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40.0),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                      borderSide: BorderSide(
+                        color: _newPasswordValidate
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onError,
+                      ),
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    labelText: "Enter password",
+                    labelStyle: TextStyle(
+                      color: _newPasswordValidate
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onError,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              RaisedButton(
+                onPressed: editPassword,
+                child: Text(
+                  "Edit",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primaryVariant),
+                ),
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+            ],
+          ),
         ),
       )),
     );
