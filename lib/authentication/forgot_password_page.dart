@@ -36,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20.0,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     SizedBox(
@@ -56,15 +56,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         controller: emailController,
                         style: TextStyle(
                           color: _emailValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
-                        cursorColor: Theme.of(context).colorScheme.primary,
+                        cursorColor:
+                            Theme.of(context).colorScheme.primaryVariant,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: _emailValidate
-                                  ? Theme.of(context).colorScheme.primary
+                                  ? Theme.of(context).colorScheme.primaryVariant
                                   : Theme.of(context).colorScheme.onError,
                             ),
                             borderRadius: BorderRadius.all(
@@ -76,7 +77,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 BorderRadius.all(Radius.circular(40.0)),
                             borderSide: BorderSide(
                               color: _emailValidate
-                                  ? Theme.of(context).colorScheme.primary
+                                  ? Theme.of(context).colorScheme.primaryVariant
                                   : Theme.of(context).colorScheme.onError,
                             ),
                           ),
@@ -85,7 +86,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           labelText: "Enter email",
                           labelStyle: TextStyle(
                             color: _emailValidate
-                                ? Theme.of(context).colorScheme.primary
+                                ? Theme.of(context).colorScheme.primaryVariant
                                 : Theme.of(context).colorScheme.onError,
                           ),
                         ),
@@ -152,7 +153,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15.0,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],

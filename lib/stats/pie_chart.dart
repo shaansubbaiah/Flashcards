@@ -96,8 +96,9 @@ class _PieChartState extends State<PieChart> {
                   );
                 } else {
                   return Container(
-                    height: 300,
-                    width: 300,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
               }),

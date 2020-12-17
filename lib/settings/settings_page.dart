@@ -274,7 +274,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       content: SizedBox(
         height: 75.0,
         child: Column(
@@ -294,16 +294,16 @@ class _DeleteAlertState extends State<DeleteAlert> {
                 controller: passwordController,
                 style: TextStyle(
                   color: _passwordValidate
-                      ? Theme.of(context).colorScheme.primary
+                      ? Theme.of(context).colorScheme.primaryVariant
                       : Theme.of(context).colorScheme.onError,
                 ),
-                cursorColor: Theme.of(context).colorScheme.primary,
+                cursorColor: Theme.of(context).colorScheme.primaryVariant,
                 obscureText: true,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: _passwordValidate
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.primaryVariant
                           : Theme.of(context).colorScheme.onError,
                     ),
                     borderRadius: BorderRadius.all(
@@ -314,7 +314,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     borderSide: BorderSide(
                       color: _passwordValidate
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.primaryVariant
                           : Theme.of(context).colorScheme.onError,
                     ),
                   ),
@@ -323,7 +323,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
                   labelText: "Confirm password",
                   labelStyle: TextStyle(
                     color: _passwordValidate
-                        ? Theme.of(context).colorScheme.primary
+                        ? Theme.of(context).colorScheme.primaryVariant
                         : Theme.of(context).colorScheme.onError,
                   ),
                 ),

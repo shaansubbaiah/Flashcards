@@ -42,7 +42,7 @@ class _SignInPageState extends State<SignInPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   SizedBox(
@@ -62,15 +62,15 @@ class _SignInPageState extends State<SignInPage> {
                       controller: emailController,
                       style: TextStyle(
                         color: _emailValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
-                      cursorColor: Theme.of(context).colorScheme.primary,
+                      cursorColor: Theme.of(context).colorScheme.primaryVariant,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: _emailValidate
-                                ? Theme.of(context).colorScheme.primary
+                                ? Theme.of(context).colorScheme.primaryVariant
                                 : Theme.of(context).colorScheme.onError,
                           ),
                           borderRadius: BorderRadius.all(
@@ -81,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide: BorderSide(
                             color: _emailValidate
-                                ? Theme.of(context).colorScheme.primary
+                                ? Theme.of(context).colorScheme.primaryVariant
                                 : Theme.of(context).colorScheme.onError,
                           ),
                         ),
@@ -90,7 +90,7 @@ class _SignInPageState extends State<SignInPage> {
                         labelText: "Enter email",
                         labelStyle: TextStyle(
                           color: _emailValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                       ),
@@ -127,16 +127,16 @@ class _SignInPageState extends State<SignInPage> {
                       controller: passwordController,
                       style: TextStyle(
                         color: _passwordValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
-                      cursorColor: Theme.of(context).colorScheme.primary,
+                      cursorColor: Theme.of(context).colorScheme.primaryVariant,
                       obscureText: true,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: _passwordValidate
-                                ? Theme.of(context).colorScheme.primary
+                                ? Theme.of(context).colorScheme.primaryVariant
                                 : Theme.of(context).colorScheme.onError,
                           ),
                           borderRadius: BorderRadius.all(
@@ -147,7 +147,7 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.all(Radius.circular(40.0)),
                           borderSide: BorderSide(
                             color: _passwordValidate
-                                ? Theme.of(context).colorScheme.primary
+                                ? Theme.of(context).colorScheme.primaryVariant
                                 : Theme.of(context).colorScheme.onError,
                           ),
                         ),
@@ -156,7 +156,7 @@ class _SignInPageState extends State<SignInPage> {
                         labelText: "Enter password",
                         labelStyle: TextStyle(
                           color: _passwordValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                       ),
@@ -230,7 +230,7 @@ class _SignInPageState extends State<SignInPage> {
                   Container(
                     padding: EdgeInsets.all(30.0),
                     child: FlatButton(
-                        textColor: Theme.of(context).colorScheme.onPrimary,
+                        textColor: Theme.of(context).colorScheme.primary,
                         child: Text("Create an account"),
                         onPressed: () {
                           toggle();
