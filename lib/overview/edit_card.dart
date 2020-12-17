@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 import '../database.dart';
@@ -65,7 +66,7 @@ class _EditCardState extends State<EditCard> {
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       content: SizedBox(
@@ -179,13 +180,29 @@ class _EditCardState extends State<EditCard> {
         ),
       ),
       actions: [
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text("Cancel"),
+        FlatButton.icon(
+          icon: Icon(
+            EvaIcons.closeOutline,
+            color: Color(0xff950F0F),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          label: Text(
+            "No",
+            style: TextStyle(
+              color: Color(0xff950F0F),
+            ),
+          ),
+          height: 30.0,
+          color: Color(0xffEDA9A9),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
         ),
-        RaisedButton(
+        FlatButton.icon(
+          icon: Icon(
+            EvaIcons.checkmarkOutline,
+            color: Color(0xff08913F),
+          ),
           onPressed: () {
             setState(() {
               _frontValidate = frontController.text.isEmpty ? false : true;
@@ -198,7 +215,17 @@ class _EditCardState extends State<EditCard> {
               Navigator.of(context).pop();
             }
           },
-          child: Text("Update"),
+          label: Text(
+            "Edit",
+            style: TextStyle(
+              color: Color(0xff08913F),
+            ),
+          ),
+          height: 30.0,
+          color: Color(0xffA9EDC4),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
         ),
       ],
     );

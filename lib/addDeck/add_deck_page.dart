@@ -650,8 +650,8 @@ class _AddCardState extends State<AddCard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                height: 20.0,
+                              Container(
+                                margin: EdgeInsets.only(top: 8),
                                 child: _cardValidate
                                     ? null
                                     : Text(

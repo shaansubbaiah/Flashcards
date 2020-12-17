@@ -272,7 +272,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       content: SizedBox(
@@ -347,19 +347,47 @@ class _DeleteAlertState extends State<DeleteAlert> {
         ),
       ),
       actions: [
-        FlatButton(
+        FlatButton.icon(
+          icon: Icon(
+            EvaIcons.closeOutline,
+            color: Color(0xff950F0F),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
             passwordController.text = "";
             wrongPassword = false;
           },
-          child: Text("Cancel"),
+          label: Text(
+            "Cancel",
+            style: TextStyle(
+              color: Color(0xff950F0F),
+            ),
+          ),
+          height: 30.0,
+          color: Color(0xffEDA9A9),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
         ),
-        RaisedButton(
+        FlatButton.icon(
+          icon: Icon(
+            EvaIcons.checkmarkOutline,
+            color: Color(0xff08913F),
+          ),
           onPressed: () {
             deleteAccount();
           },
-          child: Text("Delete"),
+          label: Text(
+            "Confirm",
+            style: TextStyle(
+              color: Color(0xff08913F),
+            ),
+          ),
+          height: 30.0,
+          color: Color(0xffA9EDC4),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
         ),
       ],
     );
