@@ -224,6 +224,9 @@ class DeckListState extends State<DeckList> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 60,
+            ),
           ],
         ),
       ),

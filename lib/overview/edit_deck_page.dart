@@ -404,9 +404,6 @@ class _EditDeckState extends State<EditDeck> {
                                   ),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(20, 20, 10, 0),
-                                  filled: true,
-                                  fillColor:
-                                      Theme.of(context).colorScheme.background,
                                   labelText: "Select Tag",
                                   labelStyle: TextStyle(
                                     color: _tagValidate
@@ -510,7 +507,7 @@ class _EditDeckState extends State<EditDeck> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                             child: Column(
                               children: [
                                 Row(

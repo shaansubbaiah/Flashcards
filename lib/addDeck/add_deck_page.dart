@@ -361,6 +361,8 @@ class _AddCardState extends State<AddCard> {
                                                 .onError,
                                       ),
                                     ),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(20, 20, 10, 0),
                                     labelText: "Select Tag",
                                     labelStyle: TextStyle(
                                       color: _tagValidate
