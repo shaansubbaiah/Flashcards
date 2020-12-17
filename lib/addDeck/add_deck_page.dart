@@ -730,21 +730,26 @@ class _AddCardState extends State<AddCard> {
                       return Slidable(
                         actionPane: SlidableDrawerActionPane(),
                         actionExtentRatio: 0.25,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.circular(25)),
-                          child: ListTile(
-                            title: Text(
-                              '${cards[index]["front"]}',
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary),
-                            ),
-                            subtitle: Text(
-                              '${cards[index]["back"]}',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.surface,
+                                borderRadius: BorderRadius.circular(25)),
+                            child: ListTile(
+                              title: Text(
+                                '${cards[index]["front"]}',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
+                              subtitle: Text(
+                                '${cards[index]["back"]}',
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                              ),
                             ),
                           ),
                         ),

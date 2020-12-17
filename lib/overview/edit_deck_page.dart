@@ -747,38 +747,43 @@ class _EditDeckState extends State<EditDeck> {
                       return Slidable(
                         actionPane: SlidableDrawerActionPane(),
                         actionExtentRatio: 0.25,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(25.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.surface,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(25.0),
+                              ),
                             ),
-                          ),
-                          // height: 70.0,
-                          child: ListTile(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return EditCard(
-                                      cards[index]["front"],
-                                      cards[index]["back"],
-                                      cards[index]["cardId"],
-                                      deckid,
-                                      updateCardList);
-                                },
-                              );
-                            },
-                            title: Text(
-                              '${cards[index]["front"]}',
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary),
-                            ),
-                            subtitle: Text(
-                              '${cards[index]["back"]}',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
+                            // height: 70.0,
+                            child: ListTile(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return EditCard(
+                                        cards[index]["front"],
+                                        cards[index]["back"],
+                                        cards[index]["cardId"],
+                                        deckid,
+                                        updateCardList);
+                                  },
+                                );
+                              },
+                              title: Text(
+                                '${cards[index]["front"]}',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
+                              subtitle: Text(
+                                '${cards[index]["back"]}',
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                              ),
                             ),
                           ),
                         ),
