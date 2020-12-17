@@ -67,7 +67,7 @@ class _EditUserState extends State<EditUser> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -78,17 +78,6 @@ class _EditUserState extends State<EditUser> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Edit",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
               SizedBox(
                 height: 50,
                 width: 300,
@@ -104,15 +93,15 @@ class _EditUserState extends State<EditUser> {
                   obscureText: true,
                   style: TextStyle(
                     color: _oldPasswordValidate
-                        ? Theme.of(context).colorScheme.primary
+                        ? Theme.of(context).colorScheme.primaryVariant
                         : Theme.of(context).colorScheme.onError,
                   ),
-                  cursorColor: Theme.of(context).colorScheme.primary,
+                  cursorColor: Theme.of(context).colorScheme.primaryVariant,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: _oldPasswordValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                       borderRadius: BorderRadius.all(
@@ -123,7 +112,7 @@ class _EditUserState extends State<EditUser> {
                       borderRadius: BorderRadius.all(Radius.circular(40.0)),
                       borderSide: BorderSide(
                         color: _oldPasswordValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                     ),
@@ -132,7 +121,7 @@ class _EditUserState extends State<EditUser> {
                     labelText: "Enter old password",
                     labelStyle: TextStyle(
                       color: _oldPasswordValidate
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.primaryVariant
                           : Theme.of(context).colorScheme.onError,
                     ),
                   ),
@@ -169,16 +158,16 @@ class _EditUserState extends State<EditUser> {
                   controller: newPasswordController,
                   style: TextStyle(
                     color: _newPasswordValidate
-                        ? Theme.of(context).colorScheme.primary
+                        ? Theme.of(context).colorScheme.primaryVariant
                         : Theme.of(context).colorScheme.onError,
                   ),
-                  cursorColor: Theme.of(context).colorScheme.primary,
+                  cursorColor: Theme.of(context).colorScheme.primaryVariant,
                   obscureText: true,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: _newPasswordValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                       borderRadius: BorderRadius.all(
@@ -189,7 +178,7 @@ class _EditUserState extends State<EditUser> {
                       borderRadius: BorderRadius.all(Radius.circular(40.0)),
                       borderSide: BorderSide(
                         color: _newPasswordValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                     ),
@@ -198,7 +187,7 @@ class _EditUserState extends State<EditUser> {
                     labelText: "Enter password",
                     labelStyle: TextStyle(
                       color: _newPasswordValidate
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.primaryVariant
                           : Theme.of(context).colorScheme.onError,
                     ),
                   ),

@@ -216,10 +216,14 @@ class DeckListState extends State<DeckList> {
               ),
             ),
             Container(
-                child: Center(
-                    child: Text("Swipe left to edit or delete a deck.",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary)))),
+              child: Center(
+                child: Text(
+                  "Swipe left to edit or delete a deck.",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.secondary),
+                ),
+              ),
+            ),
           ],
         ),
       ),

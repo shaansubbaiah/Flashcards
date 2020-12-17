@@ -62,12 +62,12 @@ class _EditCardState extends State<EditCard> {
     return AlertDialog(
       title: Text(
         'Edit Card',
-        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       content: SizedBox(
         height: 170.0,
         child: Column(
@@ -89,14 +89,14 @@ class _EditCardState extends State<EditCard> {
                     maxLines: 2,
                     controller: frontController,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primaryVariant,
                     ),
-                    cursorColor: Theme.of(context).colorScheme.primary,
+                    cursorColor: Theme.of(context).colorScheme.primaryVariant,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: _frontValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                         borderRadius: BorderRadius.all(
@@ -107,7 +107,7 @@ class _EditCardState extends State<EditCard> {
                         borderRadius: BorderRadius.all(Radius.circular(40.0)),
                         borderSide: BorderSide(
                           color: _frontValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                       ),
@@ -116,7 +116,7 @@ class _EditCardState extends State<EditCard> {
                       labelText: "Front",
                       labelStyle: TextStyle(
                         color: _frontValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                     ),
@@ -140,14 +140,14 @@ class _EditCardState extends State<EditCard> {
                     maxLines: 2,
                     controller: backController,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primaryVariant,
                     ),
-                    cursorColor: Theme.of(context).colorScheme.primary,
+                    cursorColor: Theme.of(context).colorScheme.primaryVariant,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: _backValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                         borderRadius: BorderRadius.all(
@@ -158,7 +158,7 @@ class _EditCardState extends State<EditCard> {
                         borderRadius: BorderRadius.all(Radius.circular(40.0)),
                         borderSide: BorderSide(
                           color: _backValidate
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.primaryVariant
                               : Theme.of(context).colorScheme.onError,
                         ),
                       ),
@@ -167,7 +167,7 @@ class _EditCardState extends State<EditCard> {
                       labelText: "Back",
                       labelStyle: TextStyle(
                         color: _backValidate
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.primaryVariant
                             : Theme.of(context).colorScheme.onError,
                       ),
                     ),

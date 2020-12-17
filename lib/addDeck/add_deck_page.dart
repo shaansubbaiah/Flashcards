@@ -431,7 +431,7 @@ class _AddCardState extends State<AddCard> {
                                                       .onError,
                                             ),
                                           ),
-                                          labelText: "Enter custom tag",
+                                          labelText: "Custom tag",
                                           labelStyle: TextStyle(
                                             color: _customTagValidate
                                                 ? Theme.of(context)
