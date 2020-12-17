@@ -12,17 +12,16 @@ class Dialogs {
         builder: (context) {
           return AlertDialog(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(20.0),
             ),
-            backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               title,
-              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             content: Text(
               content,
-              style:
-                  TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             actions: [
               FlatButton(

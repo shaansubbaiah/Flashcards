@@ -89,9 +89,9 @@ class DeckListState extends State<DeckList> {
                       },
                       controller: searchController,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSecondary,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
-                      cursorColor: Theme.of(context).colorScheme.onSecondary,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: Icon(
@@ -100,7 +100,7 @@ class DeckListState extends State<DeckList> {
                         hintText: "Search...",
                         hintStyle: TextStyle(
                           height: 1,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),
@@ -153,9 +153,8 @@ class DeckListState extends State<DeckList> {
                               title: Text(
                                 decks[index]["deckname"],
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary),
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
                               ),
                               subtitle: Text(
                                 decks[index]["desc"] +
@@ -164,20 +163,11 @@ class DeckListState extends State<DeckList> {
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .onSecondary),
+                                        .secondary),
                               ),
                             ),
                           ),
                         ),
-                        // NOTE: Comment out the code below to get back the SHARE left swipe action
-                        // actions: <Widget>[
-                        //   IconSlideAction(
-                        //     caption: 'Share',
-                        //     color: Colors.indigo,
-                        //     icon: Icons.share,
-                        //     onTap: () => debugPrint('Share'),
-                        //   ),
-                        // ],
                         secondaryActions: <Widget>[
                           IconSlideAction(
                             caption: 'Edit',
@@ -225,9 +215,11 @@ class DeckListState extends State<DeckList> {
                 physics: ClampingScrollPhysics(),
               ),
             ),
-            SizedBox(
-              height: 15,
-            ),
+            Container(
+                child: Center(
+                    child: Text("Swipe left to edit or delete a deck.",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary)))),
           ],
         ),
       ),

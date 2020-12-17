@@ -178,18 +178,20 @@ class _AddCardState extends State<AddCard> {
                                   },
                                   controller: deckNameController,
                                   style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primaryVariant,
                                   ),
-                                  cursorColor:
-                                      Theme.of(context).colorScheme.primary,
+                                  cursorColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryVariant,
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: _deckNameValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
@@ -205,20 +207,18 @@ class _AddCardState extends State<AddCard> {
                                         color: _deckNameValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
                                       ),
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0.0, horizontal: 10.0),
-                                    labelText: "Enter deck name",
+                                    labelText: "Deck name",
                                     labelStyle: TextStyle(
                                       color: _deckNameValidate
                                           ? Theme.of(context)
                                               .colorScheme
-                                              .primary
+                                              .primaryVariant
                                           : Theme.of(context)
                                               .colorScheme
                                               .onError,
@@ -246,18 +246,19 @@ class _AddCardState extends State<AddCard> {
                                   },
                                   controller: descController,
                                   style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                  cursorColor:
-                                      Theme.of(context).colorScheme.primary,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primaryVariant),
+                                  cursorColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryVariant,
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: _descValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
@@ -273,20 +274,18 @@ class _AddCardState extends State<AddCard> {
                                         color: _descValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
                                       ),
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0.0, horizontal: 10.0),
-                                    labelText: "Enter description",
+                                    labelText: "Description",
                                     labelStyle: TextStyle(
                                       color: _descValidate
                                           ? Theme.of(context)
                                               .colorScheme
-                                              .primary
+                                              .primaryVariant
                                           : Theme.of(context)
                                               .colorScheme
                                               .onError,
@@ -316,7 +315,7 @@ class _AddCardState extends State<AddCard> {
                                               style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .primary,
+                                                    .primaryVariant,
                                               ),
                                             ),
                                           ],
@@ -340,7 +339,7 @@ class _AddCardState extends State<AddCard> {
                                         color: _tagValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
@@ -356,24 +355,18 @@ class _AddCardState extends State<AddCard> {
                                         color: _tagValidate
                                             ? Theme.of(context)
                                                 .colorScheme
-                                                .primary
+                                                .primaryVariant
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .onError,
                                       ),
                                     ),
-                                    contentPadding:
-                                        EdgeInsets.fromLTRB(20, 20, 10, 0),
-                                    filled: true,
-                                    fillColor: Theme.of(context)
-                                        .colorScheme
-                                        .background,
                                     labelText: "Select Tag",
                                     labelStyle: TextStyle(
                                       color: _tagValidate
                                           ? Theme.of(context)
                                               .colorScheme
-                                              .primary
+                                              .primaryVariant
                                           : Theme.of(context)
                                               .colorScheme
                                               .onError,
@@ -405,18 +398,18 @@ class _AddCardState extends State<AddCard> {
                                         style: TextStyle(
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .primary,
+                                              .primaryVariant,
                                         ),
                                         cursorColor: Theme.of(context)
                                             .colorScheme
-                                            .primary,
+                                            .primaryVariant,
                                         decoration: InputDecoration(
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: _customTagValidate
                                                   ? Theme.of(context)
                                                       .colorScheme
-                                                      .primary
+                                                      .primaryVariant
                                                   : Theme.of(context)
                                                       .colorScheme
                                                       .onError,
@@ -432,20 +425,18 @@ class _AddCardState extends State<AddCard> {
                                               color: _customTagValidate
                                                   ? Theme.of(context)
                                                       .colorScheme
-                                                      .primary
+                                                      .primaryVariant
                                                   : Theme.of(context)
                                                       .colorScheme
                                                       .onError,
                                             ),
                                           ),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              vertical: 0.0, horizontal: 10.0),
                                           labelText: "Enter custom tag",
                                           labelStyle: TextStyle(
                                             color: _customTagValidate
                                                 ? Theme.of(context)
                                                     .colorScheme
-                                                    .primary
+                                                    .primaryVariant
                                                 : Theme.of(context)
                                                     .colorScheme
                                                     .onError,
@@ -494,18 +485,18 @@ class _AddCardState extends State<AddCard> {
                                           style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .primary,
+                                                .primaryVariant,
                                           ),
                                           cursorColor: Theme.of(context)
                                               .colorScheme
-                                              .primary,
+                                              .primaryVariant,
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: _frontValidate
                                                     ? Theme.of(context)
                                                         .colorScheme
-                                                        .primary
+                                                        .primaryVariant
                                                     : Theme.of(context)
                                                         .colorScheme
                                                         .onError,
@@ -521,7 +512,7 @@ class _AddCardState extends State<AddCard> {
                                                 color: _frontValidate
                                                     ? Theme.of(context)
                                                         .colorScheme
-                                                        .primary
+                                                        .primaryVariant
                                                     : Theme.of(context)
                                                         .colorScheme
                                                         .onError,
@@ -536,7 +527,7 @@ class _AddCardState extends State<AddCard> {
                                               color: _frontValidate
                                                   ? Theme.of(context)
                                                       .colorScheme
-                                                      .primary
+                                                      .primaryVariant
                                                   : Theme.of(context)
                                                       .colorScheme
                                                       .onError,
@@ -567,7 +558,7 @@ class _AddCardState extends State<AddCard> {
                                           style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .primary,
+                                                .primaryVariant,
                                           ),
                                           cursorColor: Theme.of(context)
                                               .colorScheme
@@ -578,7 +569,7 @@ class _AddCardState extends State<AddCard> {
                                                 color: _backValidate
                                                     ? Theme.of(context)
                                                         .colorScheme
-                                                        .primary
+                                                        .primaryVariant
                                                     : Theme.of(context)
                                                         .colorScheme
                                                         .onError,
@@ -594,7 +585,7 @@ class _AddCardState extends State<AddCard> {
                                                 color: _backValidate
                                                     ? Theme.of(context)
                                                         .colorScheme
-                                                        .primary
+                                                        .primaryVariant
                                                     : Theme.of(context)
                                                         .colorScheme
                                                         .onError,
@@ -609,7 +600,7 @@ class _AddCardState extends State<AddCard> {
                                               color: _backValidate
                                                   ? Theme.of(context)
                                                       .colorScheme
-                                                      .primary
+                                                      .primaryVariant
                                                   : Theme.of(context)
                                                       .colorScheme
                                                       .onError,
