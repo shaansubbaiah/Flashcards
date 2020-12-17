@@ -123,7 +123,7 @@ class DeckListState extends State<DeckList> {
                         actionExtentRatio: 0.25,
                         child: Padding(
                           padding: EdgeInsets.only(
-                              top: 5, bottom: 5, right: 15, left: 15),
+                              top: 10, bottom: 10, right: 10, left: 10),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.surface,

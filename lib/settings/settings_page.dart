@@ -24,223 +24,201 @@ class _SettingsState extends State<Settings> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            "Settings",
+            "Options",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          child: Padding(
-            padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
-            child: Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ListView(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      children: [
-                        Container(
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                              top: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              EvaIcons.editOutline,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                            title: Text(
-                              "Edit Password",
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                fontSize: 20,
-                              ),
-                            ),
-                            onTap: () {
-                              this.setIndex(5);
-                            },
-                          ),
-                        ),
-                        Container(
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              EvaIcons.downloadOutline,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                            title: Text(
-                              "Restore Backup",
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                fontSize: 20,
-                              ),
-                            ),
-                            onTap: () {
-                              print("edit");
-                            },
-                          ),
-                        ),
-                        Container(
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              EvaIcons.refreshOutline,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                            title: Text(
-                              "Reset Stats",
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                fontSize: 20,
-                              ),
-                            ),
-                            onTap: () async {
-                              final action = await Dialogs.yesAbort(
-                                  context,
-                                  "Reset Stats",
-                                  "Are you sure?",
-                                  "Reset",
-                                  "No");
-
-                              if (action == DialogAction.yes) {
-                                await DatabaseService()
-                                    .resetStats()
-                                    .then((value) => {print(value)})
-                                    .catchError((onError) => {print(onError)});
-                              }
-                            },
-                          ),
-                        ),
-                        Container(
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                            ),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              EvaIcons.sunOutline,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                            title: Text(
-                              Provider.of<AppState>(context, listen: false)
-                                  .mode,
-                              style: TextStyle(
-                                color: Color(0xff9E9D9D),
-                                fontSize: 20,
-                              ),
-                            ),
-                            onTap: () {
-                              Provider.of<AppState>(context, listen: false)
-                                  .changeTheme();
-                              setIndex(0);
-                            },
-                          ),
-                        ),
-                      ],
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: ListView(
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            children: [
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 190.0,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FlatButton(
-                          onPressed: () async {
-                            final action = await Dialogs.yesAbort(context,
-                                "Logout", "Are you sure?", "Logout", "No");
-
-                            if (action == DialogAction.yes) {
-                              context.read<AuthService>().signOut();
-                            }
-                          },
-                          child: Text(
-                            "Logout",
-                            style: TextStyle(
-                              color: Color(0xff08913F),
-                              fontSize: 30,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          height: 50.0,
-                          color: Color(0xffA9EDC4),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return DeleteAlert();
-                              },
-                            );
-                          },
-                          child: Text(
-                            "Delete",
-                            style: TextStyle(
-                              color: Color(0xff950F0F),
-                              fontSize: 30,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          height: 50.0,
-                          color: Color(0xffEDA9A9),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                      ],
+                    top: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.editOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    "Edit Password",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () {
+                    this.setIndex(5);
+                  },
+                ),
+              ),
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.downloadOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    "Restore Backup",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () {
+                    print("edit");
+                  },
+                ),
+              ),
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.refreshOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    "Reset Stats",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () async {
+                    final action = await Dialogs.yesAbort(
+                        context, "Reset Stats", "Are you sure?", "Reset", "No");
+
+                    if (action == DialogAction.yes) {
+                      await DatabaseService()
+                          .resetStats()
+                          .then((value) => {print(value)})
+                          .catchError((onError) => {print(onError)});
+                    }
+                  },
+                ),
+              ),
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.sunOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    Provider.of<AppState>(context, listen: false).mode,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () {
+                    Provider.of<AppState>(context, listen: false).changeTheme();
+                    setIndex(0);
+                  },
+                ),
+              ),
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.logOutOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () async {
+                    final action = await Dialogs.yesAbort(
+                        context, "Logout", "Are you sure?", "Logout", "No");
+
+                    if (action == DialogAction.yes) {
+                      context.read<AuthService>().signOut();
+                    }
+                  },
+                ),
+              ),
+              Container(
+                height: 55.0,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    EvaIcons.personDeleteOutline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    "Delete Account",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                    ),
+                  ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return DeleteAlert();
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -291,7 +269,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
     return AlertDialog(
       title: Text(
         'Delete Account',
-        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
