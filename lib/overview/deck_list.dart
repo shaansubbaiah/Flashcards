@@ -52,6 +52,9 @@ class DeckListState extends State<DeckList> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            //
+            // Search Bar
+            //
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -62,11 +65,8 @@ class DeckListState extends State<DeckList> {
                     padding:
                         EdgeInsets.only(bottom: 5.0, right: 10.0, left: 15.0),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(25.0),
-                      ),
-                    ),
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(25)),
                     child: TextField(
                       onChanged: (value) {
                         setState(() {
@@ -108,6 +108,9 @@ class DeckListState extends State<DeckList> {
                 ),
               ],
             ),
+            //
+            // List of Decks
+            //
             Padding(
               padding: EdgeInsets.only(top: 5),
               child: ListView.builder(

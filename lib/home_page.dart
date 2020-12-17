@@ -99,13 +99,13 @@ class _HomePageState extends State<HomePage> {
           animationDuration: Duration(milliseconds: 300),
           items: <Widget>[
             Icon(EvaIcons.homeOutline,
-                color: Theme.of(context).colorScheme.onPrimary, size: 30),
+                color: Theme.of(context).colorScheme.primary, size: 30),
             Icon(EvaIcons.plusOutline,
-                color: Theme.of(context).colorScheme.onPrimary, size: 30),
+                color: Theme.of(context).colorScheme.primary, size: 30),
             Icon(EvaIcons.options2Outline,
-                color: Theme.of(context).colorScheme.onPrimary, size: 30),
+                color: Theme.of(context).colorScheme.primary, size: 30),
             Icon(EvaIcons.barChartOutline,
-                color: Theme.of(context).colorScheme.onPrimary, size: 30),
+                color: Theme.of(context).colorScheme.primary, size: 30),
           ],
           onTap: (int index) {
             debugPrint(index.toString());
