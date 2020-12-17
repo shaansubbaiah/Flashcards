@@ -71,7 +71,7 @@ class _GamePageState extends State<GamePage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -113,14 +113,14 @@ class _GamePageState extends State<GamePage> {
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onPrimary,
+                                                .primary,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),
                                       Divider(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onPrimary,
+                                            .secondary,
                                       ),
                                       Text(
                                         ansVisible
@@ -129,7 +129,7 @@ class _GamePageState extends State<GamePage> {
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onPrimary,
+                                                .primary,
                                             fontSize: 16),
                                       ),
                                     ],
@@ -143,7 +143,7 @@ class _GamePageState extends State<GamePage> {
                             child: Column(children: [
                               Icon(
                                 EvaIcons.alertTriangleOutline,
-                                color: Colors.red,
+                                color: Theme.of(context).colorScheme.onError,
                                 size: 60,
                               ),
                               Padding(
@@ -185,7 +185,7 @@ class _GamePageState extends State<GamePage> {
                     Text(
                       "Rate difficulty:",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary),
+                          color: Theme.of(context).colorScheme.primary),
                     ),
                     SizedBox(height: 10),
                     Wrap(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 enum DialogAction { yes, abort }
 
@@ -24,14 +25,42 @@ class Dialogs {
               style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             actions: [
-              FlatButton(
+              FlatButton.icon(
+                icon: Icon(
+                  EvaIcons.closeOutline,
+                  color: Color(0xff950F0F),
+                ),
                 onPressed: () => Navigator.of(context).pop(DialogAction.abort),
-                child: Text(noText),
+                label: Text(
+                  noText,
+                  style: TextStyle(
+                    color: Color(0xff950F0F),
+                  ),
+                ),
+                height: 30.0,
+                color: Color(0xffEDA9A9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
               ),
-              RaisedButton(
+              FlatButton.icon(
+                icon: Icon(
+                  EvaIcons.checkmarkOutline,
+                  color: Color(0xff08913F),
+                ),
                 onPressed: () => Navigator.of(context).pop(DialogAction.yes),
-                child: Text(yesText),
-              )
+                label: Text(
+                  yesText,
+                  style: TextStyle(
+                    color: Color(0xff08913F),
+                  ),
+                ),
+                height: 30.0,
+                color: Color(0xffA9EDC4),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+              ),
             ],
           );
         });
