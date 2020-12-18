@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../auth_service.dart';
+import 'package:flutterfiretest/auth_service.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class SignInPage extends StatefulWidget {
   final Function toggle;
@@ -187,13 +188,25 @@ class _SignInPageState extends State<SignInPage> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
-                  FlatButton(
-                    child: Text(
-                      "Signin",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primaryVariant),
+                  FlatButton.icon(
+                    icon: Icon(
+                      EvaIcons.checkmarkOutline,
+                      color: Theme.of(context).colorScheme.primaryVariant,
                     ),
-                    color: Theme.of(context).colorScheme.primary,
+                    label: Text(
+                      "Sign In",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                      ),
+                    ),
+                    height: 30.0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryVariant
+                        .withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
                     onPressed: () async {
                       setState(() {
                         _emailValidate = (emailController.text.isEmpty ||

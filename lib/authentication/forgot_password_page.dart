@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
-
-import '../auth_service.dart';
+import 'package:flutterfiretest/auth_service.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -98,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ? Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
-                                "Email doesnot exist",
+                                "Email doesn't exist",
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.onError,
                                 ),
@@ -109,14 +109,25 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     SizedBox(
                       height: 10,
                     ),
-                    FlatButton(
-                      child: Text(
-                        "Send Mail",
-                        style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.primaryVariant),
+                    FlatButton.icon(
+                      icon: Icon(
+                        EvaIcons.checkmarkOutline,
+                        color: Theme.of(context).colorScheme.primaryVariant,
                       ),
-                      color: Theme.of(context).colorScheme.primary,
+                      label: Text(
+                        "Send Recovery Mail",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primaryVariant,
+                        ),
+                      ),
+                      height: 30.0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryVariant
+                          .withOpacity(0.3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                       onPressed: () async {
                         setState(() {
                           _emailValidate = (emailController.text.isEmpty ||
