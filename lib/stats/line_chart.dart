@@ -21,6 +21,17 @@ class _LineChartState extends State<LineChart> {
       new Level(1, 4),
       new Level(2, 1),
       new Level(3, 3),
+      new Level(4, 2),
+      new Level(5, 4),
+      new Level(6, 1),
+      new Level(7, 3),
+      new Level(8, 2),
+      new Level(9, 4),
+      new Level(10, 1),
+      new Level(11, 3),
+      new Level(12, 2),
+      new Level(13, 4),
+      new Level(14, 1),
     ];
 
     seriesLineData.add(
@@ -50,6 +61,9 @@ class _LineChartState extends State<LineChart> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Text("15 days average score",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,22 +78,29 @@ class _LineChartState extends State<LineChart> {
                           padding: EdgeInsets.all(10),
                           child: charts.LineChart(
                             seriesLineData,
+                            primaryMeasureAxis: new charts.NumericAxisSpec(
+                              renderSpec: new charts.NoneRenderSpec(),
+                            ),
                             defaultRenderer: new charts.LineRendererConfig(
-                                includeArea: true, stacked: false),
+                              includeArea: false,
+                              includePoints: false,
+                            ),
+                            domainAxis: new charts.NumericAxisSpec(
+                                renderSpec: new charts.NoneRenderSpec()),
                             animate: true,
                             animationDuration: Duration(seconds: 2),
-                            behaviors: [
-                              new charts.ChartTitle('Level',
-                                  behaviorPosition:
-                                      charts.BehaviorPosition.bottom,
-                                  titleOutsideJustification: charts
-                                      .OutsideJustification.middleDrawArea),
-                              new charts.ChartTitle('No of questions',
-                                  behaviorPosition:
-                                      charts.BehaviorPosition.start,
-                                  titleOutsideJustification: charts
-                                      .OutsideJustification.middleDrawArea),
-                            ],
+                            // behaviors: [
+                            //   new charts.ChartTitle('Level',
+                            //       behaviorPosition:
+                            //           charts.BehaviorPosition.bottom,
+                            //       titleOutsideJustification: charts
+                            //           .OutsideJustification.middleDrawArea),
+                            //   new charts.ChartTitle('No of questions',
+                            //       behaviorPosition:
+                            //           charts.BehaviorPosition.start,
+                            //       titleOutsideJustification: charts
+                            //           .OutsideJustification.middleDrawArea),
+                            // ],
                           ),
                         ),
                       ),

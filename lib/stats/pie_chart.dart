@@ -60,6 +60,11 @@ class _PieChartState extends State<PieChart> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Text(
+                        "Current level",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
                       SizedBox(
                         height: 300,
                         child: Padding(
