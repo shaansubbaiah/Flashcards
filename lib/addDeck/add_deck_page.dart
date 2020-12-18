@@ -461,7 +461,7 @@ class _AddCardState extends State<AddCard> {
                                   color: Theme.of(context)
                                       .colorScheme
                                       .primaryVariant,
-                                  width: 2,
+                                  width: 1,
                                 ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
