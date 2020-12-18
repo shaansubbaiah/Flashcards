@@ -207,6 +207,7 @@ class _GamePageState extends State<GamePage> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
+                    // check after each question
                     child: gameOver
                         ? Card(
                             shape: RoundedRectangleBorder(
@@ -240,6 +241,7 @@ class _GamePageState extends State<GamePage> {
                                 totCards = flashcards.length;
                                 print(flashcards);
                                 print('Total Cards: $totCards');
+                                // check in the beginning if all easy
                                 if (!gameOverCheck()) {
                                   return Container(
                                     width: MediaQuery.of(context).size.width,
