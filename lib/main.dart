@@ -21,10 +21,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final cron = Cron();
-    cron.schedule(Schedule.parse('*/1 * * * *'), () async{
-        print('every minute');
-        DatabaseService().addAverageScore();
-    });
+  cron.schedule(Schedule.parse('*/9 * * * *'), () async {
+    print('every minute');
+    DatabaseService().addAverageScore();
+  });
   runApp(MyApp());
 }
 

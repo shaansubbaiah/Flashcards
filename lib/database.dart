@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,13 +25,29 @@ class DatabaseService {
 
   // DatabaseService(this.uid);
 
-  Future addUserData(String uid ) async {
+  Future addUserData(String uid) async {
     DatabaseService.uid = uid;
-    
+
     return await userCollection.add({
       "uid": uid,
-      "avgScore": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-      });
+      "avgScore": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    });
   }
 
   Future getUid(String uid) async {
@@ -299,14 +317,31 @@ class DatabaseService {
     return count;
   }
 
+  Future<List> getAvgScore() async {
+    List avg;
+    await userCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                print(doc.data()["avgScore"]);
+                avg = doc.data()["avgScore"];
+              })
+            })
+        .catchError((onError) {
+      print(onError);
+    });
+    return avg;
+  }
+
   void addAverageScore() async {
-    double avg=0;
-    int sum=0;
-    int counter=0;
+    double avg = 0;
+    int sum = 0;
+    int counter = 0;
 
     List deckList = [];
 
-     await deckCollection
+    await deckCollection
         .where("uid", isEqualTo: uid)
         .get()
         .then((QuerySnapshot querySnapshot) {
@@ -315,36 +350,36 @@ class DatabaseService {
       });
     }).catchError((error) => {print(error)});
 
-        for (int i = 0; i < deckList.length; i++) {
+    for (int i = 0; i < deckList.length; i++) {
       await cardCollection
           .where("deckid", isEqualTo: deckList[i])
           .get()
           .then((QuerySnapshot querySnapshot) => {
                 querySnapshot.docs.forEach((doc) async {
-                   sum = sum + doc.data()['score'];
-                   counter += 1;
+                  sum = sum + doc.data()['score'];
+                  counter += 1;
                 })
               });
     }
-     avg=sum/counter;
-     String docRef;
-     List avgscore;
-     
-     await userCollection
+    avg = sum / counter;
+    print(avg);
+    String docRef;
+    List avgscore;
+
+    await userCollection
         .where("uid", isEqualTo: uid)
         .get()
         .then((QuerySnapshot querySnapshot) => {
               querySnapshot.docs.forEach((doc) {
-                docRef=doc.id;
+                docRef = doc.id;
                 avgscore = doc.data()["avgScore"];
                 avgscore.removeAt(0);
                 avgscore.add(avg);
+                print(avgscore);
               })
             });
 
-      await userCollection
-        .doc(docRef).update({"avgScore": avgscore});
-     
+    await userCollection.doc(docRef).update({"avgScore": avgscore});
   }
 
   Future<String> resetStats() async {
