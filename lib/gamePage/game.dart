@@ -31,6 +31,14 @@ class _GamePageState extends State<GamePage> {
 
   bool gameOver = false;
 
+  List answeredCards = [];
+
+  // check if already answered
+  bool answered(String id) {
+    if (answeredCards.indexOf(id) == -1) return false;
+    return true;
+  }
+
   void switchCard() {
     // setState(() {
     if (index < totCards - 1) {
@@ -60,11 +68,14 @@ class _GamePageState extends State<GamePage> {
   // nextType 2: hard
 
   void nextIndex() {
+    print(answeredCards);
     int tempIndex;
     while (tempIndex == null) {
       // check for easy question
       if (nextType == 0 &&
-          flashcards[(normal + 1) % flashcards.length]['score'] == 4) {
+          (flashcards[(normal + 1) % flashcards.length]['score'] == 4 &&
+              answered(
+                  flashcards[(normal + 1) % flashcards.length]['cardId']))) {
         normal = (normal + 1) % flashcards.length;
         continue;
       }
@@ -149,6 +160,11 @@ class _GamePageState extends State<GamePage> {
   }
 
   void updateScore(int i, int diff) async {
+    // add to answered card
+    if (!answered(flashcards[i]['cardId'])) {
+      answeredCards.add(flashcards[i]['cardId']);
+    }
+
     // easy: 4, moderate: 3 hard: 2, v hard: 1
     // print(flashcards[i]["score"].toString());
 
@@ -157,7 +173,7 @@ class _GamePageState extends State<GamePage> {
     // update score in database
     await DatabaseService().updateScore(flashcards[i]["cardId"], diff);
 
-    if (gameOverCheck()) {
+    if (gameOverCheck() && (answeredCards.length == flashcards.length)) {
       setState(() {
         gameOver = true;
         _confettiController.play();
@@ -277,7 +293,7 @@ class _GamePageState extends State<GamePage> {
                           ),
                           child: Text("Go Back"),
                           onPressed: () {
-                            resetDeck();
+                            // resetDeck();
                             setIndex(0);
                           },
                         ),
