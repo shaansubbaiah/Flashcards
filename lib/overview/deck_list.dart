@@ -24,7 +24,7 @@ class DeckListState extends State<DeckList> {
 
   static List<Color> colorArray = [
     Colors.deepPurpleAccent[400],
-    Colors.cyanAccent[400],
+    Colors.lightBlueAccent[400],
     Colors.orangeAccent[400],
     Colors.greenAccent[400],
     Colors.pinkAccent[400],
@@ -111,8 +111,8 @@ class DeckListState extends State<DeckList> {
             //
             // List of Decks
             //
-            Padding(
-              padding: EdgeInsets.only(top: 5),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
               child: ListView.builder(
                 itemCount: decks != null ? decks.length : 0,
                 itemBuilder: (context, index) {
@@ -123,7 +123,7 @@ class DeckListState extends State<DeckList> {
                         actionExtentRatio: 0.25,
                         child: Padding(
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 10, left: 10),
+                              top: 0, bottom: 10, right: 10, left: 10),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.surface,
@@ -131,39 +131,48 @@ class DeckListState extends State<DeckList> {
                                 Radius.circular(25.0),
                               ),
                             ),
-                            child: ListTile(
-                              onTap: () {
-                                print('Tapped ${decks[index]["deckid"]}');
-                                setState(() {
-                                  deckid = decks[index]["deckid"];
-                                  // open the Game Page
-                                  setIndex(4);
-                                });
-                              },
-                              leading: CircleAvatar(
-                                radius: 25.0,
-                                //
-                                // set color from colorArray
-                                //
-                                backgroundColor:
-                                    colorArray[index % colorArray.length],
-                                child: Text(decks[index]["tag"]),
-                                foregroundColor: Colors.white,
-                              ),
-                              title: Text(
-                                decks[index]["deckname"],
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                              subtitle: Text(
-                                decks[index]["desc"] +
-                                    " " +
-                                    decks[index]["deckid"],
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: ListTile(
+                                onTap: () {
+                                  print('Tapped ${decks[index]["deckid"]}');
+                                  setState(() {
+                                    deckid = decks[index]["deckid"];
+                                    // open the Game Page
+                                    setIndex(4);
+                                  });
+                                },
+                                leading: CircleAvatar(
+                                  radius: 25.0,
+                                  //
+                                  // set color from colorArray
+                                  //
+                                  backgroundColor:
+                                      colorArray[index % colorArray.length]
+                                          .withOpacity(0.2),
+                                  child: Text(decks[index]["tag"],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  foregroundColor:
+                                      colorArray[index % colorArray.length],
+                                ),
+                                title: Text(
+                                  decks[index]["deckname"],
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  decks[index]["desc"] +
+                                      " " +
+                                      decks[index]["deckid"],
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                ),
                               ),
                             ),
                           ),
