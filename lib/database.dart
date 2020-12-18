@@ -23,9 +23,13 @@ class DatabaseService {
 
   // DatabaseService(this.uid);
 
-  Future addUserData(String uid) async {
+  Future addUserData(String uid ) async {
     DatabaseService.uid = uid;
-    return await userCollection.add({"uid": uid});
+    
+    return await userCollection.add({
+      "uid": uid,
+      "avgScore": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      });
   }
 
   Future getUid(String uid) async {
@@ -293,6 +297,54 @@ class DatabaseService {
               });
     }
     return count;
+  }
+
+  void addAverageScore() async {
+    double avg=0;
+    int sum=0;
+    int counter=0;
+
+    List deckList = [];
+
+     await deckCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) async {
+        deckList.add(doc.id);
+      });
+    }).catchError((error) => {print(error)});
+
+        for (int i = 0; i < deckList.length; i++) {
+      await cardCollection
+          .where("deckid", isEqualTo: deckList[i])
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) async {
+                   sum = sum + doc.data()['score'];
+                   counter += 1;
+                })
+              });
+    }
+     avg=sum/counter;
+     String docRef;
+     List avgscore;
+     
+     await userCollection
+        .where("uid", isEqualTo: uid)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                docRef=doc.id;
+                avgscore = doc.data()["avgScore"];
+                avgscore.removeAt(0);
+                avgscore.add(avg);
+              })
+            });
+
+      await userCollection
+        .doc(docRef).update({"avgScore": avgscore});
+     
   }
 
   Future<String> resetStats() async {

@@ -26,6 +26,7 @@ dependencies:
   eva_icons_flutter:
 
   cupertino_icons: ^0.1.3
+  cron: ^0.2.4
 
 dev_dependencies:
   flutter_test:

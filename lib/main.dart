@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/app_theme.dart';
+import 'package:cron/cron.dart';
+import 'package:flutterfiretest/database.dart';
 
 import 'package:flutterfiretest/auth.dart';
 import 'package:flutterfiretest/auth_service.dart';
@@ -18,6 +20,11 @@ import 'package:page_transition/page_transition.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  final cron = Cron();
+    cron.schedule(Schedule.parse('*/1 * * * *'), () async{
+        print('every minute');
+        DatabaseService().addAverageScore();
+    });
   runApp(MyApp());
 }
 
