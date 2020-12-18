@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../alert_dialog.dart';
@@ -196,15 +197,36 @@ class _EditUserState extends State<EditUser> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
-                onPressed: editPassword,
-                child: Text(
-                  "Edit",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.primaryVariant),
+              FlatButton.icon(
+                icon: Icon(
+                  EvaIcons.checkmarkOutline,
+                  color: Theme.of(context).colorScheme.primaryVariant,
                 ),
-                color: Theme.of(context).colorScheme.primary,
+                label: Text(
+                  "Edit Password",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                  ),
+                ),
+                height: 30.0,
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryVariant
+                    .withOpacity(0.3),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onPressed: editPassword,
               ),
+              // RaisedButton(
+              //   onPressed: editPassword,
+              //   child: Text(
+              //     "Edit",
+              //     style: TextStyle(
+              //         color: Theme.of(context).colorScheme.primaryVariant),
+              //   ),
+              //   color: Theme.of(context).colorScheme.primary,
+              // ),
               SizedBox(
                 height: 20.0,
               ),
