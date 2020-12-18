@@ -49,7 +49,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         onChanged: (value) {
                           if (value != "") {
                             setState(() {
+                              wrongEmail = false;
                               _emailValidate = true;
+                              message = "";
                             });
                           }
                         },
@@ -98,7 +100,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ? Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
-                                "Email doesn't exist",
+                                "Email doesnot exist",
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.onError,
                                 ),

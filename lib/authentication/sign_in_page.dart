@@ -39,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Signin",
+                    "Sign In",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
@@ -103,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                         ? Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
-                              "Email doesn't exist",
+                              "Email doesnot exist",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.onError,
                               ),
@@ -164,7 +164,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   SizedBox(
-                    height: wrongPassword ? 24 : 0,
+                    height: wrongPassword ? 30 : 0,
                     child: wrongPassword
                         ? Padding(
                             padding: const EdgeInsets.all(5.0),

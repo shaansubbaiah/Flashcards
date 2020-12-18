@@ -312,7 +312,7 @@ class _DeleteAlertState extends State<DeleteAlert> {
                         "Wrong Password",
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.onError,
-                            fontSize: 14),
+                            fontSize: 12),
                       ),
                     )
                   : null,
