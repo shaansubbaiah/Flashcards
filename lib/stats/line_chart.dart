@@ -33,22 +33,41 @@ class _LineChartState extends State<LineChart> {
     // for (int i = 0; i < temp.length; i++) {
     //   lineData.add(new Level(i, temp[i]));
     // }
+    // var lineData = [
+    //   new Level(0, temp[0]),
+    //   new Level(1, temp[1]),
+    //   new Level(2, temp[2]),
+    //   new Level(3, temp[3]),
+    //   new Level(4, temp[4]),
+    //   new Level(5, temp[5]),
+    //   new Level(6, temp[6]),
+    //   new Level(7, temp[7]),
+    //   new Level(8, temp[8]),
+    //   new Level(9, temp[9]),
+    //   new Level(10, temp[10]),
+    //   new Level(11, temp[11]),
+    //   new Level(12, temp[12]),
+    //   new Level(13, temp[13]),
+    //   new Level(14, temp[14]),
+    // ];
+
+    // static data
     var lineData = [
-      new Level(0, temp[0]),
-      new Level(1, temp[1]),
-      new Level(2, temp[2]),
-      new Level(3, temp[3]),
-      new Level(4, temp[4]),
-      new Level(5, temp[5]),
-      new Level(6, temp[6]),
-      new Level(7, temp[7]),
-      new Level(8, temp[8]),
-      new Level(9, temp[9]),
-      new Level(10, temp[10]),
-      new Level(11, temp[11]),
-      new Level(12, temp[12]),
-      new Level(13, temp[13]),
-      new Level(14, temp[14]),
+      new Level(0, 0),
+      new Level(1, 3),
+      new Level(2, 1),
+      new Level(3, 2),
+      new Level(4, 3),
+      new Level(5, 2),
+      new Level(6, 4),
+      new Level(7, 2),
+      new Level(8, 3),
+      new Level(9, 1),
+      new Level(10, 2),
+      new Level(11, 2),
+      new Level(12, 4),
+      new Level(13, 1),
+      new Level(14, 2),
     ];
 
     seriesLineData.add(

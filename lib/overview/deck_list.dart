@@ -151,9 +151,14 @@ class DeckListState extends State<DeckList> {
                                   backgroundColor:
                                       colorArray[index % colorArray.length]
                                           .withOpacity(0.2),
-                                  child: Text(decks[index]["tag"],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
+                                  child: decks[index]["tag"].length < 6
+                                      ? Text(decks[index]["tag"],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold))
+                                      : Text(
+                                          decks[index]["tag"].substring(0, 5),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                   foregroundColor:
                                       colorArray[index % colorArray.length],
                                 ),
