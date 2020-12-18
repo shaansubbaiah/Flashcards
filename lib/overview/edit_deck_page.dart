@@ -502,7 +502,7 @@ class _EditDeckState extends State<EditDeck> {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .primaryVariant,
-                                width: 2,
+                                width: 1,
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
@@ -731,86 +731,98 @@ class _EditDeckState extends State<EditDeck> {
                 //
                 // List of cards created
                 //
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Center(
-                        child: Text("Cards added to the deck:",
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.primary)))),
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: cards.length,
-                    itemBuilder: (_, index) {
-                      return Slidable(
-                        actionPane: SlidableDrawerActionPane(),
-                        actionExtentRatio: 0.25,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(25.0),
-                              ),
-                            ),
-                            // height: 70.0,
-                            child: ListTile(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return EditCard(
-                                        cards[index]["front"],
-                                        cards[index]["back"],
-                                        cards[index]["cardId"],
-                                        deckid,
-                                        updateCardList);
-                                  },
-                                );
-                              },
-                              title: Text(
-                                '${cards[index]["front"]}',
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                              subtitle: Text(
-                                '${cards[index]["back"]}',
+                (cards.length == 0)
+                    ? Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Center(
+                            child: Text("This deck has no cards yet!",
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .secondary),
-                              ),
+                                        .primary))))
+                    : Column(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              child: Center(
+                                  child: Text(
+                                      '${cards.length} card(s) added to the deck:',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary)))),
+                          Padding(
+                            padding: EdgeInsets.only(top: 0),
+                            child: ListView.builder(
+                              itemCount: cards.length,
+                              itemBuilder: (_, index) {
+                                return Slidable(
+                                  actionPane: SlidableDrawerActionPane(),
+                                  actionExtentRatio: 0.25,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: ListTile(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return EditCard(
+                                                  cards[index]["front"],
+                                                  cards[index]["back"],
+                                                  cards[index]["cardId"],
+                                                  deckid,
+                                                  updateCardList);
+                                            },
+                                          );
+                                        },
+                                        title: Text(
+                                          '${cards[index]["front"]}',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary),
+                                        ),
+                                        subtitle: Text(
+                                          '${cards[index]["back"]}',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  secondaryActions: <Widget>[
+                                    IconSlideAction(
+                                      caption: 'Delete',
+                                      color: Colors.transparent,
+                                      foregroundColor: Colors.red[600],
+                                      icon: EvaIcons.trashOutline,
+                                      onTap: () {
+                                        setState(() {
+                                          cards.removeAt(index);
+                                          if (cards.isEmpty) {
+                                            _cardValidate = false;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
                             ),
                           ),
-                        ),
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                            caption: 'Delete',
-                            color: Colors.transparent,
-                            foregroundColor: Colors.red[600],
-                            icon: EvaIcons.trashOutline,
-                            onTap: () {
-                              cardId = cards[index]['cardId'];
-                              if (cards.length > 1) {
-                                deleteCard();
-                              } else {
-                                setState(() {
-                                  _cardValidate = false;
-                                });
-                              }
-                            },
-                          ),
                         ],
-                      );
-                    },
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                  ),
-                ),
+                      ),
                 SizedBox(
                   height: 50.0,
                 ),
