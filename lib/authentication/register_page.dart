@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterfiretest/auth_service.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function toggle;
@@ -168,14 +169,25 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    FlatButton(
-                      child: Text(
+                    FlatButton.icon(
+                      icon: Icon(
+                        EvaIcons.checkmarkOutline,
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                      ),
+                      label: Text(
                         "Register",
                         style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.primaryVariant),
+                          color: Theme.of(context).colorScheme.primaryVariant,
+                        ),
                       ),
-                      color: Theme.of(context).colorScheme.primary,
+                      height: 30.0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryVariant
+                          .withOpacity(0.3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                       onPressed: () async {
                         setState(() {
                           _emailValidate = (emailController.text.isEmpty ||
