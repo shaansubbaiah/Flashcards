@@ -38,7 +38,7 @@ class DatabaseService {
       "deckid": deckId,
       "front": front,
       "back": back,
-      "score": 0.5,
+      "score": 2,
     });
   }
 
@@ -211,6 +211,17 @@ class DatabaseService {
     return "Successful";
   }
 
+  Future<String> updateScore(String cardId, score) async {
+    await cardCollection
+        .doc(cardId)
+        .update({"score": score})
+        .then((value) {})
+        .catchError((onError) {
+          print(onError);
+        });
+    return "Successsful";
+  }
+
   Future<String> deleteOneCard(String cardId) async {
     await cardCollection
         .doc(cardId)
@@ -269,11 +280,11 @@ class DatabaseService {
           .get()
           .then((QuerySnapshot querySnapshot) => {
                 querySnapshot.docs.forEach((doc) async {
-                  if (doc.data()['score'] < 0.25) {
+                  if (doc.data()['score'] == 4) {
                     count[0] += 1; // easy
-                  } else if (doc.data()['score'] < 0.50) {
+                  } else if (doc.data()['score'] == 3) {
                     count[1] += 1; // moderate
-                  } else if (doc.data()['score'] < 0.75) {
+                  } else if (doc.data()['score'] == 2) {
                     count[2] += 1; // hard
                   } else {
                     count[3] += 1; // insane
@@ -307,7 +318,7 @@ class DatabaseService {
           print(doc.id);
           await cardCollection
               .doc(doc.id)
-              .update({"score": 0.5}).then((value) => {});
+              .update({"score": 2}).then((value) => {});
         });
       });
     }
