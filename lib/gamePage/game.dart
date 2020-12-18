@@ -40,7 +40,7 @@ class _GamePageState extends State<GamePage> {
 
   int next(int level) {
     // for circular loop
-    for (int i = index + 1; i < (flashcards.length + index + 1); i++) {
+    for (int i = index + 1; i < (flashcards.length + index ); i++) {
       if (flashcards[i % flashcards.length]['score'] == level) {
         return (i % flashcards.length);
       }
