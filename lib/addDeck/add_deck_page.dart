@@ -714,67 +714,86 @@ class _AddCardState extends State<AddCard> {
                 //
                 // List of cards created
                 //
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Center(
-                        child: Text("Cards added to the deck:",
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.primary)))),
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
-                  child: ListView.builder(
-                    // padding: const EdgeInsets.all(8),
-                    itemCount: cards.length,
-                    itemBuilder: (_, index) {
-                      return Slidable(
-                        actionPane: SlidableDrawerActionPane(),
-                        actionExtentRatio: 0.25,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(25)),
-                            child: ListTile(
-                              title: Text(
-                                '${cards[index]["front"]}',
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                              subtitle: Text(
-                                '${cards[index]["back"]}',
+                (cards.length == 0)
+                    ? Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Center(
+                            child: Text("This deck has no cards yet!",
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .secondary),
-                              ),
+                                        .primary))))
+                    : Column(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              child: Center(
+                                  child: Text(
+                                      '${cards.length} card(s) added to the deck:',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary)))),
+                          Padding(
+                            padding: EdgeInsets.only(top: 0),
+                            child: ListView.builder(
+                              itemCount: cards.length,
+                              itemBuilder: (_, index) {
+                                return Slidable(
+                                  actionPane: SlidableDrawerActionPane(),
+                                  actionExtentRatio: 0.25,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: ListTile(
+                                        title: Text(
+                                          '${cards[index]["front"]}',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary),
+                                        ),
+                                        subtitle: Text(
+                                          '${cards[index]["back"]}',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  secondaryActions: <Widget>[
+                                    IconSlideAction(
+                                      caption: 'Delete',
+                                      color: Colors.transparent,
+                                      foregroundColor: Colors.red[600],
+                                      icon: EvaIcons.trashOutline,
+                                      onTap: () {
+                                        setState(() {
+                                          cards.removeAt(index);
+                                          if (cards.isEmpty) {
+                                            _cardValidate = false;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
                             ),
                           ),
-                        ),
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                            caption: 'Delete',
-                            color: Colors.transparent,
-                            foregroundColor: Colors.red[600],
-                            icon: EvaIcons.trashOutline,
-                            onTap: () {
-                              setState(() {
-                                cards.removeAt(index);
-                                if (cards.isEmpty) {
-                                  _cardValidate = false;
-                                }
-                              });
-                            },
-                          ),
                         ],
-                      );
-                    },
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                  ),
-                ),
+                      ),
+
                 SizedBox(
                   height: 40.0,
                 ),
