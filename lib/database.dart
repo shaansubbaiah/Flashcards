@@ -382,6 +382,21 @@ class DatabaseService {
     await userCollection.doc(docRef).update({"avgScore": avgscore});
   }
 
+  Future<String> resetDeck(String deckid) async {
+    await cardCollection
+        .where("deckid", isEqualTo: deckid)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) async {
+        print(doc.id);
+        await cardCollection
+            .doc(doc.id)
+            .update({"score": 2}).then((value) => {});
+      });
+    });
+    return "Successful";
+  }
+
   Future<String> resetStats() async {
     List deckList = [];
 
