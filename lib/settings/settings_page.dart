@@ -80,32 +80,6 @@ class _SettingsState extends State<Settings> {
                 ),
                 child: ListTile(
                   leading: Icon(
-                    EvaIcons.downloadOutline,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  title: Text(
-                    "Restore Backup",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 20,
-                    ),
-                  ),
-                  onTap: () {
-                    print("edit");
-                  },
-                ),
-              ),
-              Container(
-                height: 55.0,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ),
-                ),
-                child: ListTile(
-                  leading: Icon(
                     EvaIcons.refreshOutline,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
