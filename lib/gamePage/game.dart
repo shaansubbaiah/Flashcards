@@ -240,58 +240,88 @@ class _GamePageState extends State<GamePage> {
                                 totCards = flashcards.length;
                                 print(flashcards);
                                 print('Total Cards: $totCards');
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 500,
-                                  child: InkWell(
-                                    onTap: () {
-                                      toggleAnswer();
-                                    },
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      elevation: 10,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Q. " +
-                                                  flashcards[index]["front"],
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
-                                            ),
-                                            Divider(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                            ),
-                                            Text(
-                                              ansVisible
-                                                  ? "A. " +
-                                                      flashcards[index]["back"]
-                                                  : "Tap to view the answer",
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                  fontSize: 16),
-                                            ),
-                                          ],
+                                if (!gameOverCheck()) {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 500,
+                                    child: InkWell(
+                                      onTap: () {
+                                        toggleAnswer();
+                                      },
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
+                                        elevation: 10,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                "Q. " +
+                                                    flashcards[index]["front"],
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18),
+                                              ),
+                                              Divider(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                              Text(
+                                                ansVisible
+                                                    ? "A. " +
+                                                        flashcards[index]
+                                                            ["back"]
+                                                    : "Tap to view the answer",
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    fontSize: 16),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                } else {
+                                  return Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    elevation: 10,
+                                    child: Column(
+                                      children: [
+                                        Text("All easy"),
+                                        RaisedButton(
+                                          onPressed: () async {
+                                            DatabaseService().resetDeck(deckid);
+                                            flashcards = await DatabaseService()
+                                                .getCardDetails(deckid);
+                                            setState(() {
+                                              gameOver = false;
+                                            });
+                                            print("reset deck");
+                                          },
+                                          child: Text("reset deck"),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
                               } else if (snapshot.hasError) {
                                 return Center(
                                   child: Column(children: [
