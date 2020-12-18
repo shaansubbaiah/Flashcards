@@ -165,9 +165,7 @@ class DeckListState extends State<DeckList> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 subtitle: Text(
-                                  decks[index]["desc"] +
-                                      " " +
-                                      decks[index]["deckid"],
+                                  decks[index]["desc"],
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
