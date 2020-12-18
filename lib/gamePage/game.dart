@@ -200,40 +200,70 @@ class _GamePageState extends State<GamePage> {
             ),
           ),
         ),
-        body: Container(
-          child: Column(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    // check after each question
-                    child: gameOver
-                        ? Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            color: Theme.of(context).colorScheme.surface,
-                            elevation: 10,
-                            child: Column(
-                              children: [
-                                Text("Over"),
-                                RaisedButton(
-                                  onPressed: () async {
-                                    DatabaseService().resetDeck(deckid);
-                                    flashcards = await DatabaseService()
-                                        .getCardDetails(deckid);
-                                    setState(() {
-                                      gameOver = false;
-                                    });
-                                    print("reset deck");
-                                  },
-                                  child: Text("reset deck"),
-                                ),
-                              ],
-                            ),
-                          )
-                        : FutureBuilder(
+        body: gameOver
+            ? Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.only(bottom: 60),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      margin: EdgeInsets.symmetric(vertical: 30),
+                      child: Text(
+                        "🎉 Yay! You have completed this deck!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Wrap(
+                      spacing: 10,
+                      children: [
+                        FlatButton(
+                          color: Colors.pink.withOpacity(0.2),
+                          textColor: Colors.pink,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Reset Deck"),
+                          onPressed: () async {
+                            DatabaseService().resetDeck(deckid);
+                            flashcards =
+                                await DatabaseService().getCardDetails(deckid);
+                            setState(() {
+                              gameOver = false;
+                            });
+                            print("reset deck");
+                          },
+                        ),
+                        FlatButton(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primaryVariant
+                              .withOpacity(0.2),
+                          textColor:
+                              Theme.of(context).colorScheme.primaryVariant,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text("Go Back"),
+                          onPressed: () => {setIndex(0)},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            : Container(
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          child: FutureBuilder(
                             future: DatabaseService().getCardDetails(deckid),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
@@ -346,98 +376,82 @@ class _GamePageState extends State<GamePage> {
                               }
                             },
                           ),
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Column(
-                  children: [
-                    // Wrap(
-                    //   direction: Axis.horizontal,
-                    //   spacing: 5,
-                    //   children: [
-                    //     OutlinedButton(
-                    //       onPressed: () => {switchCard()},
-                    //       child: Text("Next"),
-                    //     ),
-                    //     OutlinedButton(
-                    //       onPressed: () => {
-                    //         setState(() => {index = 0})
-                    //       },
-                    //       child: Text("Restart"),
-                    //     ),
-                    //   ],
-                    // ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Rate difficulty:",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 10),
-                    Wrap(
-                      direction: Axis.horizontal,
-                      spacing: 5,
-                      children: [
-                        FlatButton(
-                          color: Colors.red.withOpacity(0.2),
-                          textColor: Colors.red,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
+                    Flexible(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10),
+                          Text(
+                            "Rate difficulty:",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
                           ),
-                          child: Text("Insane"),
-                          onPressed: () => {
-                            debugPrint("Insane"),
-                            updateScore(index, 1),
-                            switchCard(),
-                          },
-                        ),
-                        FlatButton(
-                          color: Colors.orange.withOpacity(0.2),
-                          textColor: Colors.orange,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
-                          ),
-                          child: Text("Hard"),
-                          onPressed: () => {
-                            debugPrint("Hard"),
-                            updateScore(index, 2),
-                            switchCard(),
-                          },
-                        ),
-                        FlatButton(
-                          color: Colors.yellow.withOpacity(0.2),
-                          textColor: Colors.yellow[700],
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
-                          ),
-                          child: Text("Moderate"),
-                          onPressed: () => {
-                            debugPrint("Moderate"),
-                            updateScore(index, 3),
-                            switchCard(),
-                          },
-                        ),
-                        FlatButton(
-                          color: Colors.green.withOpacity(0.2),
-                          textColor: Colors.green,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
-                          ),
-                          child: Text("Easy"),
-                          onPressed: () => {
-                            debugPrint("Easy"),
-                            updateScore(index, 4),
-                            switchCard(),
-                          },
-                        ),
-                      ],
+                          SizedBox(height: 10),
+                          Wrap(
+                            direction: Axis.horizontal,
+                            spacing: 5,
+                            children: [
+                              FlatButton(
+                                color: Colors.red.withOpacity(0.2),
+                                textColor: Colors.red,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                child: Text("Insane"),
+                                onPressed: () => {
+                                  debugPrint("Insane"),
+                                  updateScore(index, 1),
+                                  switchCard(),
+                                },
+                              ),
+                              FlatButton(
+                                color: Colors.orange.withOpacity(0.2),
+                                textColor: Colors.orange,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                child: Text("Hard"),
+                                onPressed: () => {
+                                  debugPrint("Hard"),
+                                  updateScore(index, 2),
+                                  switchCard(),
+                                },
+                              ),
+                              FlatButton(
+                                color: Colors.yellow.withOpacity(0.2),
+                                textColor: Colors.yellow[700],
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                child: Text("Moderate"),
+                                onPressed: () => {
+                                  debugPrint("Moderate"),
+                                  updateScore(index, 3),
+                                  switchCard(),
+                                },
+                              ),
+                              FlatButton(
+                                color: Colors.green.withOpacity(0.2),
+                                textColor: Colors.green,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                child: Text("Easy"),
+                                onPressed: () => {
+                                  debugPrint("Easy"),
+                                  updateScore(index, 4),
+                                  switchCard(),
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
-              )
-            ],
-          ),
-        ));
+              ));
   }
 }

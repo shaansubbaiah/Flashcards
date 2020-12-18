@@ -103,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                         ? Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
-                              "Email doesnot exist",
+                              "Email doesn't exist",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.onError,
                               ),
@@ -154,7 +154,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         contentPadding: EdgeInsets.symmetric(
                             vertical: 0.0, horizontal: 10.0),
-                        labelText: "Enter password",
+                        labelText: "Enter Password",
                         labelStyle: TextStyle(
                           color: _passwordValidate
                               ? Theme.of(context).colorScheme.primaryVariant

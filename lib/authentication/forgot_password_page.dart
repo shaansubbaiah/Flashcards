@@ -167,6 +167,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.all(30.0),
+                      child: FlatButton(
+                          textColor: Theme.of(context).colorScheme.primary,
+                          child: Text("Go Back"),
+                          onPressed: () {
+                            print('this should go back but it wont.');
+                          }),
+                    )
                   ],
                 ),
               ),
