@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfiretest/database.dart';
 import 'package:flutterfiretest/overview/deck_list.dart';
+import 'package:confetti/confetti.dart';
 
 class GamePage extends StatefulWidget {
   final Function setIndex;
@@ -18,6 +19,8 @@ class _GamePageState extends State<GamePage> {
 
   List<dynamic> flashcards = [];
   int totCards = 0;
+
+  ConfettiController _confettiController;
 
   Function setIndex;
   _GamePageState(this.setIndex);
@@ -50,7 +53,7 @@ class _GamePageState extends State<GamePage> {
 
   // loop 0: normal increment -> insane
   // loop 1: normal increment -> insane -> hard
-  // loop 2: normal increment -> insane ->hard -> moderate
+  // loop 2: normal increment -> insane -> hard -> moderate
 
   // nextType 0: normal
   // nextType 1: insane
@@ -157,6 +160,7 @@ class _GamePageState extends State<GamePage> {
     if (gameOverCheck()) {
       setState(() {
         gameOver = true;
+        _confettiController.play();
       });
       print("over");
     } else {
@@ -180,8 +184,16 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 10));
     deckid = DeckListState.deckid;
     print('deckid: $deckid');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _confettiController.dispose();
   }
 
   @override
@@ -217,6 +229,20 @@ class _GamePageState extends State<GamePage> {
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
+                    ),
+                    ConfettiWidget(
+                      confettiController: _confettiController,
+                      blastDirectionality: BlastDirectionality
+                          .explosive, // don't specify a direction, blast randomly
+                      shouldLoop:
+                          true, // start again as soon as the animation is finished
+                      colors: const [
+                        Colors.green,
+                        Colors.blue,
+                        Colors.pink,
+                        Colors.orange,
+                        Colors.purple
+                      ], // manually specify the colors to be used
                     ),
                     Wrap(
                       spacing: 10,
