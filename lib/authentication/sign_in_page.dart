@@ -57,6 +57,8 @@ class _SignInPageState extends State<SignInPage> {
                         if (value != "") {
                           setState(() {
                             _emailValidate = true;
+                            wrongPassword = false;
+                            wrongEmail = false;
                           });
                         }
                       },
@@ -122,6 +124,8 @@ class _SignInPageState extends State<SignInPage> {
                         if (value != "") {
                           setState(() {
                             _passwordValidate = true;
+                            wrongPassword = false;
+                            wrongEmail = false;
                           });
                         }
                       },

@@ -56,6 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (value != "") {
                             setState(() {
                               _emailValidate = true;
+                              wrongEmail = false;
                             });
                           }
                         },
@@ -123,6 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (value != "") {
                             setState(() {
                               _passwordValidate = true;
+                              wrongEmail = false;
                             });
                           }
                         },

@@ -276,7 +276,10 @@ class _GamePageState extends State<GamePage> {
                             borderRadius: new BorderRadius.circular(18.0),
                           ),
                           child: Text("Go Back"),
-                          onPressed: () => {setIndex(0)},
+                          onPressed: () {
+                            resetDeck();
+                            setIndex(0);
+                          },
                         ),
                       ],
                     ),
