@@ -14,8 +14,8 @@ class AppTheme {
   static const Color _darkSurface = Color(0xff273152);
   static const Color _darkBackground = Color(0xff202844);
   static const Color _darkPrimaryText = Color(0xffffffff);
-  static const Color _darkSecondaryText = Color(0xff767b8a);
-  static const Color _darkAccent = Color(0xff3266eb);
+  static const Color _darkSecondaryText = Color(0xff99a0b3);
+  static const Color _darkAccent = Color(0xff37b8f4);
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: _lightBackground,
