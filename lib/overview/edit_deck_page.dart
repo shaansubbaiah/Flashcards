@@ -98,7 +98,7 @@ class _EditDeckState extends State<EditDeck> {
 
     if (_deckNameValidate &&
         _descValidate &&
-        (_tagValidate || _customTagValidate)) {
+        (_tagValidate && _customTagValidate)) {
       final action = await Dialogs.yesAbort(
           context, "Edit Deck", "Are you sure?", "Edit", "No");
 
@@ -370,6 +370,7 @@ class _EditDeckState extends State<EditDeck> {
                                       customTag = true;
                                     } else {
                                       customTag = false;
+                                      _customTagValidate = true;
                                     }
                                   });
                                 },
